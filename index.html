@@ -13,7 +13,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -24,22 +24,32 @@
     <div class="container">
       <a href="#hero" class="nav-logo">
         <!-- Mountain Icon -->
-        <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 32L15 12L21 22L26 14L35 32H5Z" fill="#D4A017" opacity="0.3"/>
-          <path d="M8 32L18 14L23 22L28 16L34 32" stroke="#D4A017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <path d="M15 20L18 14L20 18" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <svg class="nav-logo-icon" viewBox="0 0 512 320" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <g>
+              <path style="fill:#4C8276;" d="M221.99,308.864h281.658c6.43,0,10.424-6.949,7.229-12.5l-68.153-118.035l-18.73,27.776l-30.811-45.669l-30.812,45.669l-30.831-45.669l-8.447,12.52l-22.365,33.148l-18.232-27.038l-67.734,117.296C211.566,301.915,215.579,308.864,221.99,308.864z"/>
+              <path style="fill:#EDEDEC;" d="M442.728,178.358l-18.754,27.731l-30.79-45.62l-30.79,45.62l-30.857-45.62l-8.446,12.502l-18.288,27.133l-4.056,5.985l-18.221-27l5.054-8.844l2.793-4.788l14.165-24.606l46.884-81.199c1.795-3.059,4.456-5.054,7.448-5.985c5.586-1.729,12.037,0.266,15.362,5.985L387,81.731l48.28,83.726L442.728,178.358z"/>
+            </g>
+            <path style="opacity:0.07;fill:#040000;" d="M401.298,308.835H222.008c-6.451,0-10.441-6.916-7.249-12.502l67.766-117.243l5.054-8.844l2.793-4.788l14.165-24.606l5.985,10.374l12.569,21.746L401.298,308.835z"/>
+            <g>
+              <path style="fill:#4C8276;" d="M350.158,308.835H10.066c-7.315,0-11.97-7.382-9.31-13.899c0.2-0.399,0.333-0.798,0.599-1.197l81.731-141.583l22.079,32.653l37.175-55.13l37.241,55.13l37.175-55.13l37.241,55.13l22.611-33.584l10.973,19.02l17.224,29.859l54.066,93.634C362.727,300.456,357.938,308.835,350.158,308.835z"/>
+              <path style="fill:#FFFFFF;" d="M276.607,151.225l-22.611,33.584l-37.241-55.13l-37.175,55.13l-37.241-55.13l-21.813,32.32l-15.362,22.811l-22.079-32.653l9.51-16.426l0.599-1.064l45.022-78.007l28.13-48.679c6.118-10.64,21.414-10.64,27.532,0l5.453,9.443l68.297,118.307L276.607,151.225z"/>
+            </g>
+          </g>
         </svg>
         <div class="nav-logo-text">Thakali <span>Kitchen</span></div>
       </a>
 
       <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#menu">Menu</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#location">Location</a>
-        <a href="#contact">Contact</a>
-        <a href="tel:+49123456789" class="nav-cta">Reserve</a>
+        <a href="#about" data-i18n="nav.about">Über uns</a>
+        <a href="#menu" data-i18n="nav.menu">Speisekarte</a>
+        <a href="#gallery" data-i18n="nav.gallery">Galerie</a>
+        <a href="#location" data-i18n="nav.location">Standort</a>
+        <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+        <a href="tel:+49123456789" class="nav-cta" data-i18n="nav.reserve">Reservieren</a>
       </div>
+
+      <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">EN</button>
 
       <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
@@ -51,12 +61,12 @@
 
   <!-- Mobile Menu Overlay -->
   <div class="mobile-menu">
-    <a href="#about">About</a>
-    <a href="#menu">Menu</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#location">Location</a>
-    <a href="#contact">Contact</a>
-    <a href="tel:+49123456789">Reserve a Table</a>
+    <a href="#about" data-i18n="nav.about">Über uns</a>
+    <a href="#menu" data-i18n="nav.menu">Speisekarte</a>
+    <a href="#gallery" data-i18n="nav.gallery">Galerie</a>
+    <a href="#location" data-i18n="nav.location">Standort</a>
+    <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+    <a href="tel:+49123456789" data-i18n="nav.reserve-table">Tisch reservieren</a>
   </div>
 
   <!-- ============ HERO SECTION ============ -->
@@ -64,25 +74,35 @@
     <div class="hero-bg"></div>
 
     <div class="hero-content">
-      <div class="hero-badge">Asiatische Spezialitäten</div>
+      <div class="hero-badge" data-i18n="hero.badge">Asiatische Spezialitäten</div>
       <h1>Thakali <span>Kitchen</span></h1>
-      <p class="hero-tagline">Authentic Nepali Cuisine & Cross Sushi</p>
+      <p class="hero-tagline" data-i18n="hero.tagline">Authentische Nepalesische Küche & Cross Sushi</p>
       <div class="hero-buttons">
         <a href="#menu" class="btn btn-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 3v18"/></svg>
-          Explore Menu
+          <span data-i18n="hero.explore-menu">Speisekarte entdecken</span>
         </a>
         <a href="#location" class="btn btn-outline">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Find Us
+          <span data-i18n="hero.find-us">So finden Sie uns</span>
         </a>
       </div>
     </div>
 
     <!-- Mountain Divider -->
     <div class="mountain-divider">
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,120 L0,80 L120,60 L240,75 L360,35 L480,55 L540,20 L600,45 L720,10 L840,40 L900,25 L960,50 L1080,30 L1200,55 L1320,40 L1440,65 L1440,120 Z" fill="#FBF0E0"/>
+      <svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Back range (farthest, lightest) -->
+        <path d="M0,220 L0,140 L80,120 L160,100 L240,115 L320,80 L400,95 L480,60 L560,85 L640,45 L720,70 L760,35 L800,55 L880,75 L960,50 L1040,70 L1120,40 L1200,65 L1280,85 L1360,55 L1440,90 L1440,220 Z" fill="rgba(45,106,79,0.12)"/>
+        <!-- Mid range (medium depth) -->
+        <path d="M0,220 L0,170 L100,150 L180,130 L260,145 L340,110 L420,125 L500,90 L580,115 L660,80 L720,60 L780,85 L860,100 L940,75 L1020,95 L1100,65 L1180,90 L1260,110 L1340,80 L1440,120 L1440,220 Z" fill="rgba(45,106,79,0.08)"/>
+        <!-- Snow caps on tallest peaks -->
+        <path d="M476,90 L500,75 L524,90 Z" fill="rgba(255,255,255,0.7)"/>
+        <path d="M636,45 L660,28 L684,45 Z" fill="rgba(255,255,255,0.8)"/>
+        <path d="M716,60 L740,40 L764,60 Z" fill="rgba(255,255,255,0.7)"/>
+        <path d="M1096,65 L1120,48 L1144,65 Z" fill="rgba(255,255,255,0.7)"/>
+        <!-- Front range (closest, solid) -->
+        <path d="M0,220 L0,185 L60,175 L140,160 L220,170 L300,145 L380,155 L460,130 L540,150 L620,120 L700,140 L780,110 L820,125 L900,135 L980,115 L1060,130 L1140,105 L1220,125 L1300,140 L1380,120 L1440,150 L1440,220 Z" fill="#EDF5F0"/>
       </svg>
     </div>
   </section>
@@ -98,34 +118,34 @@
           </div>
         </div>
         <div class="about-content">
-          <h2>Our Story</h2>
-          <p class="accent-text">A taste of Nepal in the heart of Germany</p>
-          <p>Welcome to Thakali Kitchen, where we bring the rich culinary traditions of Nepal's Thakali community to your table. Our recipes have been passed down through generations, honoring the authentic flavors of the Himalayan region.</p>
-          <p>From our signature steamed Mo:Mo dumplings to the elaborate Thakali Set meals, every dish is prepared with fresh ingredients and traditional spices. We also offer an exquisite selection of Cross Sushi — our fusion take on Japanese cuisine with an Asian twist.</p>
+          <h2 data-i18n="about.title">Unsere Geschichte</h2>
+          <p class="accent-text" data-i18n="about.accent">Ein Geschmack von Nepal im Herzen Deutschlands</p>
+          <p data-i18n="about.p1">Willkommen im Thakali Kitchen, wo wir die reichen kulinarischen Traditionen der nepalesischen Thakali-Gemeinschaft an Ihren Tisch bringen. Unsere Rezepte wurden über Generationen weitergegeben und ehren die authentischen Aromen der Himalaya-Region.</p>
+          <p data-i18n="about.p2">Von unseren charakteristischen gedämpften Mo:Mo-Teigtaschen bis hin zu den aufwendigen Thakali Set-Mahlzeiten wird jedes Gericht mit frischen Zutaten und traditionellen Gewürzen zubereitet. Wir bieten auch eine exquisite Auswahl an Cross Sushi — unsere Fusion-Interpretation der japanischen Küche mit asiatischem Twist.</p>
           <div class="about-features">
             <div class="about-feature">
               <div class="about-feature-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
               </div>
-              <span>Traditional Recipes</span>
+              <span data-i18n="about.feature1">Traditionelle Rezepte</span>
             </div>
             <div class="about-feature">
               <div class="about-feature-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <span>Fresh Ingredients</span>
+              <span data-i18n="about.feature2">Frische Zutaten</span>
             </div>
             <div class="about-feature">
               <div class="about-feature-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
               </div>
-              <span>Family Tradition</span>
+              <span data-i18n="about.feature3">Familientradition</span>
             </div>
             <div class="about-feature">
               <div class="about-feature-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
               </div>
-              <span>Made with Love</span>
+              <span data-i18n="about.feature4">Mit Liebe zubereitet</span>
             </div>
           </div>
         </div>
@@ -137,8 +157,8 @@
   <section id="menu" class="section menu">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Our Menu</h2>
-        <p class="section-subtitle">From the peaks of Nepal to the art of Japanese sushi — discover our diverse culinary offerings</p>
+        <h2 class="section-title" data-i18n="menu.title">Unsere Speisekarte</h2>
+        <p class="section-subtitle" data-i18n="menu.subtitle">Von den Gipfeln Nepals bis zur Kunst des japanischen Sushi — entdecken Sie unsere vielfältigen kulinarischen Angebote</p>
         <div class="section-divider"></div>
       </div>
 
@@ -146,30 +166,51 @@
       <div class="menu-tab-groups reveal">
         <button class="menu-tab-group-btn active" data-group="thakali">Thakali Kitchen</button>
         <button class="menu-tab-group-btn" data-group="sushi">Cross Sushi</button>
+        <button class="menu-tab-group-btn" data-group="drinks">Getränke / Drinks</button>
       </div>
 
       <!-- Category Tabs -->
       <div class="menu-tabs reveal">
         <!-- Thakali Kitchen tabs -->
-        <button class="menu-tab active" data-category="starters" data-group="thakali">Starters</button>
+        <button class="menu-tab active" data-category="starters" data-group="thakali" data-i18n="menu.tab.starters">Vorspeisen</button>
         <button class="menu-tab" data-category="momo" data-group="thakali">Mo:Mo</button>
-        <button class="menu-tab" data-category="mains" data-group="thakali">Main Dishes</button>
+        <button class="menu-tab" data-category="mains" data-group="thakali" data-i18n="menu.tab.mains">Hauptgerichte</button>
         <!-- Cross Sushi tabs -->
-        <button class="menu-tab" data-category="soups" data-group="sushi" style="display:none">Soups</button>
-        <button class="menu-tab" data-category="appetizers" data-group="sushi" style="display:none">Appetizers</button>
+        <button class="menu-tab" data-category="soups" data-group="sushi" style="display:none">Suppen</button>
+        <button class="menu-tab" data-category="appetizers" data-group="sushi" style="display:none">Vorspeisen</button>
         <button class="menu-tab" data-category="tempura" data-group="sushi" style="display:none">Tempura</button>
-        <button class="menu-tab" data-category="salads" data-group="sushi" style="display:none">Salads</button>
+        <button class="menu-tab" data-category="salads" data-group="sushi" style="display:none">Salate</button>
+        <button class="menu-tab" data-category="poke-bowls" data-group="sushi" style="display:none">Poke Bowls</button>
         <button class="menu-tab" data-category="nigiri" data-group="sushi" style="display:none">Nigiri</button>
         <button class="menu-tab" data-category="special-nigiri" data-group="sushi" style="display:none">Special Nigiri</button>
         <button class="menu-tab" data-category="maki" data-group="sushi" style="display:none">Maki</button>
         <button class="menu-tab" data-category="crossover-maki" data-group="sushi" style="display:none">Crossover Maki</button>
+        <button class="menu-tab" data-category="kids-maki" data-group="sushi" style="display:none">Kinder Maki</button>
+        <button class="menu-tab" data-category="classic-roll" data-group="sushi" style="display:none">Classic Roll</button>
+        <button class="menu-tab" data-category="signature-roll" data-group="sushi" style="display:none">Signature Roll</button>
+        <button class="menu-tab" data-category="veggie-roll" data-group="sushi" style="display:none">Veggie Roll</button>
+        <button class="menu-tab" data-category="hot-roll" data-group="sushi" style="display:none">Hot Roll</button>
+        <button class="menu-tab" data-category="sashimi" data-group="sushi" style="display:none">Sashimi</button>
+        <button class="menu-tab" data-category="thai" data-group="sushi" style="display:none">Thai Spezialitäten</button>
+        <button class="menu-tab" data-category="fish" data-group="sushi" style="display:none">Fisch</button>
+        <button class="menu-tab" data-category="rice-noodles" data-group="sushi" style="display:none">Reis & Nudeln</button>
+        <button class="menu-tab" data-category="vegetarian" data-group="sushi" style="display:none">Vegetarisch</button>
+        <button class="menu-tab" data-category="desserts" data-group="sushi" style="display:none">Nachtisch</button>
+        <button class="menu-tab" data-category="extras" data-group="sushi" style="display:none">Extras</button>
+        <!-- Drinks tabs -->
+        <button class="menu-tab" data-category="tea-coffee" data-group="drinks" style="display:none">Tee & Kaffee</button>
+        <button class="menu-tab" data-category="soft-drinks" data-group="drinks" style="display:none">Soft Drinks</button>
+        <button class="menu-tab" data-category="lemonade" data-group="drinks" style="display:none">Limonaden</button>
+        <button class="menu-tab" data-category="beer" data-group="drinks" style="display:none">Bier</button>
+        <button class="menu-tab" data-category="cocktails" data-group="drinks" style="display:none">Cocktails</button>
+        <button class="menu-tab" data-category="wine" data-group="drinks" style="display:none">Wein & Prosecco</button>
       </div>
 
       <!-- ===== THAKALI KITCHEN CATEGORIES ===== -->
 
       <!-- Thakali Starters -->
       <div class="menu-category active" data-category="starters">
-        <h3 class="menu-category-title">Thakali Starters</h3>
+        <h3 class="menu-category-title" data-i18n="menu.starters.title">Thakali Vorspeisen</h3>
         <div class="menu-grid">
           <div class="menu-item">
             <div class="menu-item-info">
@@ -262,7 +303,7 @@
       <!-- Mo:Mo -->
       <div class="menu-category" data-category="momo">
         <h3 class="menu-category-title">Mo:Mo</h3>
-        <p class="menu-category-desc">Traditional Nepali dumplings — the heart of our kitchen</p>
+        <p class="menu-category-desc" data-i18n="menu.momo.desc">Traditionelle nepalesische Teigtaschen — das Herzstück unserer Küche</p>
         <div class="menu-grid">
           <div class="menu-item">
             <div class="menu-item-info">
@@ -308,8 +349,8 @@
 
       <!-- Main Dishes -->
       <div class="menu-category" data-category="mains">
-        <h3 class="menu-category-title">Main Dishes</h3>
-        <p class="menu-category-desc">Served with chicken and pork</p>
+        <h3 class="menu-category-title" data-i18n="menu.mains.title">Hauptgerichte</h3>
+        <p class="menu-category-desc" data-i18n="menu.mains.desc">Serviert mit Hähnchen und Schweinefleisch</p>
         <div class="menu-grid">
           <div class="menu-item">
             <div class="menu-item-info">
@@ -880,6 +921,1485 @@
         </div>
       </div>
 
+      <!-- Poke Bowls -->
+      <div class="menu-category" data-category="poke-bowls">
+        <h3 class="menu-category-title">Poke Bowls</h3>
+        <p class="menu-category-desc">Edamame, Gurke, Avocado, Rote Beete, Blaubeeren, Mais</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">30 A</span>
+                <span class="menu-item-name">Veggie Bowl</span>
+              </div>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€15.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">30 B</span>
+                <span class="menu-item-name">Tuna Bowl</span>
+              </div>
+              <p class="menu-item-desc">Korallenlinsen, Avocado, Rote Beete</p>
+            </div>
+            <span class="menu-item-price">€17.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">30 C</span>
+                <span class="menu-item-name">Teriyaki Bowl</span>
+              </div>
+              <p class="menu-item-desc">Garnelen, Walnuss, Soja, Mayo Soße</p>
+            </div>
+            <span class="menu-item-price">€19.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">30 D</span>
+                <span class="menu-item-name">Crazy Chicken Bowl</span>
+              </div>
+              <p class="menu-item-desc">Teriyaki Soße, Erdnusssoße</p>
+            </div>
+            <span class="menu-item-price">€18.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kids Maki -->
+      <div class="menu-category" data-category="kids-maki">
+        <h3 class="menu-category-title">Maki für Kinder</h3>
+        <p class="menu-category-desc">10 Stück / 10 pieces</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">70</span>
+                <span class="menu-item-name">Lachs Maki</span>
+              </div>
+              <p class="menu-item-desc">mit Teriyaki Soße</p>
+            </div>
+            <span class="menu-item-price">€8.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">71</span>
+                <span class="menu-item-name">Mango Maki</span>
+              </div>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€7.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">72</span>
+                <span class="menu-item-name">Japanese Crispy Chicken Maki</span>
+              </div>
+              <p class="menu-item-desc">mit Teriyaki Soße</p>
+            </div>
+            <span class="menu-item-price">€8.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">73</span>
+                <span class="menu-item-name">Tempura Crispy Chicken Maki</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€8.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">74</span>
+                <span class="menu-item-name">Avocado Maki</span>
+              </div>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€7.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">75</span>
+                <span class="menu-item-name">Avocado Trink Maki</span>
+              </div>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€5.50</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classic Roll -->
+      <div class="menu-category" data-category="classic-roll">
+        <h3 class="menu-category-title">Classic Roll</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">80</span>
+                <span class="menu-item-name">California Roll 1</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€9.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">81</span>
+                <span class="menu-item-name">Boston Roll 2</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€9.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">82</span>
+                <span class="menu-item-name">Romantic Roll</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€9.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">83</span>
+                <span class="menu-item-name">Cross Avocado Salmon Roll</span>
+              </div>
+              <p class="menu-item-desc">Gurke, black & white Sesam</p>
+            </div>
+            <span class="menu-item-price">€12.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signature Roll -->
+      <div class="menu-category" data-category="signature-roll">
+        <h3 class="menu-category-title">Cross Signature Roll</h3>
+        <p class="menu-category-desc">8 Stück / 8 pieces</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">110</span>
+                <span class="menu-item-name">Cross Dreams Roll</span>
+              </div>
+              <p class="menu-item-desc">Surimi, Gurke, Mayo, Lachs, flambierter french Sesam</p>
+            </div>
+            <span class="menu-item-price">€12.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">111</span>
+                <span class="menu-item-name">Swedish Love Roll</span>
+              </div>
+              <p class="menu-item-desc">Gurke, Lachs, Lachs-flambierter Insidetouch Sesam</p>
+            </div>
+            <span class="menu-item-price">€12.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">112</span>
+                <span class="menu-item-name">Cross Crazy Salmon Roll</span>
+              </div>
+              <p class="menu-item-desc">Gurke, Lachs, Tobiko, Togarashi-Mix</p>
+            </div>
+            <span class="menu-item-price">€12.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">113</span>
+                <span class="menu-item-name">Cross Crunchy Roll</span>
+              </div>
+              <p class="menu-item-desc">Gurke, Lachs, Schnittlauch</p>
+            </div>
+            <span class="menu-item-price">€12.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">114</span>
+                <span class="menu-item-name">Koi-Kou Roll</span>
+              </div>
+              <p class="menu-item-desc">Garnele, Lachs, Schnittlauch</p>
+            </div>
+            <span class="menu-item-price">€12.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">115</span>
+                <span class="menu-item-name">Cross Rainbow Roll</span>
+              </div>
+              <p class="menu-item-desc">Gurke, Teriyaki Soße, Creative Mix</p>
+            </div>
+            <span class="menu-item-price">€12.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">116</span>
+                <span class="menu-item-name">Everest Roll</span>
+              </div>
+              <p class="menu-item-desc">Tempura, Avocado, Gurke, Tatar, Tobiko, Mayo Soße, Shiso-Kresse, Sesam</p>
+            </div>
+            <span class="menu-item-price">€13.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">117</span>
+                <span class="menu-item-name">Kochi Creation Roll</span>
+              </div>
+              <p class="menu-item-desc">Tempura, Avocado, Lachs, Shiso-Kresse, Sesam</p>
+            </div>
+            <span class="menu-item-price">€12.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">118</span>
+                <span class="menu-item-name">Trüffel Roast Beef Roll</span>
+              </div>
+              <p class="menu-item-desc">Tempura, Avocado, Kimchi-Sesam, Shiso-Kresse, Sesam</p>
+            </div>
+            <span class="menu-item-price">€13.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">119</span>
+                <span class="menu-item-name">Cross Special Roll</span>
+              </div>
+              <p class="menu-item-desc">Tempura Shrimps, Gurke, Avocado, rote gegrillte Schinken, Limetten, Kimchi-Sesam</p>
+            </div>
+            <span class="menu-item-price">€14.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">120</span>
+                <span class="menu-item-name">Salmon Tatar Roll</span>
+              </div>
+              <p class="menu-item-desc">Gurke, Avocado, Lachstatar mit Teriyaki, Kimchi-Sesam</p>
+            </div>
+            <span class="menu-item-price">€13.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">121</span>
+                <span class="menu-item-name">Hot Paprika Roll</span>
+              </div>
+              <p class="menu-item-desc">Lachs, Soße, Spicy Teriyaki Soße, Kimchi-Sesam</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-spicy">Spicy</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€12.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">122</span>
+                <span class="menu-item-name">Tochi's Cross Over Roll</span>
+              </div>
+              <p class="menu-item-desc">Surimi, Gurke, Avocado mit Lachs, Avocado-Topping, Teriyaki Soße, black & white Sesam</p>
+            </div>
+            <span class="menu-item-price">€13.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">123</span>
+                <span class="menu-item-name">Swish Roll</span>
+              </div>
+              <p class="menu-item-desc">Surimi, mayo, Gurke, Avocado mit Avocado-Topping, Petersilie, black & white Sesam</p>
+            </div>
+            <span class="menu-item-price">€13.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Veggie Roll -->
+      <div class="menu-category" data-category="veggie-roll">
+        <h3 class="menu-category-title">Cross Veggie Signature Roll</h3>
+        <p class="menu-category-desc">8 Stück / 8 pieces</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">130</span>
+                <span class="menu-item-name">Top Greenpeace Roll</span>
+              </div>
+              <p class="menu-item-desc">Gurke, Avocado, Role Inside, Topping Creamy Soße</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€10.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">131</span>
+                <span class="menu-item-name">Avocado Roll</span>
+              </div>
+              <p class="menu-item-desc">Gurke, Avocado, Sesam, Topping Avocado Kresse</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€10.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">132</span>
+                <span class="menu-item-name">Cross Mix Tofu Roll</span>
+              </div>
+              <p class="menu-item-desc">Tempura Seitan, Gurke, Avocado, Topping Avocado Kresse</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€10.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">133</span>
+                <span class="menu-item-name">Green Monster Roll</span>
+              </div>
+              <p class="menu-item-desc">Portobello, Tempura, Avocado, Gurke, Kresse, Sesam, Wasabi Sesam</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€10.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hot Roll -->
+      <div class="menu-category" data-category="hot-roll">
+        <h3 class="menu-category-title">Eimsbüttel Hot Roll</h3>
+        <p class="menu-category-desc">5 Stück / 5 pieces</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">140</span>
+                <span class="menu-item-name">Cross Crunchy Roll</span>
+              </div>
+              <p class="menu-item-desc">Tempura Shrimps, hausgemachte Teriyaki und Mayo Soße</p>
+            </div>
+            <span class="menu-item-price">€11.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">141</span>
+                <span class="menu-item-name">Japanese Crispy Chicken Roll</span>
+              </div>
+              <p class="menu-item-desc">Crispy Chicken, Avocado, Gurke, Spicy Teriyaki Soße</p>
+            </div>
+            <span class="menu-item-price">€10.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">142</span>
+                <span class="menu-item-name">Crispy Duck Roll</span>
+              </div>
+              <p class="menu-item-desc">Tempura Ente, Teriyaki Soße mit Schnittlauch und Spicy Soße</p>
+            </div>
+            <span class="menu-item-price">€11.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">143</span>
+                <span class="menu-item-name">Cross Crunchy Spicy Roll</span>
+              </div>
+              <p class="menu-item-desc">Gurke, Spicy Tuna mit Schnittlauch und Spicy Soße</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-spicy">Spicy</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€11.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">144</span>
+                <span class="menu-item-name">Cross Tempura Roll</span>
+              </div>
+              <p class="menu-item-desc">Lachs, Spicy Tuna, hausgemachte Teriyaki und Mayo Soße, Sesam</p>
+            </div>
+            <span class="menu-item-price">€11.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sashimi -->
+      <div class="menu-category" data-category="sashimi">
+        <h3 class="menu-category-title">Classic Sashimi</h3>
+        <p class="menu-category-desc">10 Scheiben / 10 slices</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">90</span>
+                <span class="menu-item-name">Avocado Ceviche Sashimi</span>
+              </div>
+              <p class="menu-item-desc">Avocado, Sashimi, Sesam</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€11.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">91</span>
+                <span class="menu-item-name">Rohe Bento Sashimi</span>
+              </div>
+              <p class="menu-item-desc">Sashimi mit gemischtem Salat, Tomatensauce, Kresse</p>
+            </div>
+            <span class="menu-item-price">€11.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">92</span>
+                <span class="menu-item-name">Lachs Sashimi</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€21.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">93</span>
+                <span class="menu-item-name">Cross Special Salmon Sashimi</span>
+              </div>
+              <p class="menu-item-desc">Wasabi, Ingwer, Karotten, Tomaten, Kresse</p>
+            </div>
+            <span class="menu-item-price">€27.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">94</span>
+                <span class="menu-item-name">Cross Special Yellowfin Tuna Tatar</span>
+              </div>
+              <p class="menu-item-desc">Frischer Yellowfin Tuna, Sesam, Kresse</p>
+            </div>
+            <span class="menu-item-price">€27.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">95</span>
+                <span class="menu-item-name">Cross Special Yellowfin Tuna Tataki</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€19.90</span>
+          </div>
+        </div>
+        <h3 class="menu-category-title" style="margin-top:2rem">Signature Sashimi</h3>
+        <p class="menu-category-desc">10 Scheiben / 10 slices</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">100</span>
+                <span class="menu-item-name">Cross Special Wellhorn Sashimi</span>
+              </div>
+              <p class="menu-item-desc">Seetangblätter und Lachstatar, Soße Ponzu</p>
+            </div>
+            <span class="menu-item-price">€22.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">101</span>
+                <span class="menu-item-name">Cross Special Salmon Sashimi</span>
+              </div>
+              <p class="menu-item-desc">Wellenförmig Trockeneis, Limette, Trüffel Ponzu Soße</p>
+            </div>
+            <span class="menu-item-price">€24.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">102</span>
+                <span class="menu-item-name">Cross Special Kobe Bento Sashimi</span>
+              </div>
+              <p class="menu-item-desc">Rosenbutter, Trüffel-Schaum Sashimi, Trüffel Ponzu</p>
+            </div>
+            <span class="menu-item-price">€24.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">103</span>
+                <span class="menu-item-name">Cross Special Roast Beef Sashimi</span>
+              </div>
+              <p class="menu-item-desc">Frisches Roast Beef mit Rosenbutter, Trüffel Ponzu, gemischter Salat und Shiso-Kresse</p>
+            </div>
+            <span class="menu-item-price">€24.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thai Specialties -->
+      <div class="menu-category" data-category="thai">
+        <h3 class="menu-category-title">Thailändische Spezialitäten</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">150</span>
+                <span class="menu-item-name">Thai Fried Rice</span>
+              </div>
+              <p class="menu-item-desc">Thai Basilikum, Sambal, Cashewkerne, Kokosraspeln, oder Gai</p>
+            </div>
+            <span class="menu-item-price">€15.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">151</span>
+                <span class="menu-item-name">Massaman Curry</span>
+              </div>
+              <p class="menu-item-desc">Nahi Massaman mit Kartoffeln, Champignons, Karotten, Erdnuss</p>
+            </div>
+            <span class="menu-item-price">€17.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">152</span>
+                <span class="menu-item-name">Gäng Tom Kha Gai</span>
+              </div>
+              <p class="menu-item-desc">Kokossuppe mit Hühnerfleisch, Champignons, Koriander</p>
+            </div>
+            <span class="menu-item-price">€17.90</span>
+          </div>
+        </div>
+
+        <h3 class="menu-category-title" style="margin-top:2rem">Thai Hühnerfleisch</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">160</span>
+                <span class="menu-item-name">Crispy Sweet Huhn</span>
+              </div>
+              <p class="menu-item-desc">oder Phed — gebratenes Hühnerfleisch, Süß-Sauer mit Zuckerschoten</p>
+            </div>
+            <span class="menu-item-price">€18.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">161</span>
+                <span class="menu-item-name">Knuspriges Hühnerfleisch</span>
+              </div>
+              <p class="menu-item-desc">gebratenes Süß-Sauer mit Zuckerschoten, Mais Soße, Zwiebeln</p>
+            </div>
+            <span class="menu-item-price">€19.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">162</span>
+                <span class="menu-item-name">Huhn Cashew Teriyaki</span>
+              </div>
+              <p class="menu-item-desc">Zucchini, Hühnchen, rote Zwiebeln, Bambus, Cashewkerne, Pikante Soße</p>
+            </div>
+            <span class="menu-item-price">€19.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">163</span>
+                <span class="menu-item-name">Japanisches Teriyaki Hühnchen</span>
+              </div>
+              <p class="menu-item-desc">oder Erdnuss — Spinatblätter, Bambus, rote Zwiebeln, Glasnudeln</p>
+            </div>
+            <span class="menu-item-price">€17.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">164</span>
+                <span class="menu-item-name">Korma Tofu</span>
+              </div>
+              <p class="menu-item-desc">Tofu, Thai Peperoni, Blumenkohl, Schnittbohnen, rote Zwiebeln, Korma-Sahne-Soße</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€15.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">165</span>
+                <span class="menu-item-name">Gai Pled Prao</span>
+              </div>
+              <p class="menu-item-desc">Thai art — Hühnerfleisch, Thai Gemüse, Cashewkerne, Korma, Thai Peperoni</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-spicy">Spicy</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€17.90</span>
+          </div>
+        </div>
+
+        <h3 class="menu-category-title" style="margin-top:2rem">Rindfleisch</h3>
+        <p class="menu-category-desc">gebratenes Rindfleisch</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">170</span>
+                <span class="menu-item-name">Gebratenes Rindfleisch</span>
+              </div>
+              <p class="menu-item-desc">rote Peperoni, Blumenkohl, Brokkoli, Zucchini, Bambus, Paprika, rote Zwiebeln, Zuckerschoten</p>
+            </div>
+            <span class="menu-item-price">€17.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">171</span>
+                <span class="menu-item-name">Nua Pled Prao</span>
+              </div>
+              <p class="menu-item-desc">gebratenes Rindfleisch, Paprika, Cashewkerne, rote Zwiebeln, rote Peperoni</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-spicy">Spicy</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€17.90</span>
+          </div>
+        </div>
+
+        <h3 class="menu-category-title" style="margin-top:2rem">Cross Thai Ente</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">180</span>
+                <span class="menu-item-name">Cross Ente Teriyaki</span>
+              </div>
+              <p class="menu-item-desc">knusprige Ente, Sesamkörner, rote Zwiebeln, Erdnusskörner oder Erdnusssoße</p>
+            </div>
+            <span class="menu-item-price">€19.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">181</span>
+                <span class="menu-item-name">Cross Ente Panang Curry</span>
+              </div>
+              <p class="menu-item-desc">knusprige Ente, Panang Curry, Zuckerschoten, rote Zwiebeln, Koriander</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-spicy">Spicy</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€20.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fish -->
+      <div class="menu-category" data-category="fish">
+        <h3 class="menu-category-title">Cross Fisch</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">190</span>
+                <span class="menu-item-name">Tuna Steak</span>
+              </div>
+              <p class="menu-item-desc">Spinatblätter, Bratkartoffeln, rote Peperoni, Brokkoli, Zuckerschoten, Zitrone, Spinatsoße</p>
+            </div>
+            <span class="menu-item-price">€21.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">191</span>
+                <span class="menu-item-name">Barbecue Lachs</span>
+              </div>
+              <p class="menu-item-desc">Gegrilltes Lachsfilet, frische Salatblätter, rote Peperoni, Zuckerschoten, Zitrone, Spinatsoße</p>
+            </div>
+            <span class="menu-item-price">€19.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rice & Noodles -->
+      <div class="menu-category" data-category="rice-noodles">
+        <h3 class="menu-category-title">Cross Reis oder Nudeln</h3>
+        <p class="menu-category-desc">Gebratene Nudeln oder gebratener Reis — Gemüse, Cashewkerne, Ei und nach Wahl</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">200 A</span>
+                <span class="menu-item-name">Vegetarisch</span>
+              </div>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€13.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">200 B</span>
+                <span class="menu-item-name">Hühnerfleisch</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€17.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">200 C</span>
+                <span class="menu-item-name">Rindfleisch</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€17.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">200 D</span>
+                <span class="menu-item-name">Knusprige Ente / Hähnchen</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€18.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vegetarian -->
+      <div class="menu-category" data-category="vegetarian">
+        <h3 class="menu-category-title">Vegetarisch</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">210</span>
+                <span class="menu-item-name">Kokos Sojaan</span>
+              </div>
+              <p class="menu-item-desc">Champignons, Brokkoli, Zuckerschoten, Bambus, Thai Basilikum, Kokosraspeln</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€14.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">211</span>
+                <span class="menu-item-name">Tofu Gebraten</span>
+              </div>
+              <p class="menu-item-desc">Champignons, Ingwer, rote Zwiebeln, Bambus, Cashewkerne, Pikante Soße</p>
+              <div class="menu-item-badges">
+                <span class="badge badge-vegetarian">Vegetarian</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€14.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desserts -->
+      <div class="menu-category" data-category="desserts">
+        <h3 class="menu-category-title">Nachtisch</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">220</span>
+                <span class="menu-item-name">Knusprige Banane</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€6.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">221</span>
+                <span class="menu-item-name">Frittierte Vanille-Eis</span>
+              </div>
+              <p class="menu-item-desc">mit Erdbeer- oder Schoko-Soße</p>
+            </div>
+            <span class="menu-item-price">€6.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">222</span>
+                <span class="menu-item-name">Warme Waffeln mit Vanille-Eis</span>
+              </div>
+              <p class="menu-item-desc">mit Erdbeer- oder Schoko-Soße</p>
+            </div>
+            <span class="menu-item-price">€6.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extras & Sides -->
+      <div class="menu-category" data-category="extras">
+        <h3 class="menu-category-title">Extras & Beilagen</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">230</span>
+                <span class="menu-item-name">Jasminreis</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€2.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">231</span>
+                <span class="menu-item-name">Sushi-Reis</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€3.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">232</span>
+                <span class="menu-item-name">Hausgemachte Soßen</span>
+              </div>
+              <p class="menu-item-desc">Trüffel Soße, Soya Soße, Spicy Teriyaki-Soße</p>
+            </div>
+            <span class="menu-item-price">€2.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">233</span>
+                <span class="menu-item-name">Teriyaki Soße</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€3.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">234</span>
+                <span class="menu-item-name">Erdnusssoße</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€3.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">235</span>
+                <span class="menu-item-name">Portion Ingwer / Wasabi</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€3.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">236</span>
+                <span class="menu-item-name">Knuspriges Hühnchen</span>
+              </div>
+              <p class="menu-item-desc">mit Saison Gemüse</p>
+            </div>
+            <span class="menu-item-price">€10.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">237</span>
+                <span class="menu-item-name">Knusprige Ente</span>
+              </div>
+              <p class="menu-item-desc">mit Saison Gemüse</p>
+            </div>
+            <span class="menu-item-price">€9.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== DRINKS CATEGORIES ===== -->
+
+      <!-- Tea & Coffee -->
+      <div class="menu-category" data-category="tea-coffee">
+        <h3 class="menu-category-title">Exklusive Teesorten</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">240</span>
+                <span class="menu-item-name">Japanischer Grüner Tee</span>
+              </div>
+              <p class="menu-item-desc">mit verschiedenen Zusätzen</p>
+            </div>
+            <span class="menu-item-price">€4.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">241</span>
+                <span class="menu-item-name">Grüner Winter-Tee</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€4.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">242</span>
+                <span class="menu-item-name">Ingwer Tee</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€4.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">243</span>
+                <span class="menu-item-name">Jasmin Oolong Tee</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€5.90</span>
+          </div>
+        </div>
+        <h3 class="menu-category-title" style="margin-top:2rem">Kaffee</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">250</span>
+                <span class="menu-item-name">Espresso</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€2.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">251</span>
+                <span class="menu-item-name">Doppelter Espresso</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€3.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">252</span>
+                <span class="menu-item-name">Cappuccino</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€3.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soft Drinks -->
+      <div class="menu-category" data-category="soft-drinks">
+        <h3 class="menu-category-title">Soft Drinks</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">250</span>
+                <span class="menu-item-name">Vatu Limonade</span>
+              </div>
+              <p class="menu-item-desc">0.25 l</p>
+            </div>
+            <span class="menu-item-price">€3.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">251</span>
+                <span class="menu-item-name">Stilles Wasser / Brunnen</span>
+              </div>
+              <p class="menu-item-desc">0.75 l</p>
+            </div>
+            <span class="menu-item-price">€6.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">252</span>
+                <span class="menu-item-name">Sprudel Wasser</span>
+              </div>
+              <p class="menu-item-desc">0.75 l</p>
+            </div>
+            <span class="menu-item-price">€6.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">253</span>
+                <span class="menu-item-name">Coca Cola / Coca Cola Zero</span>
+              </div>
+              <p class="menu-item-desc">0.4 l</p>
+            </div>
+            <span class="menu-item-price">€3.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">254</span>
+                <span class="menu-item-name">Ginger Ale / Lemon</span>
+              </div>
+              <p class="menu-item-desc">Ginger Ale</p>
+            </div>
+            <span class="menu-item-price">€3.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lemonade -->
+      <div class="menu-category" data-category="lemonade">
+        <h3 class="menu-category-title">Homemade Lemonade</h3>
+        <p class="menu-category-desc">0.3 l</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">260</span>
+                <span class="menu-item-name">Passion Fruit</span>
+              </div>
+              <p class="menu-item-desc">Bio Orange, Ananas, Bio Limette</p>
+            </div>
+            <span class="menu-item-price">€5.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">261</span>
+                <span class="menu-item-name">Ginger Fruity</span>
+              </div>
+              <p class="menu-item-desc">Bio Orange, Limettensaft, Zucker</p>
+            </div>
+            <span class="menu-item-price">€5.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">262</span>
+                <span class="menu-item-name">Apple Jai</span>
+              </div>
+              <p class="menu-item-desc">Sprudel Wasser, Limettensaft, Zucker, Zitrone</p>
+            </div>
+            <span class="menu-item-price">€4.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">263</span>
+                <span class="menu-item-name">Mango Lassi</span>
+              </div>
+              <p class="menu-item-desc">Joghurt, Mango, Soft</p>
+            </div>
+            <span class="menu-item-price">€4.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">264</span>
+                <span class="menu-item-name">Kathmandu Jai</span>
+              </div>
+              <p class="menu-item-desc">Limettensaft, Ingwer und Minze</p>
+            </div>
+            <span class="menu-item-price">€6.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">265</span>
+                <span class="menu-item-name">Amrit Sarbat</span>
+              </div>
+              <p class="menu-item-desc">Brauner Zucker, Minze und Sprudel Wasser</p>
+            </div>
+            <span class="menu-item-price">€4.90</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beer -->
+      <div class="menu-category" data-category="beer">
+        <h3 class="menu-category-title">Bier vom Fass</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">270</span>
+                <span class="menu-item-name">König Pilsner</span>
+              </div>
+              <p class="menu-item-desc">0.3 l</p>
+            </div>
+            <span class="menu-item-price">€3.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">271</span>
+                <span class="menu-item-name">König Pilsner</span>
+              </div>
+              <p class="menu-item-desc">0.5 l</p>
+            </div>
+            <span class="menu-item-price">€5.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">272</span>
+                <span class="menu-item-name">Benediktiner Weißbier</span>
+              </div>
+              <p class="menu-item-desc">0.3 l</p>
+            </div>
+            <span class="menu-item-price">€3.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">273</span>
+                <span class="menu-item-name">Benediktiner Weißbier</span>
+              </div>
+              <p class="menu-item-desc">0.5 l</p>
+            </div>
+            <span class="menu-item-price">€5.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">274</span>
+                <span class="menu-item-name">Alkoholfreies Pilsner</span>
+              </div>
+              <p class="menu-item-desc">0.33 l</p>
+            </div>
+            <span class="menu-item-price">€3.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">275</span>
+                <span class="menu-item-name">Alkoholfreies Weißbier</span>
+              </div>
+              <p class="menu-item-desc">0.33 l</p>
+            </div>
+            <span class="menu-item-price">€3.50</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cocktails -->
+      <div class="menu-category" data-category="cocktails">
+        <h3 class="menu-category-title">Cocktails</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">280</span>
+                <span class="menu-item-name">Caipirinha</span>
+              </div>
+              <p class="menu-item-desc">Limetten, brauner Zucker, crushed ice</p>
+            </div>
+            <span class="menu-item-price">€10.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">281</span>
+                <span class="menu-item-name">Gin Basil Smash</span>
+              </div>
+              <p class="menu-item-desc">Gin, Basilikum, Limetten, Zuckersirup</p>
+            </div>
+            <span class="menu-item-price">€10.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">282</span>
+                <span class="menu-item-name">Mojito</span>
+              </div>
+              <p class="menu-item-desc">Rum, Limetten, Minze, brauner Zucker, crushed ice</p>
+            </div>
+            <span class="menu-item-price">€10.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">283</span>
+                <span class="menu-item-name">Espresso Martini</span>
+              </div>
+              <p class="menu-item-desc">Wodka, Espresso, Zuckersirup</p>
+            </div>
+            <span class="menu-item-price">€11.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">284</span>
+                <span class="menu-item-name">Whiskey Sour</span>
+              </div>
+              <p class="menu-item-desc">Whiskey, Zitronensaft, Zucker, Eiswürfel</p>
+            </div>
+            <span class="menu-item-price">€11.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">285</span>
+                <span class="menu-item-name">The Joshua Tree</span>
+              </div>
+              <p class="menu-item-desc">Tequila, Zitronensaft, Zucker</p>
+            </div>
+            <span class="menu-item-price">€12.00</span>
+          </div>
+        </div>
+        <h3 class="menu-category-title" style="margin-top:2rem">Spirituosen</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">290</span>
+                <span class="menu-item-name">Bambusschnaps</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€3.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">291</span>
+                <span class="menu-item-name">Grappa</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€3.50</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">292</span>
+                <span class="menu-item-name">Limoncello</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€4.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">293</span>
+                <span class="menu-item-name">Illiens Schnaps</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€4.90</span>
+          </div>
+        </div>
+        <h3 class="menu-category-title" style="margin-top:2rem">Spritz</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">301</span>
+                <span class="menu-item-name">The Joshua Tea Spritz</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€8.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">302</span>
+                <span class="menu-item-name">Aperol Spritz</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€8.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">303</span>
+                <span class="menu-item-name">Lillet Spritz</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€8.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">304</span>
+                <span class="menu-item-name">Limoncello Spritz</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€8.50</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wine -->
+      <div class="menu-category" data-category="wine">
+        <h3 class="menu-category-title">Weißwein</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">310</span>
+                <span class="menu-item-name">Riesling, Pfalz</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€7.90 / €26.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">311</span>
+                <span class="menu-item-name">Weingut Seckinger, Pfalz</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€7.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">312</span>
+                <span class="menu-item-name">Weingut Weber, Baden</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€7.90 / €26.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">313</span>
+                <span class="menu-item-name">Grüner Veltliner</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€25.90</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">314</span>
+                <span class="menu-item-name">Gavi, Baden Rivaner</span>
+              </div>
+              <p class="menu-item-desc">0.7 l</p>
+            </div>
+            <span class="menu-item-price">€6.90 / €25.90</span>
+          </div>
+        </div>
+        <h3 class="menu-category-title" style="margin-top:2rem">Rosé Wein</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">320</span>
+                <span class="menu-item-name">Weingut Weber, Baden</span>
+              </div>
+              <p class="menu-item-desc">2023 Spätburgunder Rosé</p>
+            </div>
+            <span class="menu-item-price">€7.90 / €29.90</span>
+          </div>
+        </div>
+        <h3 class="menu-category-title" style="margin-top:2rem">Rotwein</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">330</span>
+                <span class="menu-item-name">Azienda Agricola Dei Baroni</span>
+              </div>
+            </div>
+            <span class="menu-item-price">€7.90 / €25.00</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">331</span>
+                <span class="menu-item-name">Stéphane Vigny</span>
+              </div>
+              <p class="menu-item-desc">2022 Pied Spätling</p>
+            </div>
+            <span class="menu-item-price">€8.90 / €32.90</span>
+          </div>
+        </div>
+        <h3 class="menu-category-title" style="margin-top:2rem">Prosecco</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">340</span>
+                <span class="menu-item-name">Prosecco Frizzante delle Venezie D.O.C.</span>
+              </div>
+              <p class="menu-item-desc">0.7 l / 0.2 l</p>
+            </div>
+            <span class="menu-item-price">€6.90 / €26.90</span>
+          </div>
+        </div>
+        <h3 class="menu-category-title" style="margin-top:2rem">Crémant</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">350</span>
+                <span class="menu-item-name">Louis de Grenelle, Loire</span>
+              </div>
+              <p class="menu-item-desc">Crémant Grande Cuvée, 0.7 l</p>
+            </div>
+            <span class="menu-item-price">€35.50</span>
+          </div>
+        </div>
+        <h3 class="menu-category-title" style="margin-top:2rem">Weinschorle</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-header">
+                <span class="menu-item-number">300</span>
+                <span class="menu-item-name">Weinschorle</span>
+              </div>
+              <p class="menu-item-desc">Weiß / Rosé</p>
+            </div>
+            <span class="menu-item-price">€4.90 / €5.60</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -887,8 +2407,8 @@
   <section id="gallery" class="section gallery">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Gallery</h2>
-        <p class="section-subtitle">A glimpse into our kitchen and dining experience</p>
+        <h2 class="section-title" data-i18n="gallery.title">Galerie</h2>
+        <p class="section-subtitle" data-i18n="gallery.subtitle">Ein Einblick in unsere Küche und das kulinarische Erlebnis</p>
         <div class="section-divider"></div>
       </div>
 
@@ -931,16 +2451,15 @@
   <section id="location" class="section location">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Find Us</h2>
-        <p class="section-subtitle">Visit us for an unforgettable dining experience</p>
+        <h2 class="section-title" data-i18n="location.title">So finden Sie uns</h2>
+        <p class="section-subtitle" data-i18n="location.subtitle">Besuchen Sie uns für ein unvergessliches kulinarisches Erlebnis</p>
         <div class="section-divider"></div>
       </div>
 
       <div class="location-grid reveal">
         <div class="location-map">
-          <!-- Replace with your actual OpenStreetMap embed or address coordinates -->
           <iframe
-            src="https://www.openstreetmap.org/export/embed.html?bbox=11.5%2C48.1%2C11.6%2C48.2&layer=mapnik"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=9.9431%2C53.5757%2C9.9531%2C53.5797&layer=mapnik&marker=53.5777%2C9.9481"
             allowfullscreen
             loading="lazy"
             title="Restaurant Location">
@@ -948,15 +2467,15 @@
         </div>
 
         <div class="location-info">
-          <h3>Visit Us</h3>
+          <h3 data-i18n="location.visit">Besuchen Sie uns</h3>
 
           <div class="location-detail">
             <div class="location-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div class="location-detail-text">
-              <h4>Address</h4>
-              <p>Musterstraße 123<br>12345 Stadt, Germany</p>
+              <h4 data-i18n="location.address">Adresse</h4>
+              <p>Hellkamp 22<br>20255 Hamburg, Germany</p>
             </div>
           </div>
 
@@ -965,8 +2484,8 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             </div>
             <div class="location-detail-text">
-              <h4>Phone</h4>
-              <p><a href="tel:+49123456789">+49 123 456 789</a></p>
+              <h4 data-i18n="location.phone">Telefon</h4>
+              <p><a href="tel:+4904033421226">040 33421226</a></p>
             </div>
           </div>
 
@@ -975,30 +2494,42 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
             <div class="location-detail-text">
-              <h4>Email</h4>
+              <h4 data-i18n="location.email">E-Mail</h4>
               <p><a href="mailto:info@thakalikitchen.de">info@thakalikitchen.de</a></p>
             </div>
           </div>
 
           <table class="hours-table">
             <tr>
-              <th colspan="2">Opening Hours</th>
+              <th colspan="2" data-i18n="location.hours">Öffnungszeiten</th>
             </tr>
             <tr>
-              <td>Monday</td>
-              <td>Closed</td>
-            </tr>
-            <tr>
-              <td>Tuesday – Thursday</td>
-              <td>11:30 – 14:30, 17:30 – 22:00</td>
-            </tr>
-            <tr>
-              <td>Friday – Saturday</td>
-              <td>11:30 – 14:30, 17:30 – 23:00</td>
-            </tr>
-            <tr>
-              <td>Sunday</td>
+              <td data-i18n="location.mon">Montag</td>
               <td>12:00 – 22:00</td>
+            </tr>
+            <tr>
+              <td data-i18n="location.tue">Dienstag</td>
+              <td>12:00 – 22:00</td>
+            </tr>
+            <tr>
+              <td data-i18n="location.wed">Mittwoch</td>
+              <td>12:00 – 22:00</td>
+            </tr>
+            <tr>
+              <td data-i18n="location.thu">Donnerstag</td>
+              <td>12:00 – 22:00</td>
+            </tr>
+            <tr>
+              <td data-i18n="location.fri">Freitag</td>
+              <td>12:00 – 23:00</td>
+            </tr>
+            <tr>
+              <td data-i18n="location.sat">Samstag</td>
+              <td>14:00 – 23:00</td>
+            </tr>
+            <tr>
+              <td data-i18n="location.sun">Sonntag</td>
+              <td>14:00 – 22:00</td>
             </tr>
           </table>
         </div>
@@ -1010,8 +2541,8 @@
   <section id="contact" class="section contact">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Get in Touch</h2>
-        <p class="section-subtitle">We'd love to hear from you</p>
+        <h2 class="section-title" data-i18n="contact.title">Kontaktieren Sie uns</h2>
+        <p class="section-subtitle" data-i18n="contact.subtitle">Wir freuen uns von Ihnen zu hören</p>
         <div class="section-divider"></div>
       </div>
 
@@ -1020,16 +2551,16 @@
           <div class="contact-card-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
           </div>
-          <h3>Call Us</h3>
-          <p>For reservations and inquiries</p>
-          <p><a href="tel:+49123456789">+49 123 456 789</a></p>
+          <h3 data-i18n="contact.call">Rufen Sie uns an</h3>
+          <p data-i18n="contact.call-desc">Für Reservierungen und Anfragen</p>
+          <p><a href="tel:+4904033421226">040 33421226</a></p>
         </div>
         <div class="contact-card">
           <div class="contact-card-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
-          <h3>Email Us</h3>
-          <p>We'll get back to you soon</p>
+          <h3 data-i18n="contact.email">Schreiben Sie uns</h3>
+          <p data-i18n="contact.email-desc">Wir melden uns bald bei Ihnen</p>
           <p><a href="mailto:info@thakalikitchen.de">info@thakalikitchen.de</a></p>
         </div>
       </div>
@@ -1054,31 +2585,31 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="nav-logo-text">Thakali <span>Kitchen</span></div>
-          <p>Authentic Nepali cuisine and Cross Sushi. Experience the flavors of the Himalayas and the art of Japanese fusion in every bite.</p>
+          <p data-i18n="footer.desc">Authentische nepalesische Küche und Cross Sushi. Erleben Sie die Aromen des Himalaya und die Kunst der japanischen Fusion in jedem Bissen.</p>
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-i18n="footer.links">Schnelllinks</h4>
           <div class="footer-links">
-            <a href="#about">About Us</a>
-            <a href="#menu">Our Menu</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#location">Location</a>
-            <a href="#contact">Contact</a>
+            <a href="#about" data-i18n="footer.about">Über uns</a>
+            <a href="#menu" data-i18n="footer.menu">Unsere Speisekarte</a>
+            <a href="#gallery" data-i18n="footer.gallery">Galerie</a>
+            <a href="#location" data-i18n="footer.location">Standort</a>
+            <a href="#contact" data-i18n="footer.contact">Kontakt</a>
           </div>
         </div>
         <div>
-          <h4>Contact</h4>
+          <h4 data-i18n="footer.contact-title">Kontakt</h4>
           <div class="footer-links">
-            <a href="tel:+49123456789">+49 123 456 789</a>
+            <a href="tel:+4904033421226">040 33421226</a>
             <a href="mailto:info@thakalikitchen.de">info@thakalikitchen.de</a>
-            <a>Musterstraße 123</a>
-            <a>12345 Stadt, Germany</a>
+            <a>Hellkamp 22</a>
+            <a>20255 Hamburg, Germany</a>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 Thakali Kitchen. All rights reserved.</p>
+        <p data-i18n="footer.rights">&copy; 2026 Thakali Kitchen. Alle Rechte vorbehalten.</p>
         <div class="footer-legal">
           <a href="impressum.html">Impressum</a>
           <a href="datenschutz.html">Datenschutz</a>
@@ -1090,10 +2621,10 @@
   <!-- ============ COOKIE CONSENT ============ -->
   <div class="cookie-consent" role="dialog" aria-label="Cookie consent">
     <div class="container">
-      <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies. <a href="datenschutz.html">Learn more</a></p>
+      <p data-i18n-html="cookie.text">Wir verwenden Cookies, um Ihr Erlebnis zu verbessern. Durch den weiteren Besuch dieser Website stimmen Sie unserer Verwendung von Cookies zu. <a href="datenschutz.html">Mehr erfahren</a></p>
       <div class="cookie-buttons">
-        <button class="cookie-btn cookie-accept">Accept</button>
-        <button class="cookie-btn cookie-decline">Decline</button>
+        <button class="cookie-btn cookie-accept" data-i18n="cookie.accept">Akzeptieren</button>
+        <button class="cookie-btn cookie-decline" data-i18n="cookie.decline">Ablehnen</button>
       </div>
     </div>
   </div>
