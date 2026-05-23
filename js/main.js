@@ -455,6 +455,7 @@ function renderSignature() {
     <h3 style="margin-top:6px">${escapeHtml(pick.name)}</h3>
     ${pick.desc ? `<div class="sig-desc">${escapeHtml(pick.desc)}</div>` : ''}
     <div class="imgph">
+      <img src="images/signature.jpg" alt="${escapeHtml(pick.name)}" loading="lazy"/>
       <span class="imgph-tag">PHOTO · 16:10</span>
       <span class="imgph-cap">${t('menu.sig.imgcap')}</span>
     </div>
