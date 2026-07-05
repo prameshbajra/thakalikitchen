@@ -750,12 +750,13 @@ section.block {
   grid-template-columns: 1fr 1fr;
   gap: 6px;
 }
-.gallery-grid .imgph:nth-child(1) { grid-column: span 2; aspect-ratio: 16/10; }
-.gallery-grid .imgph:nth-child(2) { aspect-ratio: 1; }
-.gallery-grid .imgph:nth-child(3) { aspect-ratio: 1; }
-.gallery-grid .imgph:nth-child(4) { aspect-ratio: 4/5; }
-.gallery-grid .imgph:nth-child(5) { aspect-ratio: 4/5; }
-.gallery-grid .imgph:nth-child(6) { grid-column: span 2; aspect-ratio: 16/9; }
+/* repeating 6-tile rhythm — supports any number of tiles */
+.gallery-grid .imgph:nth-child(6n+1) { grid-column: span 2; aspect-ratio: 16/10; }
+.gallery-grid .imgph:nth-child(6n+2) { aspect-ratio: 1; }
+.gallery-grid .imgph:nth-child(6n+3) { aspect-ratio: 1; }
+.gallery-grid .imgph:nth-child(6n+4) { aspect-ratio: 4/5; }
+.gallery-grid .imgph:nth-child(6n+5) { aspect-ratio: 4/5; }
+.gallery-grid .imgph:nth-child(6n)   { grid-column: span 2; aspect-ratio: 16/9; }
 
 /* ============== Reservation ============== */
 

@@ -1,2 +1,7 @@
 .DS_Store
 .claude/
+# Photo originals stay local — the repo is public; visitors only need the
+# optimized, metadata-stripped exports in images/ (see scripts/export-images.py).
+# food_images/ = restaurant photos (WhatsApp exports), source_images/ = older full-res shots.
+food_images/
+source_images/

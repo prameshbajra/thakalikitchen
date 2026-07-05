@@ -1,0 +1,22 @@
+[
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.57 AM (2).jpeg", "out": "hero-momo.jpg", "aspect": "4:5", "focus": "center", "max_w": 1600},
+  {"src": "source_images/IMG_0062.jpeg", "out": "storefront-night.jpg", "aspect": "4:3", "focus": "center", "max_w": 1600},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.55 AM (2).jpeg", "out": "signature-flambe-roll.jpg", "aspect": "12:5", "focus": "center", "max_w": 1600},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM (3).jpeg", "out": "catering-thakali-set.jpg", "aspect": "16:10", "focus": "center", "max_w": 1600},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM (3).jpeg", "out": "og-image.jpg", "aspect": "191:100", "focus": "center", "max_w": 1200},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.55 AM (3).jpeg", "out": "gallery-1-maguro-sashimi.jpg", "aspect": "16:10", "focus": "center", "max_w": 1600},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.57 AM (3).jpeg", "out": "gallery-2-sukuti.jpg", "aspect": "1:1", "focus": "bottom", "max_w": 1100},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (3).jpeg", "out": "gallery-3-avocado-salat.jpg", "aspect": "1:1", "focus": "center", "max_w": 1100},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM (4).jpeg", "out": "gallery-4-thukpa.jpg", "aspect": "4:5", "focus": "bottom", "max_w": 1100},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (5).jpeg", "out": "gallery-5-avocado-ceviche.jpg", "aspect": "4:5", "focus": "bottom", "max_w": 1100},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (6).jpeg", "out": "gallery-6-lachs-sashimi.jpg", "aspect": "16:9", "focus": "center", "max_w": 1600},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM.jpeg", "out": "gallery-7-thakali-set.jpg", "aspect": "16:10", "focus": 0.72, "max_w": 1600},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM (6).jpeg", "out": "gallery-8-momo-jhol.jpg", "aspect": "1:1", "focus": 0.5, "max_w": 1100},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (4).jpeg", "out": "gallery-9-lachs-avocado-maki.jpg", "aspect": "1:1", "focus": 0.35, "max_w": 1100},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.57 AM (5).jpeg", "out": "gallery-10-sel-roti.jpg", "aspect": "4:5", "focus": "bottom", "max_w": 1100},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.57 AM (6).jpeg", "out": "gallery-11-table-spread.jpg", "aspect": "4:5", "focus": "center", "max_w": 1100},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (2).jpeg", "out": "gallery-12-lachs-hosomaki.jpg", "aspect": "16:9", "focus": "center", "max_w": 1600},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (8).jpeg", "out": "gallery-13-thunfisch-avocado-maki.jpg", "aspect": "16:10", "focus": "center", "max_w": 1600},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (1).jpeg", "out": "gallery-14-maguro-nigiri.jpg", "aspect": "1:1", "focus": 0.2, "max_w": 1100},
+  {"src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM (1).jpeg", "out": "gallery-15-thali-detail.jpg", "aspect": "1:1", "focus": 0.75, "max_w": 1100}
+]
