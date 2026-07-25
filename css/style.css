@@ -299,6 +299,7 @@ a { color: inherit; }
 }
 .hero-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-3); }
 .hero-meta .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--forest); box-shadow: 0 0 0 3px rgba(74,107,58,0.18); }
+.hero-meta .live-dot.is-closed { background: var(--ink-2); box-shadow: 0 0 0 3px rgba(31,26,20,0.12); }
 
 /* ============== Buttons ============== */
 
@@ -974,6 +975,48 @@ section.block {
   border: 1px solid rgba(31,26,20,0.12);
   background: #E8E0CB;
 }
+.map-consent {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(232,224,203,0.82);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.map-consent p {
+  max-width: 34ch;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.map-consent .btn { flex: 0 0 auto; padding: 10px 18px; }
+.map-consent > a {
+  font-size: 11.5px;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.map-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 1;
+}
+/* once the guest opts in, the sketch and the gate step aside */
+.map-card.map-live .map-consent,
+.map-card.map-live .map-sketch { display: none; }
+/* keep the address caption legible on top of the live map */
+.map-card.map-live > .imgph-cap,
+.map-card.map-live > .imgph-tag { z-index: 3; }
 .hours-grid {
   display: grid;
   grid-template-columns: 1fr auto;

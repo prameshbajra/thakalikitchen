@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet"/>
 
-  <link rel="stylesheet" href="css/style.css?v=4"/>
+  <link rel="stylesheet" href="css/style.css?v=5"/>
 
   <script type="application/ld+json">
   {
@@ -45,9 +45,16 @@
     "email": "thakaliklitchen111@gmail.com",
     "url": "https://thakalikitchen.de/",
     "acceptsReservations": "True",
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "12:00", "closes": "22:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "12:00", "closes": "23:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "14:00", "closes": "23:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "14:00", "closes": "22:00" }
+    ],
     "sameAs": [
       "https://www.instagram.com/crosssushihamburg/",
-      "https://www.facebook.com/cross.sushi.hamburg"
+      "https://www.facebook.com/cross.sushi.hamburg",
+      "https://www.tiktok.com/@thakalikitchenhamburg"
     ]
   }
   </script>
@@ -57,7 +64,7 @@
 
     <!-- ============ TOPBAR ============ -->
     <header class="topbar">
-      <button class="icon-btn" id="navToggle" aria-label="Menü öffnen">
+      <button class="icon-btn" id="navToggle" aria-label="Menü öffnen" data-i18n-aria-label="a11y.navopen">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
           <path d="M3 6h18M3 12h18M3 18h12"/>
         </svg>
@@ -66,7 +73,7 @@
         <img class="brand-logo" src="images/logo.png" alt="" width="38" height="43"/>
         <span>Thakali Kitchen</span>
       </a>
-      <nav class="topbar-nav" aria-label="Hauptnavigation">
+      <nav class="topbar-nav" aria-label="Hauptnavigation" data-i18n-aria-label="a11y.mainnav">
         <a href="#about" data-i18n="nav.about">Geschichte</a>
         <a href="#menu" data-i18n="nav.menu">Karte</a>
         <a href="#book" data-i18n="nav.book">Reservieren</a>
@@ -75,7 +82,7 @@
       </nav>
       <div class="topbar-actions">
         <a class="btn btn-terra topbar-order" href="https://www.crosssushi-hamburg.de/speisekarte/crosssushi" target="_blank" rel="noopener" data-i18n="cta.order">Online bestellen</a>
-        <div class="lang-pill" role="group" aria-label="Sprache wählen">
+        <div class="lang-pill" role="group" aria-label="Sprache wählen" data-i18n-aria-label="a11y.langsel">
           <button data-lang="en">EN</button>
           <button data-lang="de" class="active">DE</button>
           <button data-lang="ne">ने</button>
@@ -117,14 +124,14 @@
       </div>
 
       <div class="hero-img imgph">
-        <img src="images/hero-momo.jpg" alt="Handgefaltete Mo:Mo mit Tomaten-Achar" loading="eager"/>
-        <span class="imgph-tag">PHOTO · 4:5</span>
+        <img src="images/hero-momo.jpg" alt="Handgefaltete Mo:Mo mit Tomaten-Achar" data-i18n-alt="hero.imgcap" loading="eager"/>
+        <span class="imgph-tag" data-i18n-tag="tag.photo" data-ratio="4:5">PHOTO · 4:5</span>
         <span class="imgph-cap" data-i18n="hero.imgcap">Handgefaltete Mo:Mo mit Tomaten-Achar — frisch aus dem Dampf</span>
       </div>
 
       <div class="hero-meta">
-        <span class="live-dot"></span>
-        <span data-i18n="hero.open">Geöffnet bis 22:00</span>
+        <span class="live-dot" id="openDot"></span>
+        <span id="openBadge">Geöffnet bis 22:00</span>
         <span class="dot"></span>
         <span>HELLKAMP 22</span>
       </div>
@@ -147,12 +154,12 @@
 
       <div class="story-photos">
         <div class="imgph story-main">
-          <img src="images/gallery-11-table-spread.jpg" alt="Gedeckter Tisch mit Chilli Chicken, Mo:Mo und Sukuti" loading="lazy"/>
-          <span class="imgph-tag">PHOTO · 4:3</span>
+          <img src="images/gallery-11-table-spread.jpg" alt="Gedeckter Tisch mit Chilli Chicken, Mo:Mo und Sukuti" data-i18n-alt="story.imgcap" loading="lazy"/>
+          <span class="imgph-tag" data-i18n-tag="tag.photo" data-ratio="4:3">PHOTO · 4:3</span>
           <span class="imgph-cap" data-i18n="story.imgcap">Chilli Chicken, Mo:Mo & Sukuti — der Tisch ist gedeckt</span>
         </div>
         <figure class="polaroid">
-          <img src="images/storefront-night.jpg" alt="Leuchtreklame von Thakali Kitchen bei Nacht" loading="lazy"/>
+          <img src="images/storefront-night.jpg" alt="Leuchtreklame von Thakali Kitchen bei Nacht" data-i18n-alt="story.polaroid" loading="lazy"/>
           <figcaption data-i18n="story.polaroid">unser Schild am Hellkamp</figcaption>
         </figure>
       </div>
@@ -215,7 +222,7 @@
       <div class="section-head">
         <div class="divider">
           <svg width="60" height="10" viewBox="0 0 60 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 5 C 6 1, 11 9, 16 5 S 26 1, 31 5 S 41 9, 46 5 S 56 1, 59 5"/></svg>
-          <span class="label" data-i18n="gallery.eyebrow">03 · DER RAUM</span>
+          <span class="label" data-i18n="gallery.eyebrow">03 · AUS DER KÜCHE</span>
         </div>
         <h2>
           <span data-i18n="gallery.title.1">In der</span>
@@ -223,21 +230,21 @@
         </h2>
       </div>
       <div class="gallery-grid">
-        <div class="imgph"><img src="images/gallery-1-maguro-sashimi.jpg" alt="Maguro-Sashimi, aufgefächert auf dunkler Steingutplatte" loading="lazy"/><span class="imgph-tag">01</span><span class="imgph-cap" data-i18n="gallery.cap.1">Maguro-Sashimi — frisch aufgefächert</span></div>
-        <div class="imgph"><img src="images/gallery-2-sukuti.jpg" alt="Sukuti mit Rettich und Microgreens" loading="lazy"/><span class="imgph-tag">02</span><span class="imgph-cap" data-i18n="gallery.cap.2">Sukuti — würzig, rauchig, hausgemacht</span></div>
-        <div class="imgph"><img src="images/gallery-3-avocado-salat.jpg" alt="Cross Avocado-Salat mit Kürbiskernen" loading="lazy"/><span class="imgph-tag">03</span><span class="imgph-cap" data-i18n="gallery.cap.3">Cross Avocado-Salat mit Kürbiskernen</span></div>
-        <div class="imgph"><img src="images/gallery-4-thukpa.jpg" alt="Thukpa — Himalaya-Nudelsuppe mit goldener Brühe" loading="lazy"/><span class="imgph-tag">04</span><span class="imgph-cap" data-i18n="gallery.cap.4">Thukpa — goldene Himalaya-Nudelsuppe</span></div>
-        <div class="imgph"><img src="images/gallery-5-avocado-ceviche.jpg" alt="Avocado-Ceviche mit Sesam und Ponzu" loading="lazy"/><span class="imgph-tag">05</span><span class="imgph-cap" data-i18n="gallery.cap.5">Avocado-Ceviche mit Sesam</span></div>
-        <div class="imgph"><img src="images/gallery-6-lachs-sashimi.jpg" alt="Lachs-Sashimi auf Shiso-Blättern" loading="lazy"/><span class="imgph-tag">06</span><span class="imgph-cap" data-i18n="gallery.cap.6">Lachs-Sashimi auf Shiso-Blättern</span></div>
-        <div class="imgph"><img src="images/gallery-7-thakali-set.jpg" alt="Thakali-Set auf Messingthali" loading="lazy"/><span class="imgph-tag">07</span><span class="imgph-cap" data-i18n="gallery.cap.7">Thakali-Set auf Messing — wie im Thak Khola</span></div>
-        <div class="imgph"><img src="images/gallery-8-momo-jhol.jpg" alt="Mo:Mo-Teller mit Jhol im Steintopf" loading="lazy"/><span class="imgph-tag">08</span><span class="imgph-cap" data-i18n="gallery.cap.8">Mo:Mo-Teller mit Jhol-Topf</span></div>
-        <div class="imgph"><img src="images/gallery-9-lachs-avocado-maki.jpg" alt="Lachs-Avocado-Maki" loading="lazy"/><span class="imgph-tag">09</span><span class="imgph-cap" data-i18n="gallery.cap.9">Lachs-Avocado-Maki</span></div>
-        <div class="imgph"><img src="images/gallery-10-sel-roti.jpg" alt="Sel Roti — frittierte Reisringe mit Aloo-Curry" loading="lazy"/><span class="imgph-tag">10</span><span class="imgph-cap" data-i18n="gallery.cap.10">Sel Roti mit Aloo-Curry — Festtagsklassiker</span></div>
-        <div class="imgph"><img src="images/gallery-11-table-spread.jpg" alt="Gedeckter Tisch mit Chilli Chicken, Mo:Mo und Sukuti" loading="lazy"/><span class="imgph-tag">11</span><span class="imgph-cap" data-i18n="gallery.cap.11">Voller Tisch — Chilli Chicken, Mo:Mo & Sukuti</span></div>
-        <div class="imgph"><img src="images/gallery-12-lachs-hosomaki.jpg" alt="Lachs-Hosomaki in versetzter Reihe auf schwarzem Grund" loading="lazy"/><span class="imgph-tag">12</span><span class="imgph-cap" data-i18n="gallery.cap.12">Lachs-Hosomaki — schlicht & präzise</span></div>
-        <div class="imgph"><img src="images/gallery-13-thunfisch-avocado-maki.jpg" alt="Thunfisch-Avocado-Maki auf schwarzem Grund" loading="lazy"/><span class="imgph-tag">13</span><span class="imgph-cap" data-i18n="gallery.cap.13">Thunfisch-Avocado-Maki — tiefrot & cremig</span></div>
-        <div class="imgph"><img src="images/gallery-14-maguro-nigiri.jpg" alt="Zwei Maguro-Nigiri, minimalistisch angerichtet" loading="lazy"/><span class="imgph-tag">14</span><span class="imgph-cap" data-i18n="gallery.cap.14">Maguro-Nigiri — pur</span></div>
-        <div class="imgph"><img src="images/gallery-15-thali-detail.jpg" alt="Nahaufnahme: Hühnercurry, Dal und Reis auf Messingthali" loading="lazy"/><span class="imgph-tag">15</span><span class="imgph-cap" data-i18n="gallery.cap.15">Hühnercurry, Dal & Reis — das Thali im Detail</span></div>
+        <div class="imgph"><img src="images/gallery-1-maguro-sashimi.jpg" alt="Maguro-Sashimi, aufgefächert auf dunkler Steingutplatte" data-i18n-alt="gallery.cap.1" loading="lazy"/><span class="imgph-tag" data-num="01">01</span><span class="imgph-cap" data-i18n="gallery.cap.1">Maguro-Sashimi — frisch aufgefächert</span></div>
+        <div class="imgph"><img src="images/gallery-2-sukuti.jpg" alt="Sukuti mit Rettich und Microgreens" data-i18n-alt="gallery.cap.2" loading="lazy"/><span class="imgph-tag" data-num="02">02</span><span class="imgph-cap" data-i18n="gallery.cap.2">Sukuti — würzig, rauchig, hausgemacht</span></div>
+        <div class="imgph"><img src="images/gallery-3-avocado-salat.jpg" alt="Cross Avocado-Salat mit Kürbiskernen" data-i18n-alt="gallery.cap.3" loading="lazy"/><span class="imgph-tag" data-num="03">03</span><span class="imgph-cap" data-i18n="gallery.cap.3">Cross Avocado-Salat mit Kürbiskernen</span></div>
+        <div class="imgph"><img src="images/gallery-4-thukpa.jpg" alt="Thukpa — Himalaya-Nudelsuppe mit goldener Brühe" data-i18n-alt="gallery.cap.4" loading="lazy"/><span class="imgph-tag" data-num="04">04</span><span class="imgph-cap" data-i18n="gallery.cap.4">Thukpa — goldene Himalaya-Nudelsuppe</span></div>
+        <div class="imgph"><img src="images/gallery-5-avocado-ceviche.jpg" alt="Avocado-Ceviche mit Sesam und Ponzu" data-i18n-alt="gallery.cap.5" loading="lazy"/><span class="imgph-tag" data-num="05">05</span><span class="imgph-cap" data-i18n="gallery.cap.5">Avocado-Ceviche mit Sesam</span></div>
+        <div class="imgph"><img src="images/gallery-6-lachs-sashimi.jpg" alt="Lachs-Sashimi auf Shiso-Blättern" data-i18n-alt="gallery.cap.6" loading="lazy"/><span class="imgph-tag" data-num="06">06</span><span class="imgph-cap" data-i18n="gallery.cap.6">Lachs-Sashimi auf Shiso-Blättern</span></div>
+        <div class="imgph"><img src="images/gallery-7-thakali-set.jpg" alt="Thakali-Set auf Messingthali" data-i18n-alt="gallery.cap.7" loading="lazy"/><span class="imgph-tag" data-num="07">07</span><span class="imgph-cap" data-i18n="gallery.cap.7">Thakali-Set auf Messing — wie im Thak Khola</span></div>
+        <div class="imgph"><img src="images/gallery-8-momo-jhol.jpg" alt="Mo:Mo-Teller mit Jhol im Steintopf" data-i18n-alt="gallery.cap.8" loading="lazy"/><span class="imgph-tag" data-num="08">08</span><span class="imgph-cap" data-i18n="gallery.cap.8">Mo:Mo-Teller mit Jhol-Topf</span></div>
+        <div class="imgph"><img src="images/gallery-9-lachs-avocado-maki.jpg" alt="Lachs-Avocado-Maki" data-i18n-alt="gallery.cap.9" loading="lazy"/><span class="imgph-tag" data-num="09">09</span><span class="imgph-cap" data-i18n="gallery.cap.9">Lachs-Avocado-Maki</span></div>
+        <div class="imgph"><img src="images/gallery-10-sel-roti.jpg" alt="Sel Roti — frittierte Reisringe mit Aloo-Curry" data-i18n-alt="gallery.cap.10" loading="lazy"/><span class="imgph-tag" data-num="10">10</span><span class="imgph-cap" data-i18n="gallery.cap.10">Sel Roti mit Aloo-Curry — Festtagsklassiker</span></div>
+        <div class="imgph"><img src="images/gallery-11-table-spread.jpg" alt="Gedeckter Tisch mit Chilli Chicken, Mo:Mo und Sukuti" data-i18n-alt="gallery.cap.11" loading="lazy"/><span class="imgph-tag" data-num="11">11</span><span class="imgph-cap" data-i18n="gallery.cap.11">Voller Tisch — Chilli Chicken, Mo:Mo & Sukuti</span></div>
+        <div class="imgph"><img src="images/gallery-12-lachs-hosomaki.jpg" alt="Lachs-Hosomaki in versetzter Reihe auf schwarzem Grund" data-i18n-alt="gallery.cap.12" loading="lazy"/><span class="imgph-tag" data-num="12">12</span><span class="imgph-cap" data-i18n="gallery.cap.12">Lachs-Hosomaki — schlicht & präzise</span></div>
+        <div class="imgph"><img src="images/gallery-13-thunfisch-avocado-maki.jpg" alt="Thunfisch-Avocado-Maki auf schwarzem Grund" data-i18n-alt="gallery.cap.13" loading="lazy"/><span class="imgph-tag" data-num="13">13</span><span class="imgph-cap" data-i18n="gallery.cap.13">Thunfisch-Avocado-Maki — tiefrot & cremig</span></div>
+        <div class="imgph"><img src="images/gallery-14-maguro-nigiri.jpg" alt="Zwei Maguro-Nigiri, minimalistisch angerichtet" data-i18n-alt="gallery.cap.14" loading="lazy"/><span class="imgph-tag" data-num="14">14</span><span class="imgph-cap" data-i18n="gallery.cap.14">Maguro-Nigiri — pur</span></div>
+        <div class="imgph"><img src="images/gallery-15-thali-detail.jpg" alt="Nahaufnahme: Hühnercurry, Dal und Reis auf Messingthali" data-i18n-alt="gallery.cap.15" loading="lazy"/><span class="imgph-tag" data-num="15">15</span><span class="imgph-cap" data-i18n="gallery.cap.15">Hühnercurry, Dal & Reis — das Thali im Detail</span></div>
       </div>
     </section>
 
@@ -289,9 +296,9 @@
           <div class="field">
             <label data-i18n="field.party">GÄSTE</label>
             <div class="party-stepper">
-              <button type="button" id="partyMinus" aria-label="Weniger">−</button>
+              <button type="button" id="partyMinus" aria-label="Weniger Gäste" data-i18n-aria-label="a11y.less">−</button>
               <span class="num" id="partyNum">2</span>
-              <button type="button" id="partyPlus" aria-label="Mehr">+</button>
+              <button type="button" id="partyPlus" aria-label="Mehr Gäste" data-i18n-aria-label="a11y.more">+</button>
             </div>
           </div>
         </div>
@@ -305,16 +312,16 @@
 
         <div class="field">
           <label data-i18n="field.name">NAME</label>
-          <input type="text" name="name" required placeholder="Maya Sherchan"/>
+          <input type="text" name="name" required placeholder="Maya Sherchan" data-i18n-placeholder="ph.name"/>
         </div>
         <div class="field-row">
           <div class="field">
             <label data-i18n="field.email">E-MAIL</label>
-            <input type="email" name="email" placeholder="sie@email.de"/>
+            <input type="email" name="email" placeholder="sie@email.de" data-i18n-placeholder="ph.email"/>
           </div>
           <div class="field">
             <label data-i18n="field.phone">TELEFON</label>
-            <input type="tel" name="phone" placeholder="+49 ..."/>
+            <input type="tel" name="phone" placeholder="+49 ..." data-i18n-placeholder="ph.phone"/>
           </div>
         </div>
         <div class="field">
@@ -327,9 +334,9 @@
 
       <aside class="book-aside" aria-hidden="true">
         <div class="seat-figure">32</div>
-        <div class="seat-label" data-i18n="book.seats">PLÄTZE IM RAUM</div>
+        <div class="seat-label" data-i18n="book.seats">Plätze im Raum</div>
         <div class="aside-call">
-          <div class="eyebrow" data-i18n="book.call">ODER RUFT UNS AN</div>
+          <div class="eyebrow" data-i18n="book.call">oder ruft uns an</div>
           <a href="tel:+491608176707" tabindex="-1">+49 160 8176707</a>
         </div>
       </aside>
@@ -382,8 +389,8 @@
         <h3 style="margin-top:6px" data-i18n="cater.p">Von Acht-Personen-Dinners bis zu Hochzeiten mit hundert Gästen. Wir bringen die Küche zu Ihnen.</h3>
         <div class="cater-photo" style="margin:22px 0 14px">
           <div class="imgph">
-            <img src="images/catering-thakali-set.jpg" alt="Komplettes Thakali-Set auf Messingthali von oben" loading="lazy"/>
-            <span class="imgph-tag" style="background:var(--mustard); color:var(--ink)">PHOTO · 16:10</span>
+            <img src="images/catering-thakali-set.jpg" alt="Komplettes Thakali-Set auf Messingthali von oben" data-i18n-alt="cater.imgcap" loading="lazy"/>
+            <span class="imgph-tag" style="background:var(--mustard); color:var(--ink)" data-i18n-tag="tag.photo" data-ratio="16:10">PHOTO · 16:10</span>
             <span class="imgph-cap" style="background:rgba(31,26,20,0.7); color:var(--paper); border-left-color:var(--mustard)" data-i18n="cater.imgcap">Komplettes Thakali-Set — Reis, Dal, Curry und Achars auf Messing</span>
           </div>
         </div>
@@ -413,8 +420,8 @@
           <span class="label" data-i18n="offers.eyebrow">08 · GUTSCHEINE & TREUE</span>
         </div>
         <h2>
-          <span data-i18n="offers.title.1">Schenken &</span>
-          <span class="it" data-i18n="offers.title.accent">gesammelt.</span>
+          <span data-i18n="offers.title.1">Schenke &</span>
+          <span class="it" data-i18n="offers.title.accent">sammle.</span>
         </h2>
       </div>
       <div class="offer-grid">
@@ -517,6 +524,9 @@
               <a class="social-link" href="https://www.facebook.com/cross.sushi.hamburg" target="_blank" rel="noopener" aria-label="Facebook">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 8.5c0-1 .6-1.5 1.6-1.5H17V4.2C16.6 4.1 15.7 4 14.9 4 12.9 4 11.5 5.2 11.5 7.5V10H9v3h2.5v7h3v-7h2.3l.4-3h-2.7z"/></svg>
               </a>
+              <a class="social-link" href="https://www.tiktok.com/@thakalikitchenhamburg" target="_blank" rel="noopener" aria-label="TikTok">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.53.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              </a>
             </div>
           </div>
         </div>
@@ -527,10 +537,10 @@
         <div class="hours-grid" id="hoursGrid"></div>
       </div>
 
-      <div class="map-card imgph">
-        <span class="imgph-tag">MAP · 4:3</span>
+      <div class="map-card imgph" id="mapCard">
+        <span class="imgph-tag" data-i18n-tag="tag.map" data-ratio="4:3">MAP · 4:3</span>
         <span class="imgph-cap" data-i18n="contact.mapcap">Hellkamp 22 · Hamburg-Eimsbüttel</span>
-        <svg width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0; opacity:0.6">
+        <svg class="map-sketch" width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0; opacity:0.6" aria-hidden="true">
           <defs>
             <pattern id="gridPat" width="40" height="40" patternUnits="userSpaceOnUse">
               <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(31,26,20,0.08)" stroke-width="1"/>
@@ -543,6 +553,12 @@
           <circle cx="208" cy="172" r="10" fill="var(--terracotta)"/>
           <circle cx="208" cy="172" r="20" fill="none" stroke="var(--terracotta)" stroke-width="2" opacity="0.4"/>
         </svg>
+        <!-- Google Maps only loads once the guest asks for it — no request to Google before then. -->
+        <div class="map-consent" id="mapConsent">
+          <p data-i18n="map.consent.p">Wenn Sie die Karte laden, werden Daten an Google übertragen. Details in unserer Datenschutzerklärung.</p>
+          <button type="button" class="btn btn-terra" id="mapConsentBtn" data-i18n="map.consent.btn">Karte laden</button>
+          <a href="https://maps.google.com/?q=Hellkamp+22+20255+Hamburg" target="_blank" rel="noopener" data-i18n="map.consent.alt">Stattdessen in Google Maps öffnen</a>
+        </div>
       </div>
     </section>
 
@@ -550,7 +566,7 @@
     <footer class="footer">
       <img class="footer-logo" src="images/logo.png" alt="" width="58" height="65" loading="lazy"/>
       <div class="eyebrow" style="color:rgba(245,239,227,0.5)" data-i18n="footer.eyebrow">KOMMT ESSEN</div>
-      <h2 style="margin-top:8px">Namaste, <span style="font-style:normal; color:var(--mustard)">Hamburg.</span></h2>
+      <h2 style="margin-top:8px"><span data-i18n="footer.namaste.1">Namaste,</span> <span style="font-style:normal; color:var(--mustard)" data-i18n="footer.namaste.2">Hamburg.</span></h2>
       <p style="margin-top:14px" data-i18n="footer.addr">Hellkamp 22 · 20255 Hamburg</p>
       <div class="footer-hand" style="margin-top:16px">धन्यवाद · danke · thank you</div>
 
@@ -561,9 +577,12 @@
         <a class="social-link" href="https://www.facebook.com/cross.sushi.hamburg" target="_blank" rel="noopener" aria-label="Facebook">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 8.5c0-1 .6-1.5 1.6-1.5H17V4.2C16.6 4.1 15.7 4 14.9 4 12.9 4 11.5 5.2 11.5 7.5V10H9v3h2.5v7h3v-7h2.3l.4-3h-2.7z"/></svg>
         </a>
+        <a class="social-link" href="https://www.tiktok.com/@thakalikitchenhamburg" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.53.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
       </div>
 
-      <nav class="footer-nav" aria-label="Fußzeilen-Navigation">
+      <nav class="footer-nav" aria-label="Fußzeilen-Navigation" data-i18n-aria-label="a11y.footernav">
         <a href="#about" data-i18n="nav.about">Geschichte</a>
         <a href="#menu" data-i18n="nav.menu">Karte</a>
         <a href="#reviews" data-i18n="nav.reviews">Lieblinge</a>
@@ -578,7 +597,7 @@
       <div class="footer-meta">
         <span>© 2026 Thakali Kitchen</span>
         <span>
-          <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a class="footer-credit" href="https://prameshbajra.github.io" target="_blank" rel="noopener">@prameshbajra</a>
+          <a href="impressum.html" data-i18n="legal.impressum">Impressum</a> · <a href="datenschutz.html" data-i18n="legal.privacy">Datenschutz</a> · <a class="footer-credit" href="https://prameshbajra.github.io" target="_blank" rel="noopener">@prameshbajra</a>
         </span>
       </div>
     </footer>
@@ -590,7 +609,7 @@
     <div class="cart-sheet">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px">
         <span class="eyebrow" data-i18n="nav.label">NAVIGATION</span>
-        <button class="icon-btn" data-close-drawer aria-label="Schließen">
+        <button class="icon-btn" data-close-drawer aria-label="Schließen" data-i18n-aria-label="a11y.close">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg>
         </button>
       </div>
@@ -610,6 +629,9 @@
         <a class="social-link" href="https://www.facebook.com/cross.sushi.hamburg" target="_blank" rel="noopener" aria-label="Facebook">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 8.5c0-1 .6-1.5 1.6-1.5H17V4.2C16.6 4.1 15.7 4 14.9 4 12.9 4 11.5 5.2 11.5 7.5V10H9v3h2.5v7h3v-7h2.3l.4-3h-2.7z"/></svg>
         </a>
+        <a class="social-link" href="https://www.tiktok.com/@thakalikitchenhamburg" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.53.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -617,7 +639,7 @@
   <!-- ============ TOASTS ============ -->
   <div class="toast-wrap" id="toastWrap"></div>
 
-  <script src="js/menu-data.js?v=4"></script>
-  <script src="js/main.js?v=4"></script>
+  <script src="js/menu-data.js?v=5"></script>
+  <script src="js/main.js?v=5"></script>
 </body>
 </html>

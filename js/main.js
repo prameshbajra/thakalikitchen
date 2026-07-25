@@ -17,7 +17,7 @@ const UI = {
     'hero.hand': 'from our hearth to yours',
     'hero.sub': "Traditional Thakali thali, hand-folded Mo:Mo, and Cross Sushi — served on copper and clay in the heart of Eimsbüttel.",
     'hero.imgcap': 'Hand-folded Mo:Mo with tomato achar — fresh from the steamer',
-    'hero.open': 'Open until 22:00',
+    'hero.open.now': 'Open until {t}', 'hero.open.today': 'Opens today at {t}', 'hero.open.next': 'Opens {d} at {t}',
     'story.eyebrow': '01 · OUR STORY',
     'story.title.1': 'Born in', 'story.title.accent': 'Mustang.', 'story.title.2': 'Grown in Hamburg.',
     'story.p': "Thakali Kitchen brings the cooking of the Thak Khola valley — buckwheat, yak butter, timur pepper — to a small cream-walled room on Hellkamp. Run by the Sherchan family since 2014.",
@@ -103,6 +103,21 @@ const UI = {
     'toast.book.name': 'Please add your name', 'toast.book.ok': 'Opening your email request …',
     'closed': 'Closed', 'all': 'All',
     'days': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    'meta.title': 'Thakali Kitchen — Hamburg',
+    'meta.desc': 'Thakali Kitchen — authentic Nepalese cooking & Cross Sushi in Hamburg-Eimsbüttel. Hand-folded Mo:Mo, Thakali thali, sushi & Thai. Pickup & delivery.',
+    'a11y.navopen': 'Open menu', 'a11y.close': 'Close', 'a11y.mainnav': 'Main navigation',
+    'a11y.footernav': 'Footer navigation', 'a11y.langsel': 'Choose language',
+    'a11y.less': 'Fewer guests', 'a11y.more': 'More guests',
+    'ph.name': 'Maya Sherchan', 'ph.email': 'you@email.com', 'ph.phone': '+49 ...',
+    'tag.photo': 'PHOTO', 'tag.map': 'MAP',
+    'tag.veg': 'veg', 'tag.spicy': 'spicy',
+    'legal.impressum': 'Imprint', 'legal.privacy': 'Privacy',
+    'footer.namaste.1': 'Namaste,', 'footer.namaste.2': 'Hamburg.',
+    'map.consent.p': 'Loading the map sends data to Google. See our privacy notice for details.',
+    'map.consent.btn': 'Load map', 'map.consent.alt': 'Open in Google Maps instead',
+    'map.title': 'Map — Thakali Kitchen, Hellkamp 22, Hamburg',
+    'mail.res.subject': 'Reservation — {name} — {date} {time}',
+    'mail.cater.subject': 'Catering enquiry — Thakali Kitchen',
   },
   de: {
     'cta.book': 'Tisch reservieren', 'cta.order': 'Online bestellen',
@@ -112,7 +127,7 @@ const UI = {
     'hero.hand': 'von unserem Herd zu Ihnen',
     'hero.sub': 'Traditionelles Thakali-Thali, handgefaltete Mo:Mo und Cross Sushi — frisch zubereitet auf Kupfer und Ton, mitten in Eimsbüttel.',
     'hero.imgcap': 'Handgefaltete Mo:Mo mit Tomaten-Achar — frisch aus dem Dampf',
-    'hero.open': 'Geöffnet bis 22:00',
+    'hero.open.now': 'Geöffnet bis {t}', 'hero.open.today': 'Öffnet heute um {t}', 'hero.open.next': 'Öffnet {d} um {t}',
     'story.eyebrow': '01 · UNSERE GESCHICHTE',
     'story.title.1': 'Geboren in', 'story.title.accent': 'Mustang.', 'story.title.2': 'Gewachsen in Hamburg.',
     'story.p': 'Thakali Kitchen bringt die Küche des Thak-Khola-Tals — Buchweizen, Yak-Butter, Timur-Pfeffer — in einen kleinen, cremefarbenen Raum am Hellkamp. Geführt von der Familie Sherchan seit 2014.',
@@ -177,9 +192,9 @@ const UI = {
     'faq.q1': 'Liefert ihr zu mir? In welchem Gebiet?',
     'faq.a1': 'Wir liefern in Eimsbüttel und Umgebung — im Umkreis von rund 4 km um den Hellkamp. Ob deine Adresse dabei ist, siehst du beim Online-Bestellen nach Eingabe der Postleitzahl.',
     'faq.q2': 'Habt ihr vegetarische & vegane Gerichte? Wie sieht es mit Allergien aus?',
-    'faq.a2': 'Ja — viele vegetarische und vegane Optionen, vom Veggie-Mo:Mo bis zu Veggie-Sushi-Rollen. Mit dem Filter „Nur vegetarisch" oben in der Karte findest du sie schnell. Bei Allergien sprich uns bitte an, wir beraten dich gern.',
+    'faq.a2': 'Ja — viele vegetarische und vegane Optionen, vom Veggie-Mo:Mo bis zu Veggie-Sushi-Rollen. Mit dem Filter „Nur vegetarisch“ oben in der Karte findest du sie schnell. Bei Allergien sprich uns bitte an, wir beraten dich gern.',
     'faq.q3': 'Wofür seid ihr bekannt?',
-    'faq.a3': 'Für handgefaltete Mo:Mo, das authentische Thakali-Set und unsere Cross-Signature-Sushi-Rollen — allen voran der flambierte „Premium Smoke Salmon Roll". Dazu Thai-Klassiker wie Ente in Kokosmilch.',
+    'faq.a3': 'Für handgefaltete Mo:Mo, das authentische Thakali-Set und unsere Cross-Signature-Sushi-Rollen — allen voran der flambierte „Premium Smoke Salmon Roll“. Dazu Thai-Klassiker wie Ente in Kokosmilch.',
     'faq.q4': 'Kann ich einen Tisch reservieren oder Catering buchen?',
     'faq.a4': 'Beides gern. Reserviere direkt über das Formular oben, oder ruf uns an. Für Catering von 8 bis 200 Gästen schick uns einfach eine kurze Anfrage.',
     'contact.eyebrow': '10 · BESUCH', 'contact.title.1': 'Findet uns am', 'contact.title.accent': 'Hellkamp.',
@@ -198,6 +213,21 @@ const UI = {
     'toast.book.name': 'Bitte Namen eingeben', 'toast.book.ok': 'E-Mail-Anfrage wird geöffnet …',
     'closed': 'Geschlossen', 'all': 'Alle',
     'days': ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+    'meta.title': 'Thakali Kitchen — Hamburg',
+    'meta.desc': 'Thakali Kitchen — authentische nepalesische Küche & Cross Sushi in Hamburg-Eimsbüttel. Handgefaltete Mo:Mo, Thakali-Thali, Sushi & Thai. Abholung & Lieferung.',
+    'a11y.navopen': 'Menü öffnen', 'a11y.close': 'Schließen', 'a11y.mainnav': 'Hauptnavigation',
+    'a11y.footernav': 'Fußzeilen-Navigation', 'a11y.langsel': 'Sprache wählen',
+    'a11y.less': 'Weniger Gäste', 'a11y.more': 'Mehr Gäste',
+    'ph.name': 'Maya Sherchan', 'ph.email': 'sie@email.de', 'ph.phone': '+49 ...',
+    'tag.photo': 'FOTO', 'tag.map': 'KARTE',
+    'tag.veg': 'veg', 'tag.spicy': 'scharf',
+    'legal.impressum': 'Impressum', 'legal.privacy': 'Datenschutz',
+    'footer.namaste.1': 'Namaste,', 'footer.namaste.2': 'Hamburg.',
+    'map.consent.p': 'Wenn Sie die Karte laden, werden Daten an Google übertragen. Details in unserer Datenschutzerklärung.',
+    'map.consent.btn': 'Karte laden', 'map.consent.alt': 'Stattdessen in Google Maps öffnen',
+    'map.title': 'Karte — Thakali Kitchen, Hellkamp 22, Hamburg',
+    'mail.res.subject': 'Reservierung — {name} — {date} {time}',
+    'mail.cater.subject': 'Catering-Anfrage — Thakali Kitchen',
   },
   ne: {
     'cta.book': 'टेबल बुक गर्नुहोस्', 'cta.order': 'अनलाइन अर्डर',
@@ -207,7 +237,7 @@ const UI = {
     'hero.hand': 'हाम्रो चुलोबाट तपाईंसम्म',
     'hero.sub': 'परम्परागत थकाली थाली, हातले बनाएको म:म र क्रस सुसी — आइम्सब्युटेलको हृदयमा।',
     'hero.imgcap': 'हातले बनाएको म:म, गोलभेँडाको अचारसँग — भापबाट सिधै',
-    'hero.open': '२२:०० सम्म खुला',
+    'hero.open.now': '{t} सम्म खुला', 'hero.open.today': 'आज {t} बजे खुल्छ', 'hero.open.next': '{d} {t} बजे खुल्छ',
     'story.eyebrow': '०१ · हाम्रो कथा',
     'story.title.1': 'मुस्ताङमा', 'story.title.accent': 'जन्मेको।', 'story.title.2': 'हाम्बुर्गमा हुर्केको।',
     'story.p': 'थकाली किचनले थक खोला उपत्यकाको खाना — फापर, याक मक्खन, टिमुर — हेल्काम्पको सानो कोठामा ल्याउँछ। २०१४ देखि शेर्चन परिवारद्वारा सञ्चालित।',
@@ -272,9 +302,9 @@ const UI = {
     'faq.q1': 'तपाईं मकहाँ डेलिभरी गर्नुहुन्छ? कुन क्षेत्रमा?',
     'faq.a1': 'हामी आइम्सब्युटेल र वरपर — हेल्काम्पको करिब ४ किमी भित्र डेलिभरी गर्छौं। अनलाइन अर्डर गर्दा पोस्टकोड हालेर आफ्नो ठेगाना समेटिएको छ कि छैन हेर्नुहोस्।',
     'faq.q2': 'तपाईंसँग शाकाहारी र भेगन परिकार छन्? एलर्जीको के हुन्छ?',
-    'faq.a2': 'छन् — भेजी म:म देखि भेजी सुसी रोलसम्म धेरै शाकाहारी र भेगन विकल्प। मेनुमा भएको „शाकाहारी मात्र" फिल्टरले छिट्टै भेट्टाउनुहुन्छ। एलर्जी भए हामीलाई सोध्नुहोस्, खुसीसाथ सल्लाह दिन्छौं।',
+    'faq.a2': 'छन् — भेजी म:म देखि भेजी सुसी रोलसम्म धेरै शाकाहारी र भेगन विकल्प। मेनुमा भएको “शाकाहारी मात्र” फिल्टरले छिट्टै भेट्टाउनुहुन्छ। एलर्जी भए हामीलाई सोध्नुहोस्, खुसीसाथ सल्लाह दिन्छौं।',
     'faq.q3': 'तपाईं केका लागि प्रसिद्ध हुनुहुन्छ?',
-    'faq.a3': 'हातले बनाएको म:म, प्रामाणिक थकाली सेट, र हाम्रा क्रस सिग्नेचर सुसी रोल — विशेषगरी फ्ल्याम्बे „प्रिमियम स्मोक सामन रोल"। साथै नरिवलको दूधमा हाँस जस्ता थाई क्लासिक।',
+    'faq.a3': 'हातले बनाएको म:म, प्रामाणिक थकाली सेट, र हाम्रा क्रस सिग्नेचर सुसी रोल — विशेषगरी फ्ल्याम्बे “प्रिमियम स्मोक सामन रोल”। साथै नरिवलको दूधमा हाँस जस्ता थाई क्लासिक।',
     'faq.q4': 'म टेबल आरक्षण वा केटरिङ बुक गर्न सक्छु?',
     'faq.a4': 'दुवै हुन्छ। माथिको फारमबाट आरक्षण गर्नुहोस्, वा हामीलाई फोन गर्नुहोस्। ८ देखि २०० जनासम्मको केटरिङका लागि छोटो अनुरोध पठाउनुहोस्।',
     'contact.eyebrow': '१० · सम्पर्क', 'contact.title.1': 'हेल्काम्पमा', 'contact.title.accent': 'भेटौं।',
@@ -293,6 +323,21 @@ const UI = {
     'toast.book.name': 'नाम लेख्नुहोस्', 'toast.book.ok': 'इमेल अनुरोध खुल्दै …',
     'closed': 'बन्द', 'all': 'सबै',
     'days': ['सो', 'मं', 'बु', 'बि', 'शु', 'श', 'आ'],
+    'meta.title': 'थकाली किचन — हाम्बुर्ग',
+    'meta.desc': 'थकाली किचन — हाम्बुर्ग-आइम्सब्युटेलमा प्रामाणिक नेपाली खाना र क्रस सुसी। हातले बनाएको म:म, थकाली थाली, सुसी र थाई। पिकअप र डेलिभरी।',
+    'a11y.navopen': 'मेनु खोल्नुहोस्', 'a11y.close': 'बन्द गर्नुहोस्', 'a11y.mainnav': 'मुख्य नेविगेसन',
+    'a11y.footernav': 'फुटर नेविगेसन', 'a11y.langsel': 'भाषा छान्नुहोस्',
+    'a11y.less': 'कम पाहुना', 'a11y.more': 'बढी पाहुना',
+    'ph.name': 'माया शेर्चन', 'ph.email': 'tapai@email.com', 'ph.phone': '+49 ...',
+    'tag.photo': 'फोटो', 'tag.map': 'नक्सा',
+    'tag.veg': 'शाकाहारी', 'tag.spicy': 'पिरो',
+    'legal.impressum': 'कानुनी विवरण', 'legal.privacy': 'गोपनीयता',
+    'footer.namaste.1': 'नमस्ते,', 'footer.namaste.2': 'हाम्बुर्ग।',
+    'map.consent.p': 'नक्सा लोड गर्दा तपाईंको डाटा गुगललाई पठाइन्छ। विवरण हाम्रो गोपनीयता नीतिमा छ।',
+    'map.consent.btn': 'नक्सा लोड गर्नुहोस्', 'map.consent.alt': 'गुगल म्यापमा खोल्नुहोस्',
+    'map.title': 'नक्सा — थकाली किचन, हेल्काम्प २२, हाम्बुर्ग',
+    'mail.res.subject': 'आरक्षण — {name} — {date} {time}',
+    'mail.cater.subject': 'केटरिङ अनुरोध — थकाली किचन',
   },
 };
 
@@ -312,14 +357,46 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const t = (key) => UI[state.lang][key] ?? UI.en[key] ?? key;
 const fmt = (n) => '€' + n.toFixed(2);
 
+/* Menu content is either a plain string (reads the same in every language —
+   producer names, volumes) or a {en,de,ne} map. */
+const loc = (v) => {
+  if (v == null) return '';
+  if (typeof v === 'string') return v;
+  return v[state.lang] || v.de || v.en || '';
+};
+
+/* Attributes that carry user-visible text and so need translating too. */
+const I18N_ATTRS = ['aria-label', 'placeholder', 'title', 'alt'];
+
 function applyI18n() {
   document.documentElement.lang = state.lang === 'ne' ? 'ne' : state.lang;
   document.body.classList.toggle('lang-ne', state.lang === 'ne');
+
+  document.title = t('meta.title');
+  const desc = $('meta[name="description"]');
+  if (desc) desc.setAttribute('content', t('meta.desc'));
+
   $$('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    const val = t(key);
+    const val = t(el.getAttribute('data-i18n'));
     if (typeof val === 'string') el.textContent = val;
   });
+
+  I18N_ATTRS.forEach(attr => {
+    $$(`[data-i18n-${attr}]`).forEach(el => {
+      const val = t(el.getAttribute(`data-i18n-${attr}`));
+      if (typeof val === 'string') el.setAttribute(attr, val);
+    });
+  });
+
+  /* "PHOTO · 4:5" scaffolding labels: word translates, ratio does not. */
+  $$('[data-i18n-tag]').forEach(el => {
+    el.textContent = `${t(el.getAttribute('data-i18n-tag'))} · ${el.getAttribute('data-ratio')}`;
+  });
+  /* gallery plate numbers follow the numeral system of the language */
+  $$('[data-num]').forEach(el => { el.textContent = localiseDigits(el.getAttribute('data-num')); });
+
+  const cater = $('#caterBtn');
+  if (cater) cater.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(t('mail.cater.subject'))}`;
 }
 
 /* ===== Init ===== */
@@ -332,6 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initVegChip();
   initReservation();
   initHours();
+  initMap();
   applyI18n();
   renderSignature();
   renderMenu();
@@ -350,6 +428,8 @@ function initLanguagePill() {
       renderFavourites();
       renderTimePills();
       renderHours();
+      renderOpenBadge();
+      refreshMapLang();
     });
   });
 }
@@ -391,7 +471,7 @@ function renderGroupTabs() {
   const wrap = $('#menuGroupTabs');
   wrap.innerHTML = window.MENU_DATA.map(g => `
     <button class="group-tab ${g.group === state.group ? 'active' : ''}" data-group="${g.group}" type="button">
-      ${g.groupLabel[state.lang] || g.groupLabel.de}
+      ${loc(g.groupLabel)}
     </button>
   `).join('');
   $$('.group-tab', wrap).forEach(btn => {
@@ -408,7 +488,7 @@ function renderCategoryTabs() {
   if (!group) return;
   const wrap = $('#menuTabs');
   const tabs = [{ slug: 'all', label: t('all') }].concat(
-    group.categories.map(c => ({ slug: c.slug, label: c.label[state.lang] || c.label.de }))
+    group.categories.map(c => ({ slug: c.slug, label: loc(c.label) }))
   );
   wrap.innerHTML = tabs.map(tab => `
     <button class="${tab.slug === state.category ? 'active' : ''}" data-cat="${tab.slug}" type="button">
@@ -432,8 +512,8 @@ function itemBadges(item) {
   if (item.pop) {
     tags.push(`<span class="pop-badge"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>#${item.pop} ${t('menu.pop')}</span>`);
   }
-  if (isVegItem(item)) tags.push('<span class="tag veg">veg</span>');
-  if ((item.badges || []).includes('spicy')) tags.push('<span class="tag spicy">spicy</span>');
+  if (isVegItem(item)) tags.push(`<span class="tag veg">${escapeHtml(t('tag.veg'))}</span>`);
+  if ((item.badges || []).includes('spicy')) tags.push(`<span class="tag spicy">${escapeHtml(t('tag.spicy'))}</span>`);
   return tags.join('');
 }
 
@@ -460,9 +540,9 @@ function renderMenu() {
     return `
       <div class="menu-section">
         <div class="menu-section-head">
-          <h3>${cat.label[state.lang] || cat.label.de}</h3>
+          <h3>${escapeHtml(loc(cat.label))}</h3>
         </div>
-        <div class="menu-section-sub">${items.length} ${t('menu.items')}</div>
+        <div class="menu-section-sub">${localiseDigits(items.length)} ${t('menu.items')}</div>
         <div class="dish-list${items.length >= 5 ? ' cols' : ''}">
         ${items.map(item => {
           const badges = itemBadges(item);
@@ -471,11 +551,11 @@ function renderMenu() {
               <div class="dish-num">${item.num}</div>
               <div class="dish-body">
                 <div class="dish-title-row">
-                  <h4>${escapeHtml(item.name)}</h4>
+                  <h4>${escapeHtml(loc(item.name))}</h4>
                   <span class="dish-dots"></span>
                   <span class="dish-price">${priceHtml(item)}</span>
                 </div>
-                ${item.desc ? `<div class="dish-desc">${escapeHtml(item.desc)}</div>` : ''}
+                ${loc(item.desc) ? `<div class="dish-desc">${escapeHtml(loc(item.desc))}</div>` : ''}
                 ${badges ? `<div class="dish-tags">${badges}</div>` : ''}
               </div>
             </div>
@@ -505,11 +585,11 @@ function renderSignature() {
   const card = $('#signatureCard');
   card.innerHTML = `
     <div class="eyebrow" style="color:var(--mustard)">${t('menu.sig.label')}</div>
-    <h3 style="margin-top:6px">${escapeHtml(pick.name)}</h3>
-    ${pick.desc ? `<div class="sig-desc">${escapeHtml(pick.desc)}</div>` : ''}
+    <h3 style="margin-top:6px">${escapeHtml(loc(pick.name))}</h3>
+    ${loc(pick.desc) ? `<div class="sig-desc">${escapeHtml(loc(pick.desc))}</div>` : ''}
     <div class="imgph">
-      <img src="images/signature-flambe-roll.jpg" alt="${escapeHtml(pick.name)}" loading="lazy"/>
-      <span class="imgph-tag">PHOTO · 16:10</span>
+      <img src="images/signature-flambe-roll.jpg" alt="${escapeHtml(loc(pick.name))}" loading="lazy"/>
+      <span class="imgph-tag">${escapeHtml(t('tag.photo'))} · 16:10</span>
       <span class="imgph-cap">${t('menu.sig.imgcap')}</span>
     </div>
     <div class="sig-foot">
@@ -531,8 +611,8 @@ function renderFavourites() {
     <div class="fav-card">
       <span class="fav-rank">#${it.pop}</span>
       <div>
-        <div class="fav-name">${escapeHtml(it.name)}</div>
-        <div class="fav-cat">${it.catLabel[state.lang] || it.catLabel.de}</div>
+        <div class="fav-name">${escapeHtml(loc(it.name))}</div>
+        <div class="fav-cat">${escapeHtml(loc(it.catLabel))}</div>
       </div>
     </div>
   `).join('');
@@ -568,7 +648,8 @@ function initReservation() {
     const phone = (fd.get('phone') || '').toString().trim();
     const notes = (fd.get('notes') || '').toString().trim();
 
-    const subject = `Reservierung / Reservation — ${name} — ${date} ${state.time}`;
+    const subject = t('mail.res.subject')
+      .replace('{name}', name).replace('{date}', date).replace('{time}', state.time);
     const body = [
       `${t('field.date')}: ${date}`,
       `${t('field.time')}: ${state.time}`,
@@ -601,27 +682,123 @@ function renderTimePills() {
 }
 
 /* ===== Hours ===== */
-/* NOTE: placeholder hours (from the live Impressum) — replace with the confirmed Hellkamp hours. */
+/* Mon-first. `null` = closed that day. */
 const HOURS = [
-  '12:00–15:00 · 17:00–22:00', // Mon
-  '12:00–15:00 · 17:00–22:00', // Tue
-  '12:00–15:00 · 17:00–22:00', // Wed
-  '12:00–15:00 · 17:00–22:00', // Thu
-  '12:00–15:00 · 17:00–22:00', // Fri
-  '14:00–22:00',               // Sat
-  '14:00–22:00',               // Sun
+  { open: '12:00', close: '22:00' }, // Mon
+  { open: '12:00', close: '22:00' }, // Tue
+  { open: '12:00', close: '22:00' }, // Wed
+  { open: '12:00', close: '22:00' }, // Thu
+  { open: '12:00', close: '23:00' }, // Fri
+  { open: '14:00', close: '23:00' }, // Sat
+  { open: '14:00', close: '22:00' }, // Sun
 ];
-function initHours() { renderHours(); }
+
+/* The restaurant is in Hamburg, so "is it open now?" has to be answered in
+   Hamburg's clock — not the visitor's, which may be hours ahead. */
+function hamburgNow() {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Berlin', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false,
+  }).formatToParts(new Date());
+  const get = (type) => parts.find(p => p.type === type).value;
+  const dayIdx = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(get('weekday'));
+  return { dayIdx, minutes: Number(get('hour')) * 60 + Number(get('minute')) };
+}
+
+const toMinutes = (hhmm) => Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5));
+const localiseDigits = (s) => state.lang === 'ne'
+  ? String(s).replace(/[0-9]/g, d => '०१२३४५६७८९'[d])
+  : String(s);
+
+function hoursLabel(entry) {
+  return entry ? localiseDigits(`${entry.open}–${entry.close}`) : t('closed');
+}
+
+/* Current open/closed state, plus the next opening if we're shut. */
+function openState() {
+  const { dayIdx, minutes } = hamburgNow();
+  const today = HOURS[dayIdx];
+  if (today && minutes >= toMinutes(today.open) && minutes < toMinutes(today.close)) {
+    return { open: true, time: today.close };
+  }
+  if (today && minutes < toMinutes(today.open)) {
+    return { open: false, sameDay: true, time: today.open };
+  }
+  for (let step = 1; step <= 7; step++) {
+    const idx = (dayIdx + step) % 7;
+    if (HOURS[idx]) return { open: false, sameDay: false, time: HOURS[idx].open, dayIdx: idx };
+  }
+  return { open: false, sameDay: false, time: null };
+}
+
+function initHours() { renderHours(); renderOpenBadge(); }
+
+function renderOpenBadge() {
+  const badge = $('#openBadge');
+  if (!badge) return;
+  const st = openState();
+  const time = st.time ? localiseDigits(st.time) : '';
+  let label;
+  if (st.open) label = t('hero.open.now').replace('{t}', time);
+  else if (st.sameDay) label = t('hero.open.today').replace('{t}', time);
+  else if (st.time) label = t('hero.open.next').replace('{d}', UI[state.lang].days[st.dayIdx]).replace('{t}', time);
+  else label = t('closed');
+  badge.textContent = label;
+  const dot = $('#openDot');
+  if (dot) dot.classList.toggle('is-closed', !st.open);
+}
+
 function renderHours() {
   const grid = $('#hoursGrid');
   if (!grid) return;
-  const todayIdx = (new Date().getDay() + 6) % 7; // Mon=0
+  const todayIdx = hamburgNow().dayIdx;
   const days = UI[state.lang].days;
   grid.innerHTML = days.map((d, i) => {
-    const time = HOURS[i] === 'closed' ? t('closed') : HOURS[i];
     const today = i === todayIdx ? 'today' : '';
-    return `<div class="day ${today}">${d}${today ? ' ·' : ''}</div><div class="time ${today}">${time}</div>`;
+    return `<div class="day ${today}">${d}${today ? ' ·' : ''}</div><div class="time ${today}">${hoursLabel(HOURS[i])}</div>`;
   }).join('');
+}
+
+/* ===== Map (Google embed, loaded only on request) ===== */
+const MAP_QUERY = 'Hellkamp 22, 20255 Hamburg';
+const MAP_CONSENT_KEY = 'tk.mapConsent';
+
+function mapEmbedSrc() {
+  const params = new URLSearchParams({ q: MAP_QUERY, output: 'embed', hl: state.lang, z: '16' });
+  return `https://www.google.com/maps?${params}`;
+}
+
+function loadMap() {
+  const card = $('#mapCard');
+  if (!card || card.classList.contains('map-live')) return;
+  const frame = document.createElement('iframe');
+  frame.className = 'map-frame';
+  frame.src = mapEmbedSrc();
+  frame.loading = 'lazy';
+  frame.referrerPolicy = 'no-referrer-when-downgrade';
+  frame.allowFullscreen = true;
+  frame.title = t('map.title');
+  card.appendChild(frame);
+  card.classList.add('map-live');
+}
+
+function initMap() {
+  const btn = $('#mapConsentBtn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    try { localStorage.setItem(MAP_CONSENT_KEY, '1'); } catch { /* private mode — consent lasts this visit only */ }
+    loadMap();
+  });
+  let consented = false;
+  try { consented = localStorage.getItem(MAP_CONSENT_KEY) === '1'; } catch { /* storage blocked */ }
+  if (consented) loadMap();
+}
+
+/* Keep an already-loaded map in the selected language. */
+function refreshMapLang() {
+  const frame = $('.map-frame');
+  if (!frame) return;
+  frame.src = mapEmbedSrc();
+  frame.title = t('map.title');
 }
 
 /* ===== Toasts ===== */
