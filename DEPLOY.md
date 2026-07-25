@@ -29,9 +29,28 @@ Pages → Create → Import a repository**, then:
 | Build command | `sh scripts/build.sh` |
 | Deploy command | `npx wrangler deploy` |
 
-Then attach `thakalikitchen.de` and `www.thakalikitchen.de` under the Worker's
-**Settings → Domains & Routes**. Cloudflare creates the DNS records and issues
-the certificate — do not hand-create the apex or `www` records.
+The custom domains are declared in `wrangler.jsonc` rather than clicked into the
+dashboard, so they are version-controlled and recreated by any deploy:
+
+```jsonc
+"routes": [
+  { "pattern": "thakalikitchen.de", "custom_domain": true },
+  { "pattern": "www.thakalikitchen.de", "custom_domain": true }
+]
+```
+
+`wrangler deploy` creates the apex and `www` DNS records and provisions the
+certificate. Never hand-create those two records; the deploy owns them.
+
+Declaring `routes` disables the `*.workers.dev` URL and preview URLs unless
+`workers_dev` / `preview_urls` are set to `true` explicitly. That is deliberate
+here — one public URL, and the GitHub Pages build at
+`prameshbajra.github.io/thakalikitchen` remains available as a preview.
+
+Certificate issuance takes a few minutes on first attachment. Until it lands,
+`https://` fails with `tlsv1 alert internal error` and `http://` returns an
+unrouted 404 from the edge. Both are expected during that window; wait rather
+than reconfiguring.
 
 ### Why there is a build step
 
