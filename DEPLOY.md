@@ -96,12 +96,24 @@ answering for the zone, so the Cloudflare zone has to exist first. Done in this
 order the transfer never touches live DNS.
 
 1. Create the Cloudflare zone for `thakalikitchen.de` and note the two assigned
-   nameservers.
+   nameservers. For this zone they are:
+
+   ```
+   daisy.ns.cloudflare.com
+   sid.ns.cloudflare.com
+   ```
+
+   Cloudflare will insist you change nameservers at your current registrar and
+   leave the zone *Pending*. Ignore it — there is no IONOS access, and the
+   delegation switches as part of the transfer. A pending zone still answers
+   authoritatively, which is the whole point of doing this first.
 2. Add the mail-lockdown records above.
 3. Order the transfer at the new registrar with the AuthInfo code, supplying the
    Cloudflare nameservers **and** the new holder's name and address as
    *Domaininhaber* in the same order. Doing the holder change here avoids a
-   separate Inhaberwechsel afterwards.
+   separate Inhaberwechsel afterwards. Registrars often default to their own
+   nameservers — override that, or DENIC's delegation check will run against the
+   wrong servers.
 4. Wait for completion — usually minutes to a few hours.
 5. Create the Pages project and attach both custom domains.
 6. Confirm the holder at <https://webwhois.denic.de>. Sitting in the right
