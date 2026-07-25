@@ -1,5 +1,10 @@
 # Deploying thakalikitchen.de
 
+> **Status:** migration completed 2026-07-25. The domain is registered at INWX in
+> the name of Thakali Kitchen, DNS is on Cloudflare, and the site is served by
+> the `thakalikitchen` Worker over HTTPS. What follows is both the record of how
+> that was done and the runbook for changing it.
+
 Static site — no backend. Every page is plain HTML plus `css/`, `js/`, and
 `images/`. The reservation form is handled client-side in `js/main.js` and opens
 a `mailto:` link, so there is nothing server-side to host.
