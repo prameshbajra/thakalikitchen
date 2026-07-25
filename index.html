@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet"/>
 
-  <link rel="stylesheet" href="css/style.css?v=5"/>
+  <link rel="stylesheet" href="css/style.css?v=6"/>
 
   <script type="application/ld+json">
   {
@@ -64,7 +64,7 @@
 
     <!-- ============ TOPBAR ============ -->
     <header class="topbar">
-      <button class="icon-btn" id="navToggle" aria-label="Menü öffnen" data-i18n-aria-label="a11y.navopen">
+      <button class="icon-btn" id="navToggle" aria-label="Menü öffnen" aria-controls="navDrawer" aria-expanded="false" data-i18n-aria-label="a11y.navopen">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
           <path d="M3 6h18M3 12h18M3 18h12"/>
         </svg>
@@ -297,7 +297,7 @@
             <label data-i18n="field.party">GÄSTE</label>
             <div class="party-stepper">
               <button type="button" id="partyMinus" aria-label="Weniger Gäste" data-i18n-aria-label="a11y.less">−</button>
-              <span class="num" id="partyNum">2</span>
+              <span class="num" id="partyNum" aria-live="polite" aria-atomic="true">2</span>
               <button type="button" id="partyPlus" aria-label="Mehr Gäste" data-i18n-aria-label="a11y.more">+</button>
             </div>
           </div>
@@ -605,10 +605,10 @@
   </div>
 
   <!-- ============ NAV DRAWER ============ -->
-  <div class="drawer-scrim nav-scrim" id="navDrawer">
-    <div class="cart-sheet">
+  <div class="drawer-scrim nav-scrim" id="navDrawer" aria-hidden="true">
+    <div class="cart-sheet" role="dialog" aria-modal="true" aria-labelledby="navDrawerLabel">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px">
-        <span class="eyebrow" data-i18n="nav.label">NAVIGATION</span>
+        <span class="eyebrow" id="navDrawerLabel" data-i18n="nav.label">NAVIGATION</span>
         <button class="icon-btn" data-close-drawer aria-label="Schließen" data-i18n-aria-label="a11y.close">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg>
         </button>
@@ -639,7 +639,7 @@
   <!-- ============ TOASTS ============ -->
   <div class="toast-wrap" id="toastWrap"></div>
 
-  <script src="js/menu-data.js?v=5"></script>
-  <script src="js/main.js?v=5"></script>
+  <script src="js/menu-data.js?v=6"></script>
+  <script src="js/main.js?v=6"></script>
 </body>
 </html>
