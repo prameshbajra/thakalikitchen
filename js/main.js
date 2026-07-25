@@ -2,28 +2,37 @@
    THAKALI KITCHEN — Main script (vanilla)
    ============================================ */
 
+/* ===== External ordering (FoodAmigos) ===== */
+const ORDER_URL = 'https://www.crosssushi-hamburg.de/speisekarte/crosssushi';
+/* Contact used for mail links (swap here if the address/line changes) */
+const CONTACT = { email: 'thakaliklitchen111@gmail.com' };
+
 /* ===== i18n dictionary ===== */
 const UI = {
   en: {
+    'promo.text': 'Order online & save €10 — code',
     'cta.book': 'Reserve a table', 'cta.order': 'Order online',
     'stamp.1': 'spiced', 'stamp.2': 'by hand', 'stamp.small': 'since 2018',
-    'hero.eyebrow': 'EST. 2018 · OSTERSTRASSE, HAMBURG',
+    'hero.eyebrow': 'EST. 2018 · HELLKAMP, HAMBURG',
     'hero.title.1': 'A taste of the', 'hero.title.accent': 'Annapurna', 'hero.title.2': 'kitchen.',
     'hero.hand': 'from our hearth to yours',
     'hero.sub': "Traditional Thakali thali, hand-folded Mo:Mo, and Cross Sushi — served on copper and clay in the heart of Eimsbüttel.",
     'hero.imgcap': 'Hand-folded Mo:Mo with tomato achar — fresh from the steamer',
-    'hero.open': 'Open until 22:30',
+    'hero.open': 'Open until 22:00',
     'story.eyebrow': '01 · OUR STORY',
     'story.title.1': 'Born in', 'story.title.accent': 'Mustang.', 'story.title.2': 'Grown in Hamburg.',
-    'story.p': "Thakali Kitchen brings the cooking of the Thak Khola valley — buckwheat, yak butter, timur pepper — to a small cream-walled room on Osterstraße. Run by the Sherchan family since 2018.",
-    'story.imgcap': 'Our sign on Osterstraße — Nepali flag and all',
+    'story.p': "Thakali Kitchen brings the cooking of the Thak Khola valley — buckwheat, yak butter, timur pepper — to a small cream-walled room on Hellkamp. Run by the Sherchan family since 2018.",
+    'story.imgcap': 'Chilli chicken, mo:mo & sukuti — the table is set',
+    'story.polaroid': 'our sign on Hellkamp',
     'story.c1.title': 'Family recipes', 'story.c1.p': "Aamaa's spice mixes, ground fresh weekly. Nothing comes from a jar.",
     'story.c2.title': 'Honest ingredients', 'story.c2.p': 'Local produce from Hamburg & surrounds, Himalayan grains and fresh fish.',
     'story.c3.title': 'Slow cooking', 'story.c3.p': 'Dal simmered eight hours. Mo:Mo skins rolled to order. No shortcuts.',
     'menu.eyebrow': '02 · OUR KITCHEN', 'menu.title.1': 'The', 'menu.title.accent': 'menu',
-    'menu.sub': 'Over 180 dishes across three kitchens — from Thakali classics to Cross Sushi. Tap any item to add.',
+    'menu.sub': 'Over 170 dishes across three kitchens — from Thakali classics to Cross Sushi. Browse here, then order online for pickup or delivery.',
     'menu.chip.veg': 'Veg only', 'menu.chip.spicy': 'Spicy', 'menu.chip.glutenfree': 'Gluten-free',
-    'menu.sig.label': "TODAY'S SIGNATURE", 'menu.sig.imgcap': 'From our kitchen — torched salmon signature roll', 'menu.sig.add': 'Add to order',
+    'menu.order': 'See full menu & order online',
+    'menu.pop': 'Loved',
+    'menu.sig.label': 'OUR BESTSELLER', 'menu.sig.imgcap': 'From our kitchen — torched salmon signature roll', 'menu.sig.add': 'Order online',
     'menu.items': 'items',
     'gallery.eyebrow': '03 · FROM THE KITCHEN', 'gallery.title.1': 'Inside the', 'gallery.title.accent': 'kitchen.',
     'gallery.cap.1': 'Maguro sashimi, freshly fanned',
@@ -41,23 +50,21 @@ const UI = {
     'gallery.cap.13': 'Tuna-avocado maki — deep red & creamy',
     'gallery.cap.14': 'Maguro nigiri — pure & simple',
     'gallery.cap.15': 'Chicken curry, dal & rice — the thali up close',
-    'book.eyebrow': '04 · RESERVATIONS', 'book.title.1': 'Hold a', 'book.title.accent': 'table.',
+    'reviews.eyebrow': '04 · GUEST FAVOURITES', 'reviews.title.1': 'What guests', 'reviews.title.accent': 'order most.',
+    'reviews.cta.p': "Enjoyed your meal? We'd love a quick review on Google.",
+    'reviews.cta.btn': 'Review us on Google',
+    'book.eyebrow': '05 · RESERVATIONS', 'book.title.1': 'Hold a', 'book.title.accent': 'table.',
     'book.sub': 'We seat 32. Walk-ins welcome at the bar; book ahead for weekends.',
     'field.date': 'DATE', 'field.party': 'PARTY OF', 'field.time': 'TIME',
     'field.name': 'NAME', 'field.email': 'EMAIL', 'field.phone': 'PHONE', 'field.notes': 'NOTES (allergies, occasion)',
-    'book.btn': 'Request reservation',
-    'order.eyebrow': '05 · DELIVERY', 'order.title.1': 'Bring it', 'order.title.accent': 'home.',
-    'order.sub': 'Pickup in 20 min, or delivery within 4 km. Our own riders.',
-    'order.mode.pickup': 'Pickup', 'order.mode.delivery': 'Delivery',
-    'order.pickup.label': 'PICKUP TIME',
-    'order.pickup.asap': 'As soon as possible · ~20 min',
-    'order.pickup.30': 'In 30 min', 'order.pickup.60': 'In 1 hour',
-    'order.pickup.info': 'Osterstraße 142 · 2 min from U-Bahn Osterstraße',
-    'order.delivery.label': 'DELIVERY POSTCODE',
-    'order.delivery.info': 'Delivery within 4 km · €2.50 fee · ~35 min',
-    'order.items': 'Items', 'order.subtotal': 'Subtotal', 'order.delivery': 'Delivery',
-    'order.review': 'Review order',
-    'cater.eyebrow': '06 · CATERING', 'cater.title.1': 'For', 'cater.title.accent': 'gatherings.',
+    'book.btn': 'Request reservation by email',
+    'order.eyebrow': '06 · ORDER', 'order.title.1': 'Bring it', 'order.title.accent': 'home.',
+    'order.sub': 'Order direct — no platform fees, loyalty points and faster service. Pickup or delivery.',
+    'order.pickup.title': 'Pickup', 'order.pickup.info': 'Hellkamp 22 · ready in ~10–20 min',
+    'order.delivery.title': 'Delivery', 'order.delivery.info': 'within ~4 km · freshly made',
+    'order.promo': '€10 off your first online order with this code.',
+    'order.btn': 'Order online now',
+    'cater.eyebrow': '07 · CATERING', 'cater.title.1': 'For', 'cater.title.accent': 'gatherings.',
     'cater.label': 'EVENTS · 8 — 200 GUESTS',
     'cater.p': 'From eight-person dinners to weddings of a hundred. We bring the kitchen to you.',
     'cater.imgcap': 'Full Thakali set — rice, dal, curry and achars on brass',
@@ -65,45 +72,63 @@ const UI = {
     'cater.pkg2': 'Mo:Mo Bar (live)', 'cater.pkg2.p': 'From €36 / head',
     'cater.pkg3': 'Full Banquet', 'cater.pkg3.p': 'From €54 / head',
     'cater.btn': 'Request a quote',
-    'contact.eyebrow': '07 · VISIT US', 'contact.title.1': 'Find us on', 'contact.title.accent': 'Osterstraße.',
+    'offers.eyebrow': '08 · GIFTS & REWARDS', 'offers.title.1': 'Gift &', 'offers.title.accent': 'collect.',
+    'offers.gift.title': 'Gift cards',
+    'offers.gift.p': 'Give a taste of the Himalayas. Gift cards in any amount — perfect for birthdays, celebrations and colleagues.',
+    'offers.gift.btn': 'Buy a gift card',
+    'offers.reward.title': 'Rewards club',
+    'offers.reward.p': 'Earn on every online order: €5 back for every €50 spent — and unlock free dishes.',
+    'offers.reward.btn': 'Join rewards',
+    'faq.eyebrow': '09 · FAQ', 'faq.title.1': 'Good to', 'faq.title.accent': 'know.',
+    'faq.q1': 'Do you deliver to me? What area?',
+    'faq.a1': "We deliver in Eimsbüttel and around — roughly 4 km around Hellkamp. Enter your postcode when ordering online to check if you're covered.",
+    'faq.q2': 'Do you have vegetarian & vegan dishes? What about allergies?',
+    'faq.a2': "Yes — plenty of vegetarian and vegan options, from veggie Mo:Mo to veggie sushi rolls. Use the 'Veg only' filter in the menu to find them fast. For allergies, just ask — we're happy to advise.",
+    'faq.q3': 'What are you known for?',
+    'faq.a3': "Hand-folded Mo:Mo, the authentic Thakali set, and our Cross signature sushi rolls — above all the torched 'Premium Smoke Salmon Roll'. Plus Thai classics like duck in coconut milk.",
+    'faq.q4': 'Can I reserve a table or book catering?',
+    'faq.a4': 'Both, gladly. Reserve via the form above, or give us a call. For catering from 8 to 200 guests, just send us a quick request.',
+    'contact.eyebrow': '10 · VISIT US', 'contact.title.1': 'Find us on', 'contact.title.accent': 'Hellkamp.',
     'contact.findus': 'Find us',
-    'contact.addr': 'Osterstraße 142, 20255 Hamburg-Eimsbüttel',
-    'contact.phonesub': 'Daily, 11:00 — 22:00',
+    'contact.addr': 'Hellkamp 22, 20255 Hamburg-Eimsbüttel',
+    'contact.phonesub': 'For reservations & questions',
     'contact.emailsub': 'For private events',
+    'contact.social': 'Follow us',
     'contact.hours': 'Opening hours',
-    'contact.mapcap': 'Osterstraße 142 · Eimsbüttel · 2 min walk from U2 Osterstraße',
+    'contact.mapcap': 'Hellkamp 22 · Hamburg-Eimsbüttel',
     'footer.eyebrow': 'COME EAT WITH US',
-    'footer.addr': 'Osterstraße 142 · 20255 Hamburg',
-    'cart.title': 'Your order', 'cart.empty': "Cart's empty", 'cart.empty.hand': "let's fix that",
-    'cart.subtotal': 'Subtotal', 'cart.checkout': 'Checkout',
+    'footer.addr': 'Hellkamp 22 · 20255 Hamburg',
     'nav.label': 'NAVIGATE',
-    'nav.about': 'Story', 'nav.menu': 'Menu', 'nav.book': 'Book', 'nav.order': 'Order',
-    'nav.catering': 'Catering', 'nav.contact': 'Visit',
-    'toast.added': 'added', 'toast.book.name': 'Please add your name',
-    'toast.book.ok': 'Reserved', 'toast.cater.ok': 'Quote request sent',
+    'nav.about': 'Story', 'nav.menu': 'Menu', 'nav.reviews': 'Favourites', 'nav.book': 'Book', 'nav.order': 'Order',
+    'nav.catering': 'Catering', 'nav.offers': 'Gifts', 'nav.faq': 'FAQ', 'nav.contact': 'Visit',
+    'toast.book.name': 'Please add your name', 'toast.book.ok': 'Opening your email request …',
     'closed': 'Closed', 'all': 'All',
     'days': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
   },
   de: {
+    'promo.text': 'Jetzt online bestellen & 10 € sparen — Code',
     'cta.book': 'Tisch reservieren', 'cta.order': 'Online bestellen',
     'stamp.1': 'von Hand', 'stamp.2': 'gewürzt', 'stamp.small': 'seit 2018',
-    'hero.eyebrow': 'SEIT 2018 · OSTERSTRASSE, HAMBURG',
+    'hero.eyebrow': 'SEIT 2018 · HELLKAMP, HAMBURG',
     'hero.title.1': 'Ein Stück', 'hero.title.accent': 'Annapurna-', 'hero.title.2': 'Küche.',
     'hero.hand': 'von unserem Herd zu Ihnen',
     'hero.sub': 'Traditionelles Thakali-Thali, handgefaltete Mo:Mo und Cross Sushi — frisch zubereitet auf Kupfer und Ton, mitten in Eimsbüttel.',
     'hero.imgcap': 'Handgefaltete Mo:Mo mit Tomaten-Achar — frisch aus dem Dampf',
-    'hero.open': 'Geöffnet bis 22:30',
+    'hero.open': 'Geöffnet bis 22:00',
     'story.eyebrow': '01 · UNSERE GESCHICHTE',
     'story.title.1': 'Geboren in', 'story.title.accent': 'Mustang.', 'story.title.2': 'Gewachsen in Hamburg.',
-    'story.p': 'Thakali Kitchen bringt die Küche des Thak-Khola-Tals — Buchweizen, Yak-Butter, Timur-Pfeffer — in einen kleinen, cremefarbenen Raum an der Osterstraße. Geführt von der Familie Sherchan seit 2018.',
-    'story.imgcap': 'Unsere Leuchtreklame an der Osterstraße — mit nepalesischer Flagge',
+    'story.p': 'Thakali Kitchen bringt die Küche des Thak-Khola-Tals — Buchweizen, Yak-Butter, Timur-Pfeffer — in einen kleinen, cremefarbenen Raum am Hellkamp. Geführt von der Familie Sherchan seit 2018.',
+    'story.imgcap': 'Chilli Chicken, Mo:Mo & Sukuti — der Tisch ist gedeckt',
+    'story.polaroid': 'unser Schild am Hellkamp',
     'story.c1.title': 'Familienrezepte', 'story.c1.p': 'Aamaas Gewürzmischungen, wöchentlich frisch gemahlen. Nichts aus dem Glas.',
     'story.c2.title': 'Ehrliche Zutaten', 'story.c2.p': 'Regionale Produkte aus Hamburg & Umland, Himalaya-Getreide und frischer Fisch.',
     'story.c3.title': 'Langsames Kochen', 'story.c3.p': 'Dal acht Stunden geköchelt. Mo:Mo-Teig auf Bestellung gerollt. Keine Abkürzungen.',
     'menu.eyebrow': '02 · UNSERE KÜCHE', 'menu.title.1': 'Die', 'menu.title.accent': 'Karte',
-    'menu.sub': 'Über 180 Gerichte aus drei Küchen — von Thakali-Klassikern bis Cross Sushi. Tippen Sie ein Gericht an, um es hinzuzufügen.',
+    'menu.sub': 'Über 170 Gerichte aus drei Küchen — von Thakali-Klassikern bis Cross Sushi. Stöbern Sie hier und bestellen Sie online für Abholung oder Lieferung.',
     'menu.chip.veg': 'Nur vegetarisch', 'menu.chip.spicy': 'Scharf', 'menu.chip.glutenfree': 'Glutenfrei',
-    'menu.sig.label': 'HEUTIGES SIGNATURGERICHT', 'menu.sig.imgcap': 'Aus unserer Küche — flambierte Lachs-Signature-Rolle', 'menu.sig.add': 'Zum Korb',
+    'menu.order': 'Ganze Karte ansehen & online bestellen',
+    'menu.pop': 'Beliebt',
+    'menu.sig.label': 'UNSER BESTSELLER', 'menu.sig.imgcap': 'Aus unserer Küche — flambierte Lachs-Signature-Rolle', 'menu.sig.add': 'Online bestellen',
     'menu.items': 'Gerichte',
     'gallery.eyebrow': '03 · AUS DER KÜCHE', 'gallery.title.1': 'In der', 'gallery.title.accent': 'Küche.',
     'gallery.cap.1': 'Maguro-Sashimi — frisch aufgefächert',
@@ -121,23 +146,21 @@ const UI = {
     'gallery.cap.13': 'Thunfisch-Avocado-Maki — tiefrot & cremig',
     'gallery.cap.14': 'Maguro-Nigiri — pur',
     'gallery.cap.15': 'Hühnercurry, Dal & Reis — das Thali im Detail',
-    'book.eyebrow': '04 · RESERVIERUNG', 'book.title.1': 'Tisch', 'book.title.accent': 'sichern.',
+    'reviews.eyebrow': '04 · GÄSTELIEBLINGE', 'reviews.title.1': 'Was am meisten', 'reviews.title.accent': 'bestellt wird.',
+    'reviews.cta.p': 'Hat es dir geschmeckt? Wir freuen uns über deine Bewertung bei Google.',
+    'reviews.cta.btn': 'Bei Google bewerten',
+    'book.eyebrow': '05 · RESERVIERUNG', 'book.title.1': 'Tisch', 'book.title.accent': 'sichern.',
     'book.sub': 'Wir haben 32 Plätze. Walk-ins an der Bar willkommen; am Wochenende bitte vorbestellen.',
     'field.date': 'DATUM', 'field.party': 'GÄSTE', 'field.time': 'ZEIT',
     'field.name': 'NAME', 'field.email': 'E-MAIL', 'field.phone': 'TELEFON', 'field.notes': 'NOTIZEN (Allergien, Anlass)',
-    'book.btn': 'Reservierung anfragen',
-    'order.eyebrow': '05 · LIEFERUNG', 'order.title.1': 'Nehmt es', 'order.title.accent': 'mit nach Hause.',
-    'order.sub': 'Abholung in 20 Min., Lieferung im Umkreis von 4 km. Eigene Fahrer.',
-    'order.mode.pickup': 'Abholung', 'order.mode.delivery': 'Lieferung',
-    'order.pickup.label': 'ABHOLZEIT',
-    'order.pickup.asap': 'So bald wie möglich · ~20 Min',
-    'order.pickup.30': 'In 30 Min', 'order.pickup.60': 'In 1 Stunde',
-    'order.pickup.info': 'Osterstraße 142 · 2 Min. von U-Bahn Osterstraße',
-    'order.delivery.label': 'PLZ',
-    'order.delivery.info': 'Lieferung im Umkreis 4 km · 2,50 € Gebühr · ~35 Min',
-    'order.items': 'Artikel', 'order.subtotal': 'Zwischensumme', 'order.delivery': 'Lieferung',
-    'order.review': 'Bestellung prüfen',
-    'cater.eyebrow': '06 · CATERING', 'cater.title.1': 'Für', 'cater.title.accent': 'besondere Anlässe.',
+    'book.btn': 'Reservierung per E-Mail anfragen',
+    'order.eyebrow': '06 · BESTELLEN', 'order.title.1': 'Nehmt es', 'order.title.accent': 'mit nach Hause.',
+    'order.sub': 'Direkt bei uns bestellen — ohne Plattform-Gebühren, mit Treuepunkten und schnellem Service. Abholung oder Lieferung.',
+    'order.pickup.title': 'Abholung', 'order.pickup.info': 'Hellkamp 22 · in ca. 10–20 Min. fertig',
+    'order.delivery.title': 'Lieferung', 'order.delivery.info': 'im Umkreis von ca. 4 km · frische Zubereitung',
+    'order.promo': '10 € Rabatt auf deine erste Online-Bestellung mit diesem Code.',
+    'order.btn': 'Jetzt online bestellen',
+    'cater.eyebrow': '07 · CATERING', 'cater.title.1': 'Für', 'cater.title.accent': 'besondere Anlässe.',
     'cater.label': 'EVENTS · 8 — 200 GÄSTE',
     'cater.p': 'Von Acht-Personen-Dinners bis zu Hochzeiten mit hundert Gästen. Wir bringen die Küche zu Ihnen.',
     'cater.imgcap': 'Komplettes Thakali-Set — Reis, Dal, Curry und Achars auf Messing',
@@ -145,45 +168,63 @@ const UI = {
     'cater.pkg2': 'Mo:Mo-Bar (live)', 'cater.pkg2.p': 'Ab 36 € / Person',
     'cater.pkg3': 'Volles Bankett', 'cater.pkg3.p': 'Ab 54 € / Person',
     'cater.btn': 'Angebot anfragen',
-    'contact.eyebrow': '07 · BESUCH', 'contact.title.1': 'Findet uns in der', 'contact.title.accent': 'Osterstraße.',
+    'offers.eyebrow': '08 · GUTSCHEINE & TREUE', 'offers.title.1': 'Schenke &', 'offers.title.accent': 'sammle.',
+    'offers.gift.title': 'Gutscheine',
+    'offers.gift.p': 'Verschenke ein Stück Himalaya. Gutscheine in jeder Höhe — perfekt für Geburtstage, Feste und Kolleg:innen.',
+    'offers.gift.btn': 'Gutschein kaufen',
+    'offers.reward.title': 'Treueclub',
+    'offers.reward.p': 'Sammle bei jeder Online-Bestellung: 5 € zurück für je 50 € Umsatz — und schalte kostenlose Gerichte frei.',
+    'offers.reward.btn': 'Treueclub beitreten',
+    'faq.eyebrow': '09 · HÄUFIGE FRAGEN', 'faq.title.1': 'Gut zu', 'faq.title.accent': 'wissen.',
+    'faq.q1': 'Liefert ihr zu mir? In welchem Gebiet?',
+    'faq.a1': 'Wir liefern in Eimsbüttel und Umgebung — im Umkreis von rund 4 km um den Hellkamp. Ob deine Adresse dabei ist, siehst du beim Online-Bestellen nach Eingabe der Postleitzahl.',
+    'faq.q2': 'Habt ihr vegetarische & vegane Gerichte? Wie sieht es mit Allergien aus?',
+    'faq.a2': 'Ja — viele vegetarische und vegane Optionen, vom Veggie-Mo:Mo bis zu Veggie-Sushi-Rollen. Mit dem Filter „Nur vegetarisch" oben in der Karte findest du sie schnell. Bei Allergien sprich uns bitte an, wir beraten dich gern.',
+    'faq.q3': 'Wofür seid ihr bekannt?',
+    'faq.a3': 'Für handgefaltete Mo:Mo, das authentische Thakali-Set und unsere Cross-Signature-Sushi-Rollen — allen voran der flambierte „Premium Smoke Salmon Roll". Dazu Thai-Klassiker wie Ente in Kokosmilch.',
+    'faq.q4': 'Kann ich einen Tisch reservieren oder Catering buchen?',
+    'faq.a4': 'Beides gern. Reserviere direkt über das Formular oben, oder ruf uns an. Für Catering von 8 bis 200 Gästen schick uns einfach eine kurze Anfrage.',
+    'contact.eyebrow': '10 · BESUCH', 'contact.title.1': 'Findet uns am', 'contact.title.accent': 'Hellkamp.',
     'contact.findus': 'Adresse',
-    'contact.addr': 'Osterstraße 142, 20255 Hamburg-Eimsbüttel',
-    'contact.phonesub': 'Täglich, 11:00 — 22:00',
+    'contact.addr': 'Hellkamp 22, 20255 Hamburg-Eimsbüttel',
+    'contact.phonesub': 'Für Reservierungen & Fragen',
     'contact.emailsub': 'Für private Veranstaltungen',
+    'contact.social': 'Folgt uns',
     'contact.hours': 'Öffnungszeiten',
-    'contact.mapcap': 'Osterstraße 142 · Eimsbüttel · 2 Min. zu Fuß von U2 Osterstraße',
+    'contact.mapcap': 'Hellkamp 22 · Hamburg-Eimsbüttel',
     'footer.eyebrow': 'KOMMT ESSEN',
-    'footer.addr': 'Osterstraße 142 · 20255 Hamburg',
-    'cart.title': 'Ihre Bestellung', 'cart.empty': 'Warenkorb leer', 'cart.empty.hand': 'lasst uns das ändern',
-    'cart.subtotal': 'Zwischensumme', 'cart.checkout': 'Zur Kasse',
+    'footer.addr': 'Hellkamp 22 · 20255 Hamburg',
     'nav.label': 'NAVIGATION',
-    'nav.about': 'Geschichte', 'nav.menu': 'Karte', 'nav.book': 'Reservieren', 'nav.order': 'Bestellen',
-    'nav.catering': 'Catering', 'nav.contact': 'Besuch',
-    'toast.added': 'hinzugefügt', 'toast.book.name': 'Bitte Namen eingeben',
-    'toast.book.ok': 'Reserviert', 'toast.cater.ok': 'Anfrage gesendet',
+    'nav.about': 'Geschichte', 'nav.menu': 'Karte', 'nav.reviews': 'Lieblinge', 'nav.book': 'Reservieren', 'nav.order': 'Bestellen',
+    'nav.catering': 'Catering', 'nav.offers': 'Gutscheine', 'nav.faq': 'FAQ', 'nav.contact': 'Besuch',
+    'toast.book.name': 'Bitte Namen eingeben', 'toast.book.ok': 'E-Mail-Anfrage wird geöffnet …',
     'closed': 'Geschlossen', 'all': 'Alle',
     'days': ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
   },
   ne: {
+    'promo.text': 'अनलाइन अर्डर गर्नुहोस् र १० € बचत — कोड',
     'cta.book': 'टेबल बुक गर्नुहोस्', 'cta.order': 'अनलाइन अर्डर',
     'stamp.1': 'हातले', 'stamp.2': 'मसाला', 'stamp.small': '२०१८ देखि',
-    'hero.eyebrow': 'स्थापित २०१८ · ओस्टर्स्ट्रासे, हाम्बुर्ग',
+    'hero.eyebrow': 'स्थापित २०१८ · हेल्काम्प, हाम्बुर्ग',
     'hero.title.1': 'हाम्रो', 'hero.title.accent': 'अन्नपूर्ण', 'hero.title.2': 'भान्साको स्वाद।',
     'hero.hand': 'हाम्रो चुलोबाट तपाईंसम्म',
     'hero.sub': 'परम्परागत थकाली थाली, हातले बनाएको म:म र क्रस सुसी — आइम्सब्युटेलको हृदयमा।',
     'hero.imgcap': 'हातले बनाएको म:म, गोलभेँडाको अचारसँग — भापबाट सिधै',
-    'hero.open': '२२:३० सम्म खुला',
+    'hero.open': '२२:०० सम्म खुला',
     'story.eyebrow': '०१ · हाम्रो कथा',
     'story.title.1': 'मुस्ताङमा', 'story.title.accent': 'जन्मेको।', 'story.title.2': 'हाम्बुर्गमा हुर्केको।',
-    'story.p': 'थकाली किचनले थक खोला उपत्यकाको खाना — फापर, याक मक्खन, टिमुर — ओस्टर्स्ट्रासेको सानो कोठामा ल्याउँछ। २०१८ देखि शेर्चन परिवारद्वारा सञ्चालित।',
-    'story.imgcap': 'ओस्टर्स्ट्रासेमा हाम्रो साइनबोर्ड — नेपाली झन्डासहित',
+    'story.p': 'थकाली किचनले थक खोला उपत्यकाको खाना — फापर, याक मक्खन, टिमुर — हेल्काम्पको सानो कोठामा ल्याउँछ। २०१८ देखि शेर्चन परिवारद्वारा सञ्चालित।',
+    'story.imgcap': 'चिल्ली चिकेन, म:म र सुकुटी — टेबल तयार छ',
+    'story.polaroid': 'हेल्काम्पमा हाम्रो साइनबोर्ड',
     'story.c1.title': 'पारिवारिक भान्सा', 'story.c1.p': 'आमाको मसाला, हरेक हप्ता ताजा पिँधिएको।',
     'story.c2.title': 'इमानदार सामग्री', 'story.c2.p': 'स्थानीय हाम्बुर्गको उत्पादन, हिमाली अन्न र ताजा माछा।',
     'story.c3.title': 'बिस्तारै पकाइ', 'story.c3.p': 'दाल आठ घण्टा। म:मको छाला अर्डरमा बेलिन्छ।',
     'menu.eyebrow': '०२ · हाम्रो भान्सा', 'menu.title.1': 'हाम्रो', 'menu.title.accent': 'मेनु',
-    'menu.sub': 'तीन भान्साका १८० भन्दा बढी परिकार — थकाली देखि क्रस सुसी सम्म। थप्न परिकारमा थिच्नुहोस्।',
+    'menu.sub': 'तीन भान्साका १७० भन्दा बढी परिकार — थकाली देखि क्रस सुसीसम्म। यहाँ हेर्नुहोस्, अनि पिकअप वा डेलिभरीका लागि अनलाइन अर्डर गर्नुहोस्।',
     'menu.chip.veg': 'शाकाहारी मात्र', 'menu.chip.spicy': 'पिरो', 'menu.chip.glutenfree': 'ग्लुटेन-रहित',
-    'menu.sig.label': 'आजको विशेष', 'menu.sig.imgcap': 'हाम्रो भान्साबाट — फ्ल्याम्बे सामन सिग्नेचर रोल', 'menu.sig.add': 'थप्नुहोस्',
+    'menu.order': 'पूरै मेनु हेर्नुहोस् र अनलाइन अर्डर गर्नुहोस्',
+    'menu.pop': 'लोकप्रिय',
+    'menu.sig.label': 'हाम्रो बेस्टसेलर', 'menu.sig.imgcap': 'हाम्रो भान्साबाट — फ्ल्याम्बे सामन सिग्नेचर रोल', 'menu.sig.add': 'अनलाइन अर्डर गर्नुहोस्',
     'menu.items': 'परिकार',
     'gallery.eyebrow': '०३ · भान्साबाट', 'gallery.title.1': 'भान्साभित्र', 'gallery.title.accent': 'एक झलक।',
     'gallery.cap.1': 'मागुरो (टुना) सासिमी — ताजा काटिएको',
@@ -201,23 +242,21 @@ const UI = {
     'gallery.cap.13': 'टुना-एभोकाडो माकी — गाढा रातो र क्रिमी',
     'gallery.cap.14': 'मागुरो निगिरी — शुद्ध स्वाद',
     'gallery.cap.15': 'कुखुराको करी, दाल र भात — थाली नजिकबाट',
-    'book.eyebrow': '०४ · आरक्षण', 'book.title.1': 'टेबल', 'book.title.accent': 'राख्नुहोस्।',
+    'reviews.eyebrow': '०४ · ग्राहकका मनपर्ने', 'reviews.title.1': 'सबैभन्दा धेरै', 'reviews.title.accent': 'मगाइने परिकार।',
+    'reviews.cta.p': 'मीठो लाग्यो? गुगलमा समीक्षा दिनुभयो भने खुसी हुनेछौं।',
+    'reviews.cta.btn': 'गुगलमा समीक्षा दिनुहोस्',
+    'book.eyebrow': '०५ · आरक्षण', 'book.title.1': 'टेबल', 'book.title.accent': 'राख्नुहोस्।',
     'book.sub': 'हामी ३२ जनासम्म सीट गर्छौं। शुक्रवार र शनिबार अग्रिम बुकिङ राम्रो।',
     'field.date': 'मिति', 'field.party': 'मानिस', 'field.time': 'समय',
     'field.name': 'नाम', 'field.email': 'इमेल', 'field.phone': 'फोन', 'field.notes': 'टिप्पणी',
-    'book.btn': 'आरक्षण पठाउनुहोस्',
-    'order.eyebrow': '०५ · डेलिभरी', 'order.title.1': 'घरमै', 'order.title.accent': 'लानुहोस्।',
-    'order.sub': '२० मिनेटमा पिकअप, ४ किमी भित्र डेलिभरी।',
-    'order.mode.pickup': 'पिकअप', 'order.mode.delivery': 'डेलिभरी',
-    'order.pickup.label': 'पिकअप समय',
-    'order.pickup.asap': 'तुरुन्तै · ~२० मिनेट',
-    'order.pickup.30': '३० मिनेटमा', 'order.pickup.60': '१ घण्टामा',
-    'order.pickup.info': 'ओस्टर्स्ट्रासे १४२ · U-Bahn बाट २ मिनेट',
-    'order.delivery.label': 'पोस्टकोड',
-    'order.delivery.info': '४ किमी भित्र डेलिभरी · €२.५० शुल्क · ~३५ मिनेट',
-    'order.items': 'वस्तु', 'order.subtotal': 'जम्मा', 'order.delivery': 'डेलिभरी',
-    'order.review': 'अर्डर हेर्नुहोस्',
-    'cater.eyebrow': '०६ · केटरिङ', 'cater.title.1': 'ठूला', 'cater.title.accent': 'जमघटका लागि।',
+    'book.btn': 'इमेलबाट आरक्षण अनुरोध',
+    'order.eyebrow': '०६ · अर्डर', 'order.title.1': 'घरमै', 'order.title.accent': 'लानुहोस्।',
+    'order.sub': 'सिधै हामीसँग अर्डर गर्नुहोस् — कुनै प्लेटफर्म शुल्क छैन, इनाम अंक र छिटो सेवा। पिकअप वा डेलिभरी।',
+    'order.pickup.title': 'पिकअप', 'order.pickup.info': 'हेल्काम्प २२ · ~१०–२० मिनेटमा तयार',
+    'order.delivery.title': 'डेलिभरी', 'order.delivery.info': '~४ किमी भित्र · ताजा पकाइएको',
+    'order.promo': 'यो कोडले तपाईंको पहिलो अनलाइन अर्डरमा १० € छुट।',
+    'order.btn': 'अहिले नै अनलाइन अर्डर गर्नुहोस्',
+    'cater.eyebrow': '०७ · केटरिङ', 'cater.title.1': 'ठूला', 'cater.title.accent': 'जमघटका लागि।',
     'cater.label': 'कार्यक्रम · ८ — २०० जना',
     'cater.p': 'आठ जनाको खानादेखि सय जनाको विवाहसम्म। हामी भान्सा तपाईंकहाँ ल्याउँछौं।',
     'cater.imgcap': 'पूरा थकाली सेट — भात, दाल, मासु र अचार पित्तलको थालीमा',
@@ -225,22 +264,36 @@ const UI = {
     'cater.pkg2': 'म:म बार (लाइभ)', 'cater.pkg2.p': '€३६ / जना देखि',
     'cater.pkg3': 'पूर्ण भोज', 'cater.pkg3.p': '€५४ / जना देखि',
     'cater.btn': 'मूल्य सोध्नुहोस्',
-    'contact.eyebrow': '०७ · हामीलाई भेट्नुहोस्', 'contact.title.1': 'ओस्टर्स्ट्रासेमा', 'contact.title.accent': 'भेटौं।',
+    'offers.eyebrow': '०८ · उपहार र इनाम', 'offers.title.1': 'उपहार दिनुहोस्', 'offers.title.accent': 'अंक जोड्नुहोस्।',
+    'offers.gift.title': 'उपहार कार्ड',
+    'offers.gift.p': 'हिमालको स्वाद उपहार दिनुहोस्। जुनसुकै रकमको उपहार कार्ड — जन्मदिन, चाडपर्व र सहकर्मीका लागि उत्तम।',
+    'offers.gift.btn': 'उपहार कार्ड किन्नुहोस्',
+    'offers.reward.title': 'इनाम क्लब',
+    'offers.reward.p': 'हरेक अनलाइन अर्डरमा कमाउनुहोस्: प्रत्येक ५० € खर्चमा ५ € फिर्ता — र नि:शुल्क परिकार पाउनुहोस्।',
+    'offers.reward.btn': 'क्लबमा सामेल हुनुहोस्',
+    'faq.eyebrow': '०९ · प्रश्नहरू', 'faq.title.1': 'जान्न', 'faq.title.accent': 'राम्रो।',
+    'faq.q1': 'तपाईं मकहाँ डेलिभरी गर्नुहुन्छ? कुन क्षेत्रमा?',
+    'faq.a1': 'हामी आइम्सब्युटेल र वरपर — हेल्काम्पको करिब ४ किमी भित्र डेलिभरी गर्छौं। अनलाइन अर्डर गर्दा पोस्टकोड हालेर आफ्नो ठेगाना समेटिएको छ कि छैन हेर्नुहोस्।',
+    'faq.q2': 'तपाईंसँग शाकाहारी र भेगन परिकार छन्? एलर्जीको के हुन्छ?',
+    'faq.a2': 'छन् — भेजी म:म देखि भेजी सुसी रोलसम्म धेरै शाकाहारी र भेगन विकल्प। मेनुमा भएको „शाकाहारी मात्र" फिल्टरले छिट्टै भेट्टाउनुहुन्छ। एलर्जी भए हामीलाई सोध्नुहोस्, खुसीसाथ सल्लाह दिन्छौं।',
+    'faq.q3': 'तपाईं केका लागि प्रसिद्ध हुनुहुन्छ?',
+    'faq.a3': 'हातले बनाएको म:म, प्रामाणिक थकाली सेट, र हाम्रा क्रस सिग्नेचर सुसी रोल — विशेषगरी फ्ल्याम्बे „प्रिमियम स्मोक सामन रोल"। साथै नरिवलको दूधमा हाँस जस्ता थाई क्लासिक।',
+    'faq.q4': 'म टेबल आरक्षण वा केटरिङ बुक गर्न सक्छु?',
+    'faq.a4': 'दुवै हुन्छ। माथिको फारमबाट आरक्षण गर्नुहोस्, वा हामीलाई फोन गर्नुहोस्। ८ देखि २०० जनासम्मको केटरिङका लागि छोटो अनुरोध पठाउनुहोस्।',
+    'contact.eyebrow': '१० · सम्पर्क', 'contact.title.1': 'हेल्काम्पमा', 'contact.title.accent': 'भेटौं।',
     'contact.findus': 'ठेगाना',
-    'contact.addr': 'ओस्टर्स्ट्रासे १४२, २०२५५ हाम्बुर्ग-आइम्सब्युटेल',
-    'contact.phonesub': 'दैनिक ११:०० — २२:००',
+    'contact.addr': 'हेल्काम्प २२, २०२५५ हाम्बुर्ग-आइम्सब्युटेल',
+    'contact.phonesub': 'आरक्षण र प्रश्नका लागि',
     'contact.emailsub': 'निजी कार्यक्रमका लागि',
+    'contact.social': 'हामीलाई फलो गर्नुहोस्',
     'contact.hours': 'खुला समय',
-    'contact.mapcap': 'ओस्टर्स्ट्रासे १४२ · U2 बाट २ मिनेट पैदल',
+    'contact.mapcap': 'हेल्काम्प २२ · हाम्बुर्ग-आइम्सब्युटेल',
     'footer.eyebrow': 'हामीसँग खानुहोस्',
-    'footer.addr': 'ओस्टर्स्ट्रासे १४२ · २०२५५ हाम्बुर्ग',
-    'cart.title': 'तपाईंको अर्डर', 'cart.empty': 'अर्डर खाली छ', 'cart.empty.hand': 'केही थपौं',
-    'cart.subtotal': 'जम्मा', 'cart.checkout': 'अघि बढ्नुहोस्',
+    'footer.addr': 'हेल्काम्प २२ · २०२५५ हाम्बुर्ग',
     'nav.label': 'नेविगेसन',
-    'nav.about': 'कथा', 'nav.menu': 'मेनु', 'nav.book': 'बुकिङ', 'nav.order': 'अर्डर',
-    'nav.catering': 'केटरिङ', 'nav.contact': 'सम्पर्क',
-    'toast.added': 'थपियो', 'toast.book.name': 'नाम लेख्नुहोस्',
-    'toast.book.ok': 'आरक्षित', 'toast.cater.ok': 'अनुरोध पठाइयो',
+    'nav.about': 'कथा', 'nav.menu': 'मेनु', 'nav.reviews': 'लोकप्रिय', 'nav.book': 'बुकिङ', 'nav.order': 'अर्डर',
+    'nav.catering': 'केटरिङ', 'nav.offers': 'उपहार', 'nav.faq': 'प्रश्न', 'nav.contact': 'सम्पर्क',
+    'toast.book.name': 'नाम लेख्नुहोस्', 'toast.book.ok': 'इमेल अनुरोध खुल्दै …',
     'closed': 'बन्द', 'all': 'सबै',
     'days': ['सो', 'मं', 'बु', 'बि', 'शु', 'श', 'आ'],
   },
@@ -249,11 +302,9 @@ const UI = {
 /* ===== State ===== */
 const state = {
   lang: 'de',
-  cart: [],            // [{id, name, price, qty, num, badges}]
   group: null,         // active menu group slug
   category: 'all',     // active category slug or 'all'
   vegOnly: false,
-  orderMode: 'pickup',
   party: 2,
   time: '19:30',
 };
@@ -280,17 +331,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initLanguagePill();
   initNavDrawer();
-  initCartDrawer();
   initMenu();
   initVegChip();
   initReservation();
-  initOrder();
-  initCatering();
   initHours();
   applyI18n();
   renderSignature();
   renderMenu();
-  renderOrder();
+  renderFavourites();
 });
 
 /* ===== Language ===== */
@@ -302,14 +350,14 @@ function initLanguagePill() {
       applyI18n();
       renderSignature();
       renderMenu();
-      renderOrder();
+      renderFavourites();
       renderTimePills();
       renderHours();
     });
   });
 }
 
-/* ===== Drawers (cart + nav) ===== */
+/* ===== Nav drawer ===== */
 function openDrawer(el) {
   el.classList.add('open');
   document.body.classList.add('drawer-open');
@@ -329,19 +377,8 @@ function initNavDrawer() {
   });
 }
 
-function initCartDrawer() {
-  const drawer = $('#cartDrawer');
-  $('#cartToggle').addEventListener('click', () => openDrawer(drawer));
-  drawer.addEventListener('click', (e) => {
-    if (e.target === drawer || e.target.closest('[data-close-drawer]')) {
-      closeDrawer(drawer);
-    }
-  });
-}
-
 /* ===== Menu ===== */
 function initMenu() {
-  // ESC closes drawers
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       $$('.drawer-scrim.open').forEach(closeDrawer);
@@ -389,17 +426,23 @@ function renderCategoryTabs() {
   });
 }
 
-function dishTags(item) {
+function isVegItem(item) {
+  return (item.badges || []).some(b => b === 'vegetarian' || b === 'vegan');
+}
+
+function itemBadges(item) {
   const tags = [];
-  const isVeg = (item.badges || []).some(b => b === 'vegetarian' || b === 'vegan');
-  const isSpicy = (item.badges || []).includes('spicy');
-  if (isVeg) tags.push('<span class="tag veg">veg</span>');
-  if (isSpicy) tags.push('<span class="tag spicy">spicy</span>');
+  if (item.pop) {
+    tags.push(`<span class="pop-badge"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>#${item.pop} ${t('menu.pop')}</span>`);
+  }
+  if (isVegItem(item)) tags.push('<span class="tag veg">veg</span>');
+  if ((item.badges || []).includes('spicy')) tags.push('<span class="tag spicy">spicy</span>');
   return tags.join('');
 }
 
-function isVegItem(item) {
-  return (item.badges || []).some(b => b === 'vegetarian' || b === 'vegan');
+function priceHtml(item) {
+  const was = item.was ? `<span class="was">${fmt(item.was)}</span>` : '';
+  return `${was}${fmt(item.price)}`;
 }
 
 function renderMenu() {
@@ -414,8 +457,6 @@ function renderMenu() {
     ? group.categories
     : group.categories.filter(c => c.slug === state.category);
 
-  const cartIds = new Set(state.cart.map(c => c.id));
-
   list.innerHTML = cats.map(cat => {
     const items = cat.items.filter(it => !state.vegOnly || isVegItem(it));
     if (!items.length) return '';
@@ -425,39 +466,28 @@ function renderMenu() {
           <h3>${cat.label[state.lang] || cat.label.de}</h3>
         </div>
         <div class="menu-section-sub">${items.length} ${t('menu.items')}</div>
+        <div class="dish-list${items.length >= 5 ? ' cols' : ''}">
         ${items.map(item => {
-          const id = `${cat.slug}-${item.num}`;
-          const inCart = cartIds.has(id);
+          const badges = itemBadges(item);
           return `
-            <div class="dish" data-id="${id}" data-num="${item.num}" data-name="${escapeAttr(item.name)}" data-price="${item.price}">
+            <div class="dish">
               <div class="dish-num">${item.num}</div>
               <div class="dish-body">
                 <div class="dish-title-row">
                   <h4>${escapeHtml(item.name)}</h4>
                   <span class="dish-dots"></span>
-                  <span class="dish-price">${fmt(item.price)}</span>
+                  <span class="dish-price">${priceHtml(item)}</span>
                 </div>
                 ${item.desc ? `<div class="dish-desc">${escapeHtml(item.desc)}</div>` : ''}
-                ${dishTags(item) ? `<div class="dish-tags">${dishTags(item)}</div>` : ''}
+                ${badges ? `<div class="dish-tags">${badges}</div>` : ''}
               </div>
-              <button class="add-btn ${inCart ? 'added' : ''}" type="button" aria-label="Hinzufügen">${inCart ? '✓' : '+'}</button>
             </div>
           `;
         }).join('')}
+        </div>
       </div>
     `;
   }).join('');
-
-  $$('.dish', list).forEach(row => {
-    row.addEventListener('click', () => {
-      addToCart({
-        id: row.dataset.id,
-        num: row.dataset.num,
-        name: row.dataset.name,
-        price: parseFloat(row.dataset.price),
-      });
-    });
-  });
 }
 
 function initVegChip() {
@@ -468,14 +498,13 @@ function initVegChip() {
   });
 }
 
-/* ===== Signature dish ===== */
+/* ===== Signature dish (features the #1 bestseller) ===== */
 function renderSignature() {
-  // Pick a deterministic dish based on date — prefers Thakali Mo:Mo, falls back to first item
   const all = window.MENU_DATA.flatMap(g => g.categories.flatMap(c =>
     c.items.map(it => ({ ...it, cat: c, group: g.group }))
   ));
   if (!all.length) return;
-  const pick = all[new Date().getDate() % all.length];
+  const pick = all.find(it => it.pop === 1) || all[0];
   const card = $('#signatureCard');
   card.innerHTML = `
     <div class="eyebrow" style="color:var(--mustard)">${t('menu.sig.label')}</div>
@@ -487,82 +516,36 @@ function renderSignature() {
       <span class="imgph-cap">${t('menu.sig.imgcap')}</span>
     </div>
     <div class="sig-foot">
-      <span class="sig-price">${fmt(pick.price)}</span>
-      <button class="btn btn-terra" type="button" id="sigAdd" style="flex:0 0 auto; padding:10px 16px">${t('menu.sig.add')}</button>
+      <span class="sig-price">${priceHtml(pick)}</span>
+      <a class="btn btn-terra" href="${ORDER_URL}" target="_blank" rel="noopener" style="flex:0 0 auto; padding:10px 16px">${t('menu.sig.add')}</a>
     </div>
   `;
-  $('#sigAdd').addEventListener('click', () => addToCart({
-    id: `${pick.cat.slug}-${pick.num}`,
-    num: pick.num,
-    name: pick.name,
-    price: pick.price,
-  }));
 }
 
-/* ===== Cart ===== */
-function addToCart(item) {
-  const ex = state.cart.find(c => c.id === item.id);
-  if (ex) ex.qty += 1;
-  else state.cart.push({ ...item, qty: 1 });
-  pushToast(`${item.name} · ${t('toast.added')}`);
-  renderCart();
-  renderMenu();
-  renderOrder();
-}
+/* ===== Guest favourites (real most-ordered data) ===== */
+function renderFavourites() {
+  const grid = $('#favGrid');
+  if (!grid) return;
+  const favs = window.MENU_DATA.flatMap(g => g.categories.flatMap(c =>
+    c.items.filter(it => it.pop).map(it => ({ ...it, catLabel: c.label }))
+  )).sort((a, b) => a.pop - b.pop).slice(0, 6);
 
-function updateQty(id, delta) {
-  const it = state.cart.find(c => c.id === id);
-  if (!it) return;
-  it.qty += delta;
-  state.cart = state.cart.filter(c => c.qty > 0);
-  renderCart();
-  renderMenu();
-  renderOrder();
-}
-
-function renderCart() {
-  const count = state.cart.reduce((s, i) => s + i.qty, 0);
-  const dot = $('#cartDot');
-  if (count > 0) { dot.hidden = false; dot.textContent = count; }
-  else { dot.hidden = true; }
-
-  const list = $('#cartList');
-  const foot = $('#cartFoot');
-  if (state.cart.length === 0) {
-    list.innerHTML = `
-      <div class="cart-empty">
-        ${t('cart.empty')}
-        <span class="hand">${t('cart.empty.hand')}</span>
+  grid.innerHTML = favs.map(it => `
+    <div class="fav-card">
+      <span class="fav-rank">#${it.pop}</span>
+      <div>
+        <div class="fav-name">${escapeHtml(it.name)}</div>
+        <div class="fav-cat">${it.catLabel[state.lang] || it.catLabel.de}</div>
       </div>
-    `;
-    foot.hidden = true;
-    return;
-  }
-  list.innerHTML = state.cart.map(it => `
-    <div class="cart-row">
-      <span class="name">${escapeHtml(it.name)}</span>
-      <div class="qty">
-        <button type="button" data-id="${it.id}" data-delta="-1" aria-label="−">−</button>
-        <span>${it.qty}</span>
-        <button type="button" data-id="${it.id}" data-delta="1" aria-label="+">+</button>
-      </div>
-      <span class="price">${fmt(it.price * it.qty)}</span>
     </div>
   `).join('');
-  foot.hidden = false;
-  const subtotal = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
-  $('#cartTotal').textContent = fmt(subtotal);
-  $$('.cart-row .qty button', list).forEach(btn => {
-    btn.addEventListener('click', () => updateQty(btn.dataset.id, parseInt(btn.dataset.delta, 10)));
-  });
 }
 
-/* ===== Reservation ===== */
+/* ===== Reservation (opens a prefilled email) ===== */
 const TIME_SLOTS = ['17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00'];
 const DISABLED_TIMES = ['18:30', '20:00'];
 
 function initReservation() {
-  // default date = tomorrow
   const d = new Date(); d.setDate(d.getDate() + 1);
   const iso = d.toISOString().slice(0, 10);
   $('#resDate').value = iso;
@@ -584,10 +567,23 @@ function initReservation() {
     const name = (fd.get('name') || '').toString().trim();
     if (!name) { pushToast(t('toast.book.name')); return; }
     const date = fd.get('date');
-    pushToast(`${t('toast.book.ok')} · ${date} · ${state.time} · ${state.party}`);
-    e.target.reset();
-    state.party = 2; $('#partyNum').textContent = 2;
-    $('#resDate').value = iso;
+    const email = (fd.get('email') || '').toString().trim();
+    const phone = (fd.get('phone') || '').toString().trim();
+    const notes = (fd.get('notes') || '').toString().trim();
+
+    const subject = `Reservierung / Reservation — ${name} — ${date} ${state.time}`;
+    const body = [
+      `${t('field.date')}: ${date}`,
+      `${t('field.time')}: ${state.time}`,
+      `${t('field.party')}: ${state.party}`,
+      `${t('field.name')}: ${name}`,
+      email ? `${t('field.email')}: ${email}` : null,
+      phone ? `${t('field.phone')}: ${phone}` : null,
+      notes ? `${t('field.notes')}: ${notes}` : null,
+    ].filter(Boolean).join('\n');
+
+    pushToast(t('toast.book.ok'));
+    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 }
 
@@ -607,92 +603,25 @@ function renderTimePills() {
   });
 }
 
-/* ===== Order ===== */
-function initOrder() {
-  $$('.order-mode-toggle button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      state.orderMode = btn.dataset.mode;
-      $$('.order-mode-toggle button').forEach(b => b.classList.toggle('on', b === btn));
-      renderOrder();
-    });
-  });
-}
-
-function renderOrder() {
-  const card = $('#orderCard');
-  if (!card) return;
-  const subtotal = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const fee = state.orderMode === 'delivery' ? 2.50 : 0;
-  const total = subtotal + fee;
-
-  const pinSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-7.5 7-13a7 7 0 1 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>';
-  const bikeSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-9h5l3 9M14 8h3"/></svg>';
-
-  const pickupBlock = `
-    <div class="field">
-      <label>${t('order.pickup.label')}</label>
-      <select id="pickupTime">
-        <option value="asap">${t('order.pickup.asap')}</option>
-        <option value="30">${t('order.pickup.30')}</option>
-        <option value="60">${t('order.pickup.60')}</option>
-      </select>
-    </div>
-    <div style="font-size:13px; color:var(--ink-2); padding:10px 0; display:flex; align-items:center; gap:6px">
-      <span style="color:var(--terracotta-deep); display:inline-flex">${pinSvg}</span>
-      <span>${t('order.pickup.info')}</span>
-    </div>
-  `;
-  const deliveryBlock = `
-    <div class="field">
-      <label>${t('order.delivery.label')}</label>
-      <input type="text" id="deliveryPostcode" value="20255"/>
-    </div>
-    <div style="font-size:13px; color:var(--ink-2); padding:10px 0; display:flex; align-items:center; gap:6px">
-      <span style="color:var(--terracotta-deep); display:inline-flex">${bikeSvg}</span>
-      <span>${t('order.delivery.info')}</span>
-    </div>
-  `;
-
-  card.innerHTML = `
-    ${state.orderMode === 'pickup' ? pickupBlock : deliveryBlock}
-    <hr class="dashed-rule"/>
-    <div style="display:flex; justify-content:space-between; margin-top:14px; font-size:14px">
-      <span style="color:var(--ink-2)">${t('order.items')}</span>
-      <span>${state.cart.reduce((s, i) => s + i.qty, 0)}</span>
-    </div>
-    <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:14px">
-      <span style="color:var(--ink-2)">${t('order.subtotal')}</span>
-      <span>${fmt(subtotal)}</span>
-    </div>
-    ${fee > 0 ? `
-      <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:14px">
-        <span style="color:var(--ink-2)">${t('order.delivery')}</span>
-        <span>${fmt(fee)}</span>
-      </div>
-    ` : ''}
-    <button class="btn btn-primary" id="orderReview" style="width:100%; margin-top:18px" type="button">
-      ${t('order.review')} · ${fmt(total)}
-    </button>
-  `;
-  $('#orderReview').addEventListener('click', () => openDrawer($('#cartDrawer')));
-}
-
-/* ===== Catering ===== */
-function initCatering() {
-  $('#caterBtn').addEventListener('click', () => pushToast(t('toast.cater.ok')));
-}
-
 /* ===== Hours ===== */
-const HOURS_KEYS = ['12:00 — 22:30','12:00 — 22:30','closed','12:00 — 22:30','12:00 — 23:00','12:00 — 23:00','13:00 — 22:00'];
+/* NOTE: placeholder hours (from the live Impressum) — replace with the confirmed Hellkamp hours. */
+const HOURS = [
+  '12:00–15:00 · 17:00–22:00', // Mon
+  '12:00–15:00 · 17:00–22:00', // Tue
+  '12:00–15:00 · 17:00–22:00', // Wed
+  '12:00–15:00 · 17:00–22:00', // Thu
+  '12:00–15:00 · 17:00–22:00', // Fri
+  '14:00–22:00',               // Sat
+  '14:00–22:00',               // Sun
+];
 function initHours() { renderHours(); }
 function renderHours() {
   const grid = $('#hoursGrid');
   if (!grid) return;
-  const today = new Date().getDay();
-  const todayIdx = (today + 6) % 7; // Mon=0
+  const todayIdx = (new Date().getDay() + 6) % 7; // Mon=0
   const days = UI[state.lang].days;
   grid.innerHTML = days.map((d, i) => {
-    const time = HOURS_KEYS[i] === 'closed' ? t('closed') : HOURS_KEYS[i];
+    const time = HOURS[i] === 'closed' ? t('closed') : HOURS[i];
     const today = i === todayIdx ? 'today' : '';
     return `<div class="day ${today}">${d}${today ? ' ·' : ''}</div><div class="time ${today}">${time}</div>`;
   }).join('');
@@ -710,8 +639,5 @@ function pushToast(msg) {
 
 /* ===== Escape helpers ===== */
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-}
-function escapeAttr(s) {
   return String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 }
