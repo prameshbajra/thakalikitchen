@@ -1005,6 +1005,11 @@ footer.footer .footer-meta a {
   text-decoration: none;
 }
 footer.footer .footer-meta a:hover { color: var(--paper); }
+/* a handle keeps its own casing, so it opts out of the meta row's uppercasing */
+footer.footer .footer-meta a.footer-credit {
+  text-transform: none;
+  letter-spacing: 0.06em;
+}
 
 /* ============== Cart / Nav drawer ============== */
 
