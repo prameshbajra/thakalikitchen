@@ -10,7 +10,6 @@ const CONTACT = { email: 'thakaliklitchen111@gmail.com' };
 /* ===== i18n dictionary ===== */
 const UI = {
   en: {
-    'promo.text': 'Order online & save €10 — code',
     'cta.book': 'Reserve a table', 'cta.order': 'Order online',
     'stamp.1': 'spiced', 'stamp.2': 'by hand', 'stamp.small': 'since 2018',
     'hero.eyebrow': 'EST. 2018 · HELLKAMP, HAMBURG',
@@ -62,7 +61,6 @@ const UI = {
     'order.sub': 'Order direct — no platform fees, loyalty points and faster service. Pickup or delivery.',
     'order.pickup.title': 'Pickup', 'order.pickup.info': 'Hellkamp 22 · ready in ~10–20 min',
     'order.delivery.title': 'Delivery', 'order.delivery.info': 'within ~4 km · freshly made',
-    'order.promo': '€10 off your first online order with this code.',
     'order.btn': 'Order online now',
     'cater.eyebrow': '07 · CATERING', 'cater.title.1': 'For', 'cater.title.accent': 'gatherings.',
     'cater.label': 'EVENTS · 8 — 200 GUESTS',
@@ -106,7 +104,6 @@ const UI = {
     'days': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
   },
   de: {
-    'promo.text': 'Jetzt online bestellen & 10 € sparen — Code',
     'cta.book': 'Tisch reservieren', 'cta.order': 'Online bestellen',
     'stamp.1': 'von Hand', 'stamp.2': 'gewürzt', 'stamp.small': 'seit 2018',
     'hero.eyebrow': 'SEIT 2018 · HELLKAMP, HAMBURG',
@@ -158,7 +155,6 @@ const UI = {
     'order.sub': 'Direkt bei uns bestellen — ohne Plattform-Gebühren, mit Treuepunkten und schnellem Service. Abholung oder Lieferung.',
     'order.pickup.title': 'Abholung', 'order.pickup.info': 'Hellkamp 22 · in ca. 10–20 Min. fertig',
     'order.delivery.title': 'Lieferung', 'order.delivery.info': 'im Umkreis von ca. 4 km · frische Zubereitung',
-    'order.promo': '10 € Rabatt auf deine erste Online-Bestellung mit diesem Code.',
     'order.btn': 'Jetzt online bestellen',
     'cater.eyebrow': '07 · CATERING', 'cater.title.1': 'Für', 'cater.title.accent': 'besondere Anlässe.',
     'cater.label': 'EVENTS · 8 — 200 GÄSTE',
@@ -202,7 +198,6 @@ const UI = {
     'days': ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
   },
   ne: {
-    'promo.text': 'अनलाइन अर्डर गर्नुहोस् र १० € बचत — कोड',
     'cta.book': 'टेबल बुक गर्नुहोस्', 'cta.order': 'अनलाइन अर्डर',
     'stamp.1': 'हातले', 'stamp.2': 'मसाला', 'stamp.small': '२०१८ देखि',
     'hero.eyebrow': 'स्थापित २०१८ · हेल्काम्प, हाम्बुर्ग',
@@ -254,7 +249,6 @@ const UI = {
     'order.sub': 'सिधै हामीसँग अर्डर गर्नुहोस् — कुनै प्लेटफर्म शुल्क छैन, इनाम अंक र छिटो सेवा। पिकअप वा डेलिभरी।',
     'order.pickup.title': 'पिकअप', 'order.pickup.info': 'हेल्काम्प २२ · ~१०–२० मिनेटमा तयार',
     'order.delivery.title': 'डेलिभरी', 'order.delivery.info': '~४ किमी भित्र · ताजा पकाइएको',
-    'order.promo': 'यो कोडले तपाईंको पहिलो अनलाइन अर्डरमा १० € छुट।',
     'order.btn': 'अहिले नै अनलाइन अर्डर गर्नुहोस्',
     'cater.eyebrow': '०७ · केटरिङ', 'cater.title.1': 'ठूला', 'cater.title.accent': 'जमघटका लागि।',
     'cater.label': 'कार्यक्रम · ८ — २०० जना',

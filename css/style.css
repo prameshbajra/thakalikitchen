@@ -1239,38 +1239,9 @@ textarea:focus-visible {
 body.drawer-open { overflow: hidden; }
 
 /* ==========================================================
-   REBRAND ADDITIONS — promo · badges · reviews · offers · faq · social
+   REBRAND ADDITIONS — badges · reviews · offers · faq · social
    (reuses existing tokens/components for visual consistency)
    ========================================================== */
-
-/* ---- Promo strip (top of page, scrolls away) ---- */
-.promo-strip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding: 9px 16px;
-  text-align: center;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(245, 239, 227, 0.12);
-  transition: background 160ms ease;
-}
-.promo-strip:hover { background: var(--rule); }
-.promo-strip .code {
-  color: var(--ink);
-  background: var(--mustard);
-  padding: 2px 7px;
-  border-radius: 2px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-}
-.promo-strip .promo-arrow { color: var(--mustard); }
 
 /* ---- Most-liked badge on dishes ---- */
 .pop-badge {
@@ -1434,7 +1405,7 @@ body.drawer-open { overflow: hidden; }
 }
 
 /* ---- Order handoff ---- */
-.order-facts { display: flex; flex-direction: column; }
+.order-facts { display: flex; flex-direction: column; margin-bottom: 16px; }
 .order-fact {
   display: flex;
   align-items: flex-start;
@@ -1447,28 +1418,6 @@ body.drawer-open { overflow: hidden; }
 .order-fact:last-child { border-bottom: 0; }
 .order-fact .ico { color: var(--terracotta-deep); margin-top: 1px; flex-shrink: 0; }
 .order-fact strong { color: var(--ink); font-weight: 600; }
-.order-promo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 16px 0;
-  padding: 12px 14px;
-  background: rgba(200, 146, 58, 0.12);
-  border: 1px dashed var(--mustard);
-  border-radius: 2px;
-  font-size: 13px;
-  color: var(--ink);
-}
-.order-promo .code {
-  font-family: var(--mono);
-  font-weight: 600;
-  background: var(--mustard);
-  color: var(--ink);
-  padding: 2px 7px;
-  border-radius: 2px;
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-}
 
 /* menu-level order CTA */
 .menu-order-cta { margin: 4px 0 24px; }
@@ -1668,8 +1617,6 @@ section.block, .hero { scroll-margin-top: 126px; }
   .topbar-actions { gap: 12px; }
   .topbar-order { display: inline-flex; flex: 0 0 auto; padding: 9px 16px; font-size: 12.5px; }
   .cta-bar { display: none; }
-
-  .promo-strip { font-size: 11.5px; padding: 10px 16px; }
 
   /* hero: text left, photo right */
   .hero {
