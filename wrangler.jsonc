@@ -1,9 +1,28 @@
 {
   "name": "thakalikitchen",
   "compatibility_date": "2026-07-25",
+  "main": "worker/index.js",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    // Everything except /api/* is a static file and never touches the Worker.
+    "run_worker_first": ["/api/*"]
   },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      // Pinned to one verified destination: free on every plan, exempt from
+      // sending quotas, and impossible to abuse as an open relay.
+      "destination_address": "thakalikitchen111@gmail.com"
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "ENQUIRY_LIMIT",
+      "namespace_id": "1001",
+      "simple": { "limit": 5, "period": 60 }
+    }
+  ],
+  "observability": { "enabled": true },
   "routes": [
     { "pattern": "thakalikitchen.de", "custom_domain": true },
     { "pattern": "www.thakalikitchen.de", "custom_domain": true }

@@ -827,6 +827,21 @@ section.block {
 .field select:focus,
 .field textarea:focus { border-bottom-color: var(--terracotta); }
 
+/* Bot bait. Off-screen rather than display:none — crawlers skip hidden inputs,
+ * which is exactly the ones we want filling this in. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.btn[aria-busy="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .party-stepper {
   display: flex;
   align-items: center;
@@ -879,10 +894,10 @@ section.block {
   color: var(--paper);
   border-color: var(--ink);
 }
-.time-pill.disabled {
-  opacity: 0.35;
-  text-decoration: line-through;
-  cursor: not-allowed;
+.time-empty {
+  color: var(--ink-3);
+  font-size: 13px;
+  margin: 4px 0 0;
 }
 
 /* ============== Order / cart ============== */
@@ -946,6 +961,23 @@ section.block {
 }
 .catering-card .pkg .pkg-name { font-family: var(--serif); font-style: italic; font-size: 16px; }
 .catering-card .pkg .pkg-price { font-family: var(--mono); font-size: 12px; color: var(--mustard); }
+
+/* The enquiry form sits on the card's dark ground, so the inherited .field
+ * styling has to invert. */
+.cater-form { margin-top: 18px; }
+.cater-form .field label { color: rgba(245,239,227,0.6); }
+.cater-form .field input,
+.cater-form .field textarea {
+  color: var(--paper);
+  border-bottom-color: rgba(245,239,227,0.28);
+}
+.cater-form .field input:focus,
+.cater-form .field textarea:focus { border-bottom-color: var(--mustard); }
+.cater-form .field input::placeholder,
+.cater-form .field textarea::placeholder { color: rgba(245,239,227,0.35); }
+/* Safari renders the native date/number pickers dark-on-dark otherwise. */
+.cater-form input[type="date"]::-webkit-calendar-picker-indicator,
+.cater-form input[type="number"]::-webkit-inner-spin-button { filter: invert(1) opacity(0.5); }
 
 /* ============== Contact ============== */
 
@@ -1405,7 +1437,45 @@ body.drawer-open { overflow: hidden; }
   margin-top: 3px;
 }
 
-/* optional real testimonials */
+.google-review-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(31, 26, 20, 0.1);
+  background: rgba(255, 255, 255, 0.45);
+}
+.google-review-label,
+.google-review-count {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.google-review-score {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 3px 0;
+}
+.google-review-score strong {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 500;
+}
+.google-review-score .stars {
+  color: var(--mustard);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.google-review-summary > a {
+  color: var(--terracotta-deep);
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .review-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
 .review-card {
   padding: 18px;
@@ -1414,7 +1484,7 @@ body.drawer-open { overflow: hidden; }
   border-radius: 2px;
 }
 .review-card .stars { color: var(--mustard); font-size: 12px; letter-spacing: 2px; }
-.review-card .quote { font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.5; margin-top: 8px; }
+.review-card .quote { font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.5; margin: 8px 0 0; }
 .review-card .who {
   font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--ink-3); margin-top: 10px;
@@ -1526,7 +1596,8 @@ body.drawer-open { overflow: hidden; }
 @media (min-width: 600px) {
   .fav-grid { grid-template-columns: repeat(3, 1fr); }
   .offer-grid { grid-template-columns: 1fr 1fr; }
-  .review-grid { grid-template-columns: 1fr 1fr; }
+  .review-grid { grid-template-columns: repeat(3, 1fr); }
+  .google-review-summary { flex-direction: row; align-items: center; justify-content: space-between; }
   .reviews-cta { flex-direction: row; align-items: center; justify-content: space-between; }
   .reviews-cta .cta-copy { flex: 1; }
 }
@@ -2452,9 +2523,6 @@ html.motion-ready .polaroid img:not(.is-loaded) {
   /* Intro is short and runs only once; no scroll-linked continuous transforms. */
   html.motion-ready .hero-eyebrow-row {
     animation: hero-rise 520ms var(--ease-out) 30ms both;
-  }
-  html.motion-ready .hero h1 {
-    animation: hero-rise 600ms var(--ease-out) 90ms both;
   }
   html.motion-ready .hero-hand {
     animation: hero-fade 500ms ease 180ms both;

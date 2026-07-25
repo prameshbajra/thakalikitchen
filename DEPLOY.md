@@ -5,9 +5,10 @@
 > the `thakalikitchen` Worker over HTTPS. What follows is both the record of how
 > that was done and the runbook for changing it.
 
-Static site — no backend. Every page is plain HTML plus `css/`, `js/`, and
-`images/`. The reservation form is handled client-side in `js/main.js` and opens
-a `mailto:` link, so there is nothing server-side to host.
+Static site with one exception. Every page is plain HTML plus `css/`, `js/`, and
+`images/`, served as static assets. The only server-side code is
+`worker/index.js`, which handles the two enquiry forms — see
+[Enquiry forms](#enquiry-forms) below.
 
 Target: **Cloudflare DNS + a Cloudflare Worker serving static assets**, domain
 registered at a `.de` registrar that is not IONOS. Cloudflare Registrar does not
@@ -111,25 +112,105 @@ DNSSEC was not enabled, which is one less thing to break during the transfer.
 
 ### What to create instead
 
-Apex and `www` come from Pages. Add these by hand so the domain cannot be
-spoofed — a domain that sends no mail should say so explicitly:
+Apex and `www` come from the Worker deploy. The mail records were originally a
+full lockdown — null MX and `v=spf1 -all`, declaring that the domain sends and
+receives nothing. **That lockdown was retired when the enquiry forms started
+sending mail as `reservierung@thakalikitchen.de`.** It is recorded here because
+the reasoning still applies to any *other* subdomain or future provider:
 
-| Type | Name | Value |
-| --- | --- | --- |
-| MX | `@` | `0 .` (null MX, RFC 7505) |
-| TXT | `@` | `v=spf1 -all` |
-| TXT | `_dmarc` | `v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s` |
-| TXT | `*._domainkey` | `v=DKIM1; p=` |
+| Type | Name | Original lockdown | Now |
+| --- | --- | --- | --- |
+| MX | `@` | `0 .` (null MX, RFC 7505) | Cloudflare Email Routing MX records |
+| TXT | `@` | `v=spf1 -all` | SPF from Email Routing onboarding |
+| TXT | `_dmarc` | `v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s` | keep `p=reject`; verify alignment first |
+| TXT | `*._domainkey` | `v=DKIM1; p=` | remove — it would void the real DKIM key |
 
-If the Cloudflare dashboard refuses a bare `.` as the MX target, leave MX out
-entirely. `v=spf1 -all` plus `p=reject` already blocks the overwhelming
-majority of spoofing attempts.
+Enabling Email Routing writes the MX and SPF records for you. Two traps:
 
-**This set is only correct while nothing sends mail as `@thakalikitchen.de`.**
-Adding a mailbox later, or sending through a booking or newsletter provider,
-means relaxing these first — otherwise that mail is rejected on arrival. The
-Gmail address is unaffected either way; these records govern
+- **The wildcard DKIM record must go.** `*._domainkey` with an empty `p=` tells
+  the world that every selector on this domain is invalid, which silently kills
+  DKIM for the mail the Worker sends.
+- **Keep DMARC at `p=reject`, but confirm alignment after the first send** —
+  check the Authentication-Results header on a real enquiry email before
+  assuming it passes. Tightening DMARC before DKIM works means your own
+  reservations land in spam.
+
+The Gmail address is unaffected by any of this; these records govern
 `thakalikitchen.de`, not `gmail.com`.
+
+---
+
+## Enquiry forms
+
+The reservation and catering forms POST JSON to the Worker, which emails the
+restaurant. Before this, both opened a `mailto:` link — which silently did
+nothing on any device without a configured mail client, and at best produced a
+draft the guest still had to send themselves.
+
+| Path | Form | Source |
+| --- | --- | --- |
+| `POST /api/reserve` | `#reservationForm` | [index.html](index.html) |
+| `POST /api/catering` | `#cateringForm` | [index.html](index.html) |
+
+`run_worker_first: ["/api/*"]` in `wrangler.jsonc` means every other path is
+served straight from `dist/` and never wakes the Worker.
+
+### Why this costs nothing
+
+Mail goes out through Cloudflare's `send_email` binding. Delivery **to a
+verified destination address** is free on every plan and does not count against
+any sending quota — so the binding is pinned to one `destination_address` rather
+than taking a recipient from the request. That also makes it useless as an open
+relay.
+
+Sending to *arbitrary* recipients is the metered feature (Workers Paid, 3,000/mo
+then $0.35/1,000). This is why the guest gets **no** automated confirmation
+email: their address is arbitrary, so confirming to them would cross onto the
+paid path. The restaurant's reply is the confirmation. The Worker sets
+`replyTo` to the guest's address so that reply is one click.
+
+### One-time setup in the dashboard
+
+Both steps are manual — they cannot be done from this repo:
+
+1. **Email → Email Routing**, enable it for `thakalikitchen.de`. Let Cloudflare
+   add its MX/SPF records, then delete the `*._domainkey` record described above.
+2. **Destination addresses**, add `thakalikitchen111@gmail.com` and click the
+   link in the verification mail Cloudflare sends. Until it is verified, sends
+   fail with `E_SENDER_NOT_VERIFIED` / an unverified-destination error.
+
+The sender is `reservierung@thakalikitchen.de` (`FROM` in `worker/index.js`). It
+needs no mailbox — only the domain has to be onboarded. Replies from the guest
+go to whatever Email Routing forwards, so add a route for it if you want those.
+
+### Abuse controls
+
+- **Honeypot** — a `ref_code` field hidden off-screen. Filled in ⇒ discarded with
+  a `200`, so bots stop retrying.
+- **Timing** — the page stamps load time; anything submitted under 2.5s is
+  dropped. A skewed or missing clock skips the check rather than blocking a guest.
+- **Rate limit** — the `ENQUIRY_LIMIT` binding, 5 requests per 60s per IP. If the
+  binding is ever missing the endpoint still works; the limiter failing open is
+  deliberate, since losing a real reservation is worse than allowing a duplicate.
+- **Origin check** — cross-origin POSTs get a `403`. A missing `Origin` is
+  allowed through for local dev.
+- Body capped at 8 KiB, every field length-capped, CR/LF stripped so a crafted
+  name cannot inject mail headers.
+
+### Testing
+
+```bash
+node worker/index.test.mjs   # 35 assertions, no deps, no dev server
+```
+
+Stubs the `send_email` and rate-limit bindings, so it covers everything except
+Cloudflare's actual delivery. Run it after touching `worker/index.js`.
+
+To verify delivery end to end, submit the real form once on
+`https://thakalikitchen.de/#book` after the two dashboard steps are done, and
+check the Gmail inbox. Worker logs are at **Workers & Pages → thakalikitchen →
+Logs** (`observability` is enabled in `wrangler.jsonc`); a failed send logs its
+Cloudflare error code there.
 
 ---
 
@@ -172,9 +253,21 @@ whois -h whois.denic.de thakalikitchen.de   # Status: connect, Cloudflare NS, fr
 dig +short NS thakalikitchen.de             # two Cloudflare nameservers
 dig +short A thakalikitchen.de              # Cloudflare IPs, not 217.160.0.69
 dig +short CNAME www.thakalikitchen.de      # resolves
-dig +short MX thakalikitchen.de             # null MX, or empty
-dig +short TXT thakalikitchen.de            # v=spf1 -all
+dig +short MX thakalikitchen.de             # Cloudflare Email Routing MX records
+dig +short TXT thakalikitchen.de            # Email Routing SPF record
 curl -sI https://thakalikitchen.de          # HTTP 200, cert for the domain
+dig +short TXT '*._domainkey.thakalikitchen.de'   # must be EMPTY once mail sends
+
+# enquiry endpoint is wired up: expects {"ok":false,"error":"name_required"}
+curl -s -X POST https://thakalikitchen.de/api/reserve \
+  -H 'Content-Type: application/json' \
+  -d '{"date":"2026-08-01","time":"19:30","party":2}'
+
+# GET must be rejected — proves run_worker_first is routing /api/*
+curl -so /dev/null -w '%{http_code}\n' https://thakalikitchen.de/api/reserve   # 405
+
+# the Worker source must NOT be downloadable
+curl -so /dev/null -w '%{http_code}\n' https://thakalikitchen.de/worker/index.js   # 404
 ```
 
 HTTPS at the apex is currently broken — IONOS's parking page has no valid

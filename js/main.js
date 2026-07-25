@@ -4,8 +4,6 @@
 
 /* ===== External ordering (FoodAmigos) ===== */
 const ORDER_URL = 'https://www.crosssushi-hamburg.de/speisekarte/crosssushi';
-/* Contact used for mail links (swap here if the address/line changes) */
-const CONTACT = { email: 'thakaliklitchen111@gmail.com' };
 
 /* ===== i18n dictionary ===== */
 const UI = {
@@ -28,7 +26,7 @@ const UI = {
     'story.c3.title': 'Slow cooking', 'story.c3.p': 'Dal simmered eight hours. Mo:Mo skins rolled to order. No shortcuts.',
     'menu.eyebrow': '02 · OUR KITCHEN', 'menu.title.1': 'The', 'menu.title.accent': 'menu',
     'menu.sub': 'Over 170 dishes across three kitchens — from Thakali classics to Cross Sushi. Browse here, then order online for pickup or delivery.',
-    'menu.chip.veg': 'Veg only', 'menu.chip.spicy': 'Spicy', 'menu.chip.glutenfree': 'Gluten-free',
+    'menu.chip.veg': 'Veg only', 'menu.chip.spicy': 'Spicy',
     'menu.order': 'See full menu & order online',
     'menu.pop': 'Loved',
     'menu.sig.label': 'OUR BESTSELLER', 'menu.sig.imgcap': 'From our kitchen — torched salmon signature roll', 'menu.sig.add': 'Order online',
@@ -52,11 +50,17 @@ const UI = {
     'reviews.eyebrow': '04 · GUEST FAVOURITES', 'reviews.title.1': 'What guests', 'reviews.title.accent': 'order most.',
     'reviews.cta.p': "Enjoyed your meal? We'd love a quick review on Google.",
     'reviews.cta.btn': 'Review us on Google',
+    'reviews.google.label': 'Google rating',
+    'reviews.google.count': '463 reviews · as of July 2026',
+    'reviews.google.all': 'See all Google reviews',
+    'reviews.google.4months': 'Google · 4 months ago',
+    'reviews.google.3months': 'Google · 3 months ago',
     'book.eyebrow': '05 · RESERVATIONS', 'book.title.1': 'Hold a', 'book.title.accent': 'table.',
     'book.sub': 'We seat 32. Walk-ins welcome at the bar; book ahead for weekends.',
+    'book.noSlots': 'No reservation times are available on this date.',
     'field.date': 'DATE', 'field.party': 'PARTY OF', 'field.time': 'TIME',
     'field.name': 'NAME', 'field.email': 'EMAIL', 'field.phone': 'PHONE', 'field.notes': 'NOTES (allergies, occasion)',
-    'book.btn': 'Request reservation by email',
+    'book.btn': 'Request a reservation',
     'book.seats': 'seats in the room', 'book.call': 'or call us',
     'order.eyebrow': '06 · ORDER', 'order.title.1': 'Bring it', 'order.title.accent': 'home.',
     'order.sub': 'Order direct — no platform fees, loyalty points and faster service. Pickup or delivery.',
@@ -70,6 +74,9 @@ const UI = {
     'cater.pkg1': 'Thali Feast', 'cater.pkg1.p': 'From €28 / head',
     'cater.pkg2': 'Mo:Mo Bar (live)', 'cater.pkg2.p': 'From €36 / head',
     'cater.pkg3': 'Full Banquet', 'cater.pkg3.p': 'From €54 / head',
+    'cater.f.date': 'PREFERRED DATE', 'cater.f.guests': 'GUESTS',
+    'cater.f.occasion': 'OCCASION', 'cater.f.msg': 'MESSAGE',
+    'cater.ph.occasion': 'Wedding, company party …',
     'cater.btn': 'Request a quote',
     'offers.eyebrow': '08 · GIFTS & REWARDS', 'offers.title.1': 'Gift &', 'offers.title.accent': 'collect.',
     'offers.gift.title': 'Gift cards',
@@ -100,11 +107,18 @@ const UI = {
     'nav.label': 'NAVIGATE',
     'nav.about': 'Story', 'nav.menu': 'Menu', 'nav.reviews': 'Favourites', 'nav.book': 'Book', 'nav.order': 'Order',
     'nav.catering': 'Catering', 'nav.offers': 'Gifts', 'nav.faq': 'FAQ', 'nav.contact': 'Visit',
-    'toast.book.name': 'Please add your name', 'toast.book.ok': 'Opening your email request …',
+    'toast.book.name': 'Please add your name',
+    'toast.form.contact': 'Please add an email address or phone number',
+    'toast.form.sending': 'Sending your request …',
+    'toast.book.sent': 'Thank you! We will confirm your table shortly.',
+    'toast.book.invalid': 'Please choose a valid date and an opening-hours time.',
+    'toast.cater.sent': 'Thank you! We will send you a quote shortly.',
+    'toast.form.fail': 'Could not send — please call +49 160 8176707',
+    'toast.form.rate': 'Too many requests — please wait a moment.',
     'closed': 'Closed', 'all': 'All',
     'days': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    'meta.title': 'Thakali Kitchen — Hamburg',
-    'meta.desc': 'Thakali Kitchen — authentic Nepalese cooking & Cross Sushi in Hamburg-Eimsbüttel. Hand-folded Mo:Mo, Thakali thali, sushi & Thai. Pickup & delivery.',
+    'meta.title': 'Nepalese Restaurant Hamburg | Thakali Kitchen',
+    'meta.desc': 'Authentic Nepalese restaurant in Hamburg-Eimsbüttel: handmade Mo:Mo, Thakali thali, sushi and Thai food. Reserve, collect or order delivery.',
     'a11y.navopen': 'Open menu', 'a11y.close': 'Close', 'a11y.mainnav': 'Main navigation',
     'a11y.footernav': 'Footer navigation', 'a11y.langsel': 'Choose language',
     'a11y.less': 'Fewer guests', 'a11y.more': 'More guests',
@@ -116,8 +130,6 @@ const UI = {
     'map.consent.p': 'Loading the map sends data to Google. See our privacy notice for details.',
     'map.consent.btn': 'Load map', 'map.consent.alt': 'Open in Google Maps instead',
     'map.title': 'Map — Thakali Kitchen, Hellkamp 22, Hamburg',
-    'mail.res.subject': 'Reservation — {name} — {date} {time}',
-    'mail.cater.subject': 'Catering enquiry — Thakali Kitchen',
   },
   de: {
     'cta.book': 'Tisch reservieren', 'cta.order': 'Online bestellen',
@@ -138,7 +150,7 @@ const UI = {
     'story.c3.title': 'Langsames Kochen', 'story.c3.p': 'Dal acht Stunden geköchelt. Mo:Mo-Teig auf Bestellung gerollt. Keine Abkürzungen.',
     'menu.eyebrow': '02 · UNSERE KÜCHE', 'menu.title.1': 'Die', 'menu.title.accent': 'Karte',
     'menu.sub': 'Über 170 Gerichte aus drei Küchen — von Thakali-Klassikern bis Cross Sushi. Stöbern Sie hier und bestellen Sie online für Abholung oder Lieferung.',
-    'menu.chip.veg': 'Nur vegetarisch', 'menu.chip.spicy': 'Scharf', 'menu.chip.glutenfree': 'Glutenfrei',
+    'menu.chip.veg': 'Nur vegetarisch', 'menu.chip.spicy': 'Scharf',
     'menu.order': 'Ganze Karte ansehen & online bestellen',
     'menu.pop': 'Beliebt',
     'menu.sig.label': 'UNSER BESTSELLER', 'menu.sig.imgcap': 'Aus unserer Küche — flambierte Lachs-Signature-Rolle', 'menu.sig.add': 'Online bestellen',
@@ -162,11 +174,17 @@ const UI = {
     'reviews.eyebrow': '04 · GÄSTELIEBLINGE', 'reviews.title.1': 'Was am meisten', 'reviews.title.accent': 'bestellt wird.',
     'reviews.cta.p': 'Hat es dir geschmeckt? Wir freuen uns über deine Bewertung bei Google.',
     'reviews.cta.btn': 'Bei Google bewerten',
+    'reviews.google.label': 'Google-Bewertung',
+    'reviews.google.count': '463 Bewertungen · Stand Juli 2026',
+    'reviews.google.all': 'Alle Google-Bewertungen ansehen',
+    'reviews.google.4months': 'Google · vor 4 Monaten',
+    'reviews.google.3months': 'Google · vor 3 Monaten',
     'book.eyebrow': '05 · RESERVIERUNG', 'book.title.1': 'Tisch', 'book.title.accent': 'sichern.',
     'book.sub': 'Wir haben 32 Plätze. Walk-ins an der Bar willkommen; am Wochenende bitte vorbestellen.',
+    'book.noSlots': 'Für dieses Datum sind keine Reservierungszeiten verfügbar.',
     'field.date': 'DATUM', 'field.party': 'GÄSTE', 'field.time': 'ZEIT',
     'field.name': 'NAME', 'field.email': 'E-MAIL', 'field.phone': 'TELEFON', 'field.notes': 'NOTIZEN (Allergien, Anlass)',
-    'book.btn': 'Reservierung per E-Mail anfragen',
+    'book.btn': 'Reservierung anfragen',
     'book.seats': 'Plätze im Raum', 'book.call': 'oder ruft uns an',
     'order.eyebrow': '06 · BESTELLEN', 'order.title.1': 'Nehmt es', 'order.title.accent': 'mit nach Hause.',
     'order.sub': 'Direkt bei uns bestellen — ohne Plattform-Gebühren, mit Treuepunkten und schnellem Service. Abholung oder Lieferung.',
@@ -180,6 +198,9 @@ const UI = {
     'cater.pkg1': 'Thali-Festmahl', 'cater.pkg1.p': 'Ab 28 € / Person',
     'cater.pkg2': 'Mo:Mo-Bar (live)', 'cater.pkg2.p': 'Ab 36 € / Person',
     'cater.pkg3': 'Volles Bankett', 'cater.pkg3.p': 'Ab 54 € / Person',
+    'cater.f.date': 'WUNSCHTERMIN', 'cater.f.guests': 'GÄSTE',
+    'cater.f.occasion': 'ANLASS', 'cater.f.msg': 'NACHRICHT',
+    'cater.ph.occasion': 'Hochzeit, Firmenfeier …',
     'cater.btn': 'Angebot anfragen',
     'offers.eyebrow': '08 · GUTSCHEINE & TREUE', 'offers.title.1': 'Schenke &', 'offers.title.accent': 'sammle.',
     'offers.gift.title': 'Gutscheine',
@@ -210,11 +231,18 @@ const UI = {
     'nav.label': 'NAVIGATION',
     'nav.about': 'Geschichte', 'nav.menu': 'Karte', 'nav.reviews': 'Lieblinge', 'nav.book': 'Reservieren', 'nav.order': 'Bestellen',
     'nav.catering': 'Catering', 'nav.offers': 'Gutscheine', 'nav.faq': 'FAQ', 'nav.contact': 'Besuch',
-    'toast.book.name': 'Bitte Namen eingeben', 'toast.book.ok': 'E-Mail-Anfrage wird geöffnet …',
+    'toast.book.name': 'Bitte Namen eingeben',
+    'toast.form.contact': 'Bitte E-Mail-Adresse oder Telefonnummer angeben',
+    'toast.form.sending': 'Anfrage wird gesendet …',
+    'toast.book.sent': 'Danke! Wir bestätigen den Tisch in Kürze.',
+    'toast.book.invalid': 'Bitte ein gültiges Datum und eine Zeit während der Öffnungszeiten wählen.',
+    'toast.cater.sent': 'Danke! Wir senden Ihnen zeitnah ein Angebot.',
+    'toast.form.fail': 'Senden fehlgeschlagen — bitte anrufen: +49 160 8176707',
+    'toast.form.rate': 'Zu viele Anfragen — bitte kurz warten.',
     'closed': 'Geschlossen', 'all': 'Alle',
     'days': ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
-    'meta.title': 'Thakali Kitchen — Hamburg',
-    'meta.desc': 'Thakali Kitchen — authentische nepalesische Küche & Cross Sushi in Hamburg-Eimsbüttel. Handgefaltete Mo:Mo, Thakali-Thali, Sushi & Thai. Abholung & Lieferung.',
+    'meta.title': 'Nepalesisches Restaurant Hamburg | Thakali Kitchen',
+    'meta.desc': 'Authentisches nepalesisches Restaurant in Hamburg-Eimsbüttel: handgemachte Mo:Mo, Thakali-Thali, Sushi und Thai. Reservieren, abholen oder liefern lassen.',
     'a11y.navopen': 'Menü öffnen', 'a11y.close': 'Schließen', 'a11y.mainnav': 'Hauptnavigation',
     'a11y.footernav': 'Fußzeilen-Navigation', 'a11y.langsel': 'Sprache wählen',
     'a11y.less': 'Weniger Gäste', 'a11y.more': 'Mehr Gäste',
@@ -226,8 +254,6 @@ const UI = {
     'map.consent.p': 'Wenn Sie die Karte laden, werden Daten an Google übertragen. Details in unserer Datenschutzerklärung.',
     'map.consent.btn': 'Karte laden', 'map.consent.alt': 'Stattdessen in Google Maps öffnen',
     'map.title': 'Karte — Thakali Kitchen, Hellkamp 22, Hamburg',
-    'mail.res.subject': 'Reservierung — {name} — {date} {time}',
-    'mail.cater.subject': 'Catering-Anfrage — Thakali Kitchen',
   },
   ne: {
     'cta.book': 'टेबल बुक गर्नुहोस्', 'cta.order': 'अनलाइन अर्डर',
@@ -248,7 +274,7 @@ const UI = {
     'story.c3.title': 'बिस्तारै पकाइ', 'story.c3.p': 'दाल आठ घण्टा। म:मको छाला अर्डरमा बेलिन्छ।',
     'menu.eyebrow': '०२ · हाम्रो भान्सा', 'menu.title.1': 'हाम्रो', 'menu.title.accent': 'मेनु',
     'menu.sub': 'तीन भान्साका १७० भन्दा बढी परिकार — थकाली देखि क्रस सुसीसम्म। यहाँ हेर्नुहोस्, अनि पिकअप वा डेलिभरीका लागि अनलाइन अर्डर गर्नुहोस्।',
-    'menu.chip.veg': 'शाकाहारी मात्र', 'menu.chip.spicy': 'पिरो', 'menu.chip.glutenfree': 'ग्लुटेन-रहित',
+    'menu.chip.veg': 'शाकाहारी मात्र', 'menu.chip.spicy': 'पिरो',
     'menu.order': 'पूरै मेनु हेर्नुहोस् र अनलाइन अर्डर गर्नुहोस्',
     'menu.pop': 'लोकप्रिय',
     'menu.sig.label': 'हाम्रो बेस्टसेलर', 'menu.sig.imgcap': 'हाम्रो भान्साबाट — फ्ल्याम्बे सामन सिग्नेचर रोल', 'menu.sig.add': 'अनलाइन अर्डर गर्नुहोस्',
@@ -272,11 +298,17 @@ const UI = {
     'reviews.eyebrow': '०४ · ग्राहकका मनपर्ने', 'reviews.title.1': 'सबैभन्दा धेरै', 'reviews.title.accent': 'मगाइने परिकार।',
     'reviews.cta.p': 'मीठो लाग्यो? गुगलमा समीक्षा दिनुभयो भने खुसी हुनेछौं।',
     'reviews.cta.btn': 'गुगलमा समीक्षा दिनुहोस्',
+    'reviews.google.label': 'Google मूल्याङ्कन',
+    'reviews.google.count': '४६३ समीक्षा · जुलाई २०२६ सम्म',
+    'reviews.google.all': 'Google का सबै समीक्षा हेर्नुहोस्',
+    'reviews.google.4months': 'Google · ४ महिना अघि',
+    'reviews.google.3months': 'Google · ३ महिना अघि',
     'book.eyebrow': '०५ · आरक्षण', 'book.title.1': 'टेबल', 'book.title.accent': 'राख्नुहोस्।',
     'book.sub': 'हामी ३२ जनासम्म सीट गर्छौं। शुक्रवार र शनिबार अग्रिम बुकिङ राम्रो।',
+    'book.noSlots': 'यो मितिमा बुकिङ समय उपलब्ध छैन।',
     'field.date': 'मिति', 'field.party': 'मानिस', 'field.time': 'समय',
     'field.name': 'नाम', 'field.email': 'इमेल', 'field.phone': 'फोन', 'field.notes': 'टिप्पणी',
-    'book.btn': 'इमेलबाट आरक्षण अनुरोध',
+    'book.btn': 'आरक्षण अनुरोध गर्नुहोस्',
     'book.seats': 'कोठामा सिट', 'book.call': 'वा फोन गर्नुहोस्',
     'order.eyebrow': '०६ · अर्डर', 'order.title.1': 'घरमै', 'order.title.accent': 'लानुहोस्।',
     'order.sub': 'सिधै हामीसँग अर्डर गर्नुहोस् — कुनै प्लेटफर्म शुल्क छैन, इनाम अंक र छिटो सेवा। पिकअप वा डेलिभरी।',
@@ -290,6 +322,9 @@ const UI = {
     'cater.pkg1': 'थाली भोज', 'cater.pkg1.p': '€२८ / जना देखि',
     'cater.pkg2': 'म:म बार (लाइभ)', 'cater.pkg2.p': '€३६ / जना देखि',
     'cater.pkg3': 'पूर्ण भोज', 'cater.pkg3.p': '€५४ / जना देखि',
+    'cater.f.date': 'चाहिएको मिति', 'cater.f.guests': 'पाहुना',
+    'cater.f.occasion': 'अवसर', 'cater.f.msg': 'सन्देश',
+    'cater.ph.occasion': 'विवाह, कार्यालय कार्यक्रम …',
     'cater.btn': 'मूल्य सोध्नुहोस्',
     'offers.eyebrow': '०८ · उपहार र इनाम', 'offers.title.1': 'उपहार दिनुहोस्', 'offers.title.accent': 'अंक जोड्नुहोस्।',
     'offers.gift.title': 'उपहार कार्ड',
@@ -320,7 +355,14 @@ const UI = {
     'nav.label': 'नेविगेसन',
     'nav.about': 'कथा', 'nav.menu': 'मेनु', 'nav.reviews': 'लोकप्रिय', 'nav.book': 'बुकिङ', 'nav.order': 'अर्डर',
     'nav.catering': 'केटरिङ', 'nav.offers': 'उपहार', 'nav.faq': 'प्रश्न', 'nav.contact': 'सम्पर्क',
-    'toast.book.name': 'नाम लेख्नुहोस्', 'toast.book.ok': 'इमेल अनुरोध खुल्दै …',
+    'toast.book.name': 'नाम लेख्नुहोस्',
+    'toast.form.contact': 'इमेल वा फोन नम्बर लेख्नुहोस्',
+    'toast.form.sending': 'अनुरोध पठाउँदै …',
+    'toast.book.sent': 'धन्यवाद! हामी चाँडै टेबल पुष्टि गर्नेछौं।',
+    'toast.book.invalid': 'कृपया खुल्ने समयभित्रको सही मिति र समय छान्नुहोस्।',
+    'toast.cater.sent': 'धन्यवाद! हामी चाँडै मूल्य पठाउनेछौं।',
+    'toast.form.fail': 'पठाउन सकिएन — कृपया फोन गर्नुहोस्: +४९ १६० ८१७६७०७',
+    'toast.form.rate': 'धेरै अनुरोध — कृपया केही बेर पर्खनुहोस्।',
     'closed': 'बन्द', 'all': 'सबै',
     'days': ['सो', 'मं', 'बु', 'बि', 'शु', 'श', 'आ'],
     'meta.title': 'थकाली किचन — हाम्बुर्ग',
@@ -336,8 +378,6 @@ const UI = {
     'map.consent.p': 'नक्सा लोड गर्दा तपाईंको डाटा गुगललाई पठाइन्छ। विवरण हाम्रो गोपनीयता नीतिमा छ।',
     'map.consent.btn': 'नक्सा लोड गर्नुहोस्', 'map.consent.alt': 'गुगल म्यापमा खोल्नुहोस्',
     'map.title': 'नक्सा — थकाली किचन, हेल्काम्प २२, हाम्बुर्ग',
-    'mail.res.subject': 'आरक्षण — {name} — {date} {time}',
-    'mail.cater.subject': 'केटरिङ अनुरोध — थकाली किचन',
   },
 };
 
@@ -347,6 +387,7 @@ const state = {
   group: null,         // active menu group slug
   category: 'all',     // active category slug or 'all'
   vegOnly: false,
+  spicyOnly: false,
   party: 2,
   time: '19:30',
 };
@@ -415,9 +456,6 @@ function applyI18n() {
   });
   /* gallery plate numbers follow the numeral system of the language */
   $$('[data-num]').forEach(el => { el.textContent = localiseDigits(el.getAttribute('data-num')); });
-
-  const cater = $('#caterBtn');
-  if (cater) cater.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(t('mail.cater.subject'))}`;
 }
 
 /* ===== Init ===== */
@@ -426,8 +464,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initLanguagePill();
   initNavDrawer();
-  initVegChip();
+  initMenuFilters();
   initReservation();
+  initCatering();
   initHours();
   initMap();
   initFaqMotion();
@@ -566,6 +605,11 @@ function isVegItem(item) {
   return (item.badges || []).some(b => b === 'vegetarian' || b === 'vegan');
 }
 
+function itemMatchesFilters(item) {
+  return (!state.vegOnly || isVegItem(item))
+    && (!state.spicyOnly || (item.badges || []).includes('spicy'));
+}
+
 function itemBadges(item) {
   const tags = [];
   if (item.pop) {
@@ -594,7 +638,7 @@ function renderMenu({ animate = false, keepActiveTabVisible = false } = {}) {
     : group.categories.filter(c => c.slug === state.category);
 
   list.innerHTML = cats.map(cat => {
-    const items = cat.items.filter(it => !state.vegOnly || isVegItem(it));
+    const items = cat.items.filter(itemMatchesFilters);
     if (!items.length) return '';
     return `
       <div class="menu-section">
@@ -673,18 +717,24 @@ function animateMenuResults({ keepActiveTabVisible = false } = {}) {
   });
 }
 
-function initVegChip() {
-  const chip = $('#vegChip');
-  chip.setAttribute('aria-pressed', 'false');
-  chip.addEventListener('click', () => {
-    state.vegOnly = !state.vegOnly;
-    chip.classList.toggle('on', state.vegOnly);
-    chip.setAttribute('aria-pressed', String(state.vegOnly));
-    renderMenu({ animate: true });
-    playMotion(chip, [
-      { transform: 'scale(0.95)' },
-      { transform: 'scale(1)' },
-    ], { duration: 240, easing: 'cubic-bezier(0.2, 0.85, 0.25, 1.15)' });
+function initMenuFilters() {
+  [
+    { selector: '#vegChip', stateKey: 'vegOnly' },
+    { selector: '#spicyChip', stateKey: 'spicyOnly' },
+  ].forEach(({ selector, stateKey }) => {
+    const chip = $(selector);
+    if (!chip) return;
+    chip.setAttribute('aria-pressed', 'false');
+    chip.addEventListener('click', () => {
+      state[stateKey] = !state[stateKey];
+      chip.classList.toggle('on', state[stateKey]);
+      chip.setAttribute('aria-pressed', String(state[stateKey]));
+      renderMenu({ animate: true });
+      playMotion(chip, [
+        { transform: 'scale(0.95)' },
+        { transform: 'scale(1)' },
+      ], { duration: 240, easing: 'cubic-bezier(0.2, 0.85, 0.25, 1.15)' });
+    });
   });
 }
 
@@ -872,14 +922,74 @@ function initFaqMotion() {
   });
 }
 
-/* ===== Reservation (opens a prefilled email) ===== */
-const TIME_SLOTS = ['17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00'];
-const DISABLED_TIMES = ['18:30', '20:00'];
+/* ===== Enquiry forms (reservation + catering) =====
+ * Both post to the Worker in worker/index.js, which mails the restaurant. The
+ * page is otherwise static, so these two fetches are the only server calls the
+ * site makes. */
+/* Stamped once at load and sent with the form, so the Worker can spot a
+ * submission that arrived faster than a human could type. */
+const PAGE_LOADED_AT = Date.now();
+
+function hamburgReservationNow() {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Berlin',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  }).formatToParts(new Date());
+  const value = Object.fromEntries(parts.map(part => [part.type, part.value]));
+  return {
+    date: `${value.year}-${value.month}-${value.day}`,
+    minutes: Number(value.hour) * 60 + Number(value.minute),
+  };
+}
+
+function dateInputValue(offsetDays = 0) {
+  const [year, month, day] = hamburgReservationNow().date.split('-').map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day + offsetDays));
+  return [
+    date.getUTCFullYear(),
+    String(date.getUTCMonth() + 1).padStart(2, '0'),
+    String(date.getUTCDate()).padStart(2, '0'),
+  ].join('-');
+}
+
+function dayIndexFromDate(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || '');
+  if (!match) return null;
+  const [, year, month, day] = match.map(Number);
+  const date = new Date(year, month - 1, day, 12);
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) return null;
+  return (date.getDay() + 6) % 7;
+}
+
+function clockMinutes(value) {
+  const [hour, minute] = value.split(':').map(Number);
+  return hour * 60 + minute;
+}
+
+function timeSlotsForDate(value) {
+  const hours = HOURS[dayIndexFromDate(value)];
+  if (!hours) return [];
+
+  const now = hamburgReservationNow();
+  const slots = [];
+  const close = clockMinutes(hours.close);
+  for (let minute = clockMinutes(hours.open); minute <= close - 30; minute += 30) {
+    if (value === now.date && minute <= now.minutes) continue;
+    slots.push(`${String(Math.floor(minute / 60)).padStart(2, '0')}:${String(minute % 60).padStart(2, '0')}`);
+  }
+  return slots;
+}
 
 function initReservation() {
-  const d = new Date(); d.setDate(d.getDate() + 1);
-  const iso = d.toISOString().slice(0, 10);
-  $('#resDate').value = iso;
+  const dateInput = $('#resDate');
+  dateInput.min = dateInputValue();
+  dateInput.value = dateInputValue(1);
+  dateInput.addEventListener('change', () => renderTimePills());
 
   $('#partyMinus').addEventListener('click', () => {
     updateParty(Math.max(1, state.party - 1));
@@ -890,31 +1000,125 @@ function initReservation() {
 
   renderTimePills();
 
-  $('#reservationForm').addEventListener('submit', (e) => {
+  wireEnquiryForm($('#reservationForm'), {
+    endpoint: '/api/reserve',
+    sentKey: 'toast.book.sent',
+    payload: (fd) => ({
+      date: fd.get('date'),
+      time: state.time,
+      party: state.party,
+    }),
+    validate: (fd) => timeSlotsForDate(fd.get('date')).includes(state.time),
+  });
+}
+
+function initCatering() {
+  const form = $('#cateringForm');
+  if (!form) return;
+
+  /* Catering needs lead time; a fortnight out is a friendlier default than
+   * today's date, which is never a realistic answer. */
+  const dateInput = $('#caterDate');
+  dateInput.min = dateInputValue();
+  dateInput.value = dateInputValue(14);
+
+  wireEnquiryForm(form, {
+    endpoint: '/api/catering',
+    sentKey: 'toast.cater.sent',
+    payload: (fd) => ({
+      date: fd.get('date'),
+      guests: Number(fd.get('guests')) || null,
+      occasion: (fd.get('occasion') || '').toString().trim(),
+    }),
+  });
+}
+
+function wireEnquiryForm(form, { endpoint, sentKey, payload, validate = null }) {
+  const submit = form.querySelector('button[type="submit"]');
+  let inFlight = false;
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const fd = new FormData(e.target);
+    if (inFlight) return;
+
+    const fd = new FormData(form);
     const name = (fd.get('name') || '').toString().trim();
     if (!name) { pushToast(t('toast.book.name')); return; }
-    const date = fd.get('date');
+
     const email = (fd.get('email') || '').toString().trim();
     const phone = (fd.get('phone') || '').toString().trim();
-    const notes = (fd.get('notes') || '').toString().trim();
+    /* Without one of these there is no way to answer, so the enquiry is
+     * worthless — catch it here rather than after a round trip. */
+    if (!email && !phone) { pushToast(t('toast.form.contact')); return; }
+    if (validate && !validate(fd)) { pushToast(t('toast.book.invalid')); return; }
 
-    const subject = t('mail.res.subject')
-      .replace('{name}', name).replace('{date}', date).replace('{time}', state.time);
-    const body = [
-      `${t('field.date')}: ${date}`,
-      `${t('field.time')}: ${state.time}`,
-      `${t('field.party')}: ${state.party}`,
-      `${t('field.name')}: ${name}`,
-      email ? `${t('field.email')}: ${email}` : null,
-      phone ? `${t('field.phone')}: ${phone}` : null,
-      notes ? `${t('field.notes')}: ${notes}` : null,
-    ].filter(Boolean).join('\n');
+    const body = {
+      ...payload(fd),
+      name,
+      email,
+      phone,
+      notes: (fd.get('notes') || '').toString().trim(),
+      ref_code: (fd.get('ref_code') || '').toString(),
+      ts: PAGE_LOADED_AT,
+      lang: state.lang,
+    };
 
-    pushToast(t('toast.book.ok'));
-    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    inFlight = true;
+    setBusy(submit, true);
+    pushToast(t('toast.form.sending'));
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok) {
+        pushToast(t(sentKey));
+        form.reset();
+        /* reset() wipes the prefilled date and the stepper's hidden state, so
+         * put the defaults back. */
+        resetEnquiryDefaults(form);
+      } else if (res.status === 429) {
+        pushToast(t('toast.form.rate'));
+      } else if (data.error === 'contact_required') {
+        pushToast(t('toast.form.contact'));
+      } else if (data.error === 'invalid_reservation') {
+        pushToast(t('toast.book.invalid'));
+      } else {
+        pushToast(t('toast.form.fail'));
+      }
+    } catch {
+      /* Offline, DNS failure, blocked request — the guest still needs a way to
+       * reach us, so the toast carries the phone number. */
+      pushToast(t('toast.form.fail'));
+    } finally {
+      inFlight = false;
+      setBusy(submit, false);
+    }
   });
+}
+
+function resetEnquiryDefaults(form) {
+  const offsetDays = form.id === 'cateringForm' ? 14 : 1;
+  const dateInput = form.querySelector('input[type="date"]');
+  if (dateInput) {
+    dateInput.min = dateInputValue();
+    dateInput.value = dateInputValue(offsetDays);
+  }
+  if (form.id === 'reservationForm') {
+    updateParty(2);
+    state.time = '19:30';
+    renderTimePills();
+  }
+}
+
+function setBusy(btn, busy) {
+  if (!btn) return;
+  btn.setAttribute('aria-busy', busy ? 'true' : 'false');
+  btn.disabled = busy;
 }
 
 function updateParty(nextParty) {
@@ -930,14 +1134,21 @@ function updateParty(nextParty) {
 
 function renderTimePills(animateSelected = false) {
   const wrap = $('#timePills');
-  wrap.innerHTML = TIME_SLOTS.map(tm => {
-    const disabled = DISABLED_TIMES.includes(tm);
+  const slots = timeSlotsForDate($('#resDate')?.value);
+  if (!slots.includes(state.time)) {
+    state.time = slots.includes('19:30') ? '19:30' : (slots[0] || '');
+  }
+  if (!slots.length) {
+    wrap.innerHTML = `<p class="time-empty">${escapeHtml(t('book.noSlots'))}</p>`;
+    return;
+  }
+
+  wrap.innerHTML = slots.map(tm => {
     const on = tm === state.time;
-    return `<button class="time-pill ${on ? 'on' : ''} ${disabled ? 'disabled' : ''}" type="button" ${disabled ? 'disabled' : ''} data-time="${tm}">${tm}</button>`;
+    return `<button class="time-pill ${on ? 'on' : ''}" type="button" aria-pressed="${on}" data-time="${tm}">${tm}</button>`;
   }).join('');
   $$('button', wrap).forEach(btn => {
     btn.addEventListener('click', () => {
-      if (btn.disabled) return;
       state.time = btn.dataset.time;
       renderTimePills(true);
     });
