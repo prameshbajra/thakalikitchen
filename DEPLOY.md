@@ -1,39 +1,59 @@
 # Deploying thakalikitchen.de
 
-Static site — no build step, no backend. Every page is plain HTML plus
-`css/`, `js/`, and `images/`. The reservation form is handled client-side in
-`js/main.js` and opens a `mailto:` link, so there is nothing server-side to
-host.
+Static site — no backend. Every page is plain HTML plus `css/`, `js/`, and
+`images/`. The reservation form is handled client-side in `js/main.js` and opens
+a `mailto:` link, so there is nothing server-side to host.
 
-Target: **Cloudflare DNS + Cloudflare Pages**, domain registered at a `.de`
-registrar that is not IONOS. Cloudflare Registrar does not support `.de`, so
-only DNS and hosting live at Cloudflare.
+Target: **Cloudflare DNS + a Cloudflare Worker serving static assets**, domain
+registered at a `.de` registrar that is not IONOS. Cloudflare Registrar does not
+support `.de`, so only DNS and hosting live at Cloudflare.
 
 > Never put the DENIC AuthInfo code in this repo, in a commit message, or in an
 > issue. It is a one-time password for the domain.
 
 ---
 
-## Cloudflare Pages settings
+## Cloudflare hosting settings
 
-Connect the GitHub repo `prameshbajra/thakalikitchen` via **Workers & Pages →
-Create → Pages → Connect to Git**, then:
+Cloudflare no longer offers a Pages "Connect to Git" flow on this account, so the
+site is deployed as a Worker with static assets — the supported successor to
+Pages for a site with no server-side code. Config lives in `wrangler.jsonc`.
+
+Connect the GitHub repo `prameshbajra/thakalikitchen` via **Compute → Workers &
+Pages → Create → Import a repository**, then:
 
 | Setting | Value |
 | --- | --- |
+| Project name | `thakalikitchen` |
 | Production branch | `main` |
-| Framework preset | None |
-| Build command | *(leave empty)* |
-| Build output directory | `/` |
-| Root directory | `/` |
+| Build command | `sh scripts/build.sh` |
+| Deploy command | `npx wrangler deploy` |
 
-Then **Custom domains → Set up a domain** for both `thakalikitchen.de` and
-`www.thakalikitchen.de`. Cloudflare creates the DNS records and issues the
-certificate automatically — do not hand-create the apex or `www` records.
+Then attach `thakalikitchen.de` and `www.thakalikitchen.de` under the Worker's
+**Settings → Domains & Routes**. Cloudflare creates the DNS records and issues
+the certificate — do not hand-create the apex or `www` records.
 
-Publishing from the repo root also serves `scripts/`. That is already true of
-the current GitHub Pages deploy and the repo is public, so it exposes nothing
-new. Photo originals stay out via `.gitignore`.
+### Why there is a build step
+
+`wrangler` publishes a whole directory and has no working exclude mechanism: an
+`.assetsignore` at the assets root had no effect on what wrangler read (tested
+against 4.114.0). Pointing it at the repo root would therefore publish `.git`,
+`scripts/`, and — on a local `wrangler deploy`, which uploads from the working
+tree — the unoptimized photo originals in `food_images/` and `source_images/`.
+
+So `scripts/build.sh` copies the 27 files that make up the site into `dist/`, and
+`wrangler.jsonc` points at `dist/`. Listing what ships is the only reliable way
+to control it. `dist/` is gitignored. Verify with:
+
+```bash
+sh scripts/build.sh && find dist -type f | wc -l   # expect 27
+npx wrangler deploy --dry-run                      # expect 30 (27 files + 3 dirs)
+```
+
+Wrangler's "Read N files" count includes directories, which is why the dry-run
+number is higher than the file count.
+
+Adding a new page or asset directory means adding it to `scripts/build.sh`.
 
 ---
 

@@ -5,3 +5,6 @@
 # food_images/ = restaurant photos (WhatsApp exports), source_images/ = older full-res shots.
 food_images/
 source_images/
+
+# Build output assembled by scripts/build.sh for the Cloudflare deploy.
+dist/
