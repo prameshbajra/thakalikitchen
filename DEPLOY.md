@@ -49,11 +49,19 @@ account (see `impressum.html`).
 | Type | Name | Value | Carry over? |
 | --- | --- | --- | --- |
 | A | `@` | `217.160.0.69` | No — IONOS parking page |
+| AAAA | `@` | `2001:8d8:100f:f000::200` | No — IONOS parking page |
 | CNAME | `www` | *(did not exist)* | No — Pages creates it |
+| CNAME | `autodiscover` | `adsredir.ionos.info` | No — IONOS mail autodiscovery |
+| CNAME | `_domainconnect` | `_domainconnect.ionos.com` | No — IONOS provisioning tooling |
 | MX | `@` | `10 mx00.ionos.de`, `10 mx01.ionos.de` | No — see below |
 | TXT | `@` | `v=spf1 include:_spf-eu.ionos.com ~all` | No — replace |
 | CNAME | `_dmarc` | `dmarc.ionos.de` (→ `v=DMARC1; p=none;`) | No — replace |
 | CNAME | `s42582890._domainkey` | `s42582890.dkim.ionos.com` | No — drop |
+
+Cloudflare's quick scan found eight of these nine; it missed the DKIM CNAME,
+which is why its own warning about uncommon records is worth heeding. Moot here
+since every mail record is being dropped, but the lesson generalises: the scan
+is a starting point, not an inventory.
 
 DNSSEC was not enabled, which is one less thing to break during the transfer.
 
