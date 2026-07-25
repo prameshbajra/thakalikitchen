@@ -5,3 +5,10 @@
 # food_images/ = restaurant photos (WhatsApp exports), source_images/ = older full-res shots.
 food_images/
 source_images/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
