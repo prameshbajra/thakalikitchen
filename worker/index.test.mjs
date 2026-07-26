@@ -23,8 +23,28 @@ const env = {
 };
 
 const ORIGIN = 'https://thakalikitchen.de';
+
+/* Dates are derived, never hardcoded: validReservation rejects anything in the
+ * past, so a literal date would silently turn this suite red the day it expired.
+ * Berlin's calendar day is what the Worker compares against. */
+const berlinDate = (offsetDays) => new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit',
+}).format(new Date(Date.now() + offsetDays * 86_400_000));
+
+/* The base date must be a Saturday. Sat/Sun open at 14:00, which is what makes
+ * the "before opening" case at 13:30 a rejection; Mon–Fri open at 12:00 and
+ * would accept it. */
+function nextSaturday() {
+  for (let n = 1; n <= 7; n++) {
+    const iso = berlinDate(n);
+    const [y, m, d] = iso.split('-').map(Number);
+    if (new Date(Date.UTC(y, m - 1, d)).getUTCDay() === 6) return iso;
+  }
+  throw new Error('no Saturday in the next 7 days');
+}
+
 const valid = {
-  date: '2026-08-01', time: '19:30', party: 4,
+  date: nextSaturday(), time: '19:30', party: 4,
   name: 'Maya Sherchan', email: 'maya@example.com', phone: '+49 170 1234567',
   notes: 'Fensterplatz bitte', ref_code: '', ts: Date.now() - 10_000, lang: 'de',
 };
@@ -77,7 +97,7 @@ await check('reservation sends one mail, 200 ok', async () => {
 });
 await check('catering sends one mail with guests + occasion', async () => {
   const { res } = await hit('/api/catering', {
-    ...valid, guests: 40, occasion: 'Hochzeit', date: '2026-09-12',
+    ...valid, guests: 40, occasion: 'Hochzeit', date: berlinDate(48),
   });
   eq(res.status, 200, 'status'); eq(sent.length, 1, 'mails sent');
   if (!sent[0].subject.includes('Catering-Anfrage')) throw new Error('wrong subject');
