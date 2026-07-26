@@ -66,13 +66,13 @@ against 4.114.0). Pointing it at the repo root would therefore publish `.git`,
 `scripts/`, and — on a local `wrangler deploy`, which uploads from the working
 tree — the unoptimized photo originals in `food_images/` and `source_images/`.
 
-So `scripts/build.sh` copies the 29 files that make up the site into `dist/`, and
+So `scripts/build.sh` copies the 48 files that make up the site into `dist/`, and
 `wrangler.jsonc` points at `dist/`. Listing what ships is the only reliable way
 to control it. `dist/` is gitignored. Verify with:
 
 ```bash
-sh scripts/build.sh && find dist -type f | wc -l   # expect 29
-npx wrangler deploy --dry-run                      # expect 32 (29 files + 3 dirs)
+sh scripts/build.sh && find dist -type f | wc -l   # expect 48
+npx wrangler deploy --dry-run                      # expect 51 (48 files + 3 dirs)
 ```
 
 Wrangler's "Read N files" count includes directories, which is why the dry-run

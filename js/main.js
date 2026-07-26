@@ -25,18 +25,26 @@ const UI = {
     'story.c2.title': 'Honest ingredients', 'story.c2.p': 'Local produce from Hamburg & surrounds, Himalayan grains and fresh fish.',
     'story.c3.title': 'Slow cooking', 'story.c3.p': 'Dal simmered eight hours. Mo:Mo skins rolled to order. No shortcuts.',
     'menu.eyebrow': '02 · OUR KITCHEN', 'menu.title.1': 'The', 'menu.title.accent': 'menu',
-    'menu.sub': 'Over 170 dishes across three kitchens — from Thakali classics to Cross Sushi. Browse here, then order online for pickup or delivery.',
+    'menu.sub': 'All {n} dishes across four kitchens — Thakali, Cross Sushi, Asian and the bar. Browse here, then order online for pickup or delivery.',
     'menu.chip.veg': 'Veg only', 'menu.chip.spicy': 'Spicy',
     'menu.order': 'See full menu & order online',
     'menu.pop': 'Loved',
+    'menu.hint': 'Tap a dish for its photo, allergens and spice level.',
+    'legend.title': 'Allergens & additives',
+    'legend.allergens': 'Allergens', 'legend.additives': 'Additives',
+    'sheet.num': 'No.', 'sheet.prices': 'Prices',
+    'sheet.none': 'No allergen letter is printed for this dish.',
+    'sheet.advice': 'The letters come from the printed menu; the spice level is our kitchen’s guide. Please tell us about any allergy or intolerance — we are glad to advise.',
+    'price.from': 'from {p}',
+    'spice.1': 'mildly spicy', 'spice.2': 'spicy',
     'menu.sig.label': 'OUR BESTSELLER', 'menu.sig.imgcap': 'From our kitchen — torched salmon signature roll', 'menu.sig.add': 'Order online',
-    'menu.items': 'items',
+    'menu.items': 'items', 'menu.drinks': 'drinks',
     'gallery.eyebrow': '03 · FROM THE KITCHEN', 'gallery.title.1': 'Inside the', 'gallery.title.accent': 'kitchen.',
     'gallery.cap.1': 'Maguro sashimi, freshly fanned',
     'gallery.cap.2': 'Sukuti — spiced, smoky, house-made',
     'gallery.cap.3': 'Cross avocado salad with pumpkin seeds',
     'gallery.cap.4': 'Thukpa — golden Himalayan noodle soup',
-    'gallery.cap.5': 'Avocado ceviche with sesame',
+    'gallery.cap.5': 'Red Power Roll — avocado and beetroot',
     'gallery.cap.6': 'Salmon sashimi on shiso leaves',
     'gallery.cap.7': 'Thakali set on brass — Thak Khola style',
     'gallery.cap.8': 'Mo:Mo platter with jhol pot',
@@ -46,7 +54,7 @@ const UI = {
     'gallery.cap.12': 'Salmon hosomaki — simple & precise',
     'gallery.cap.13': 'Tuna-avocado maki — deep red & creamy',
     'gallery.cap.14': 'Maguro nigiri — pure & simple',
-    'gallery.cap.15': 'Chicken curry, dal & rice — the thali up close',
+    'gallery.cap.15': 'Curry, dal & rice — the thali up close',
     'reviews.eyebrow': '04 · GUEST FAVOURITES', 'reviews.title.1': 'What guests', 'reviews.title.accent': 'order most.',
     'reviews.cta.p': "Enjoyed your meal? We'd love a quick review on Google.",
     'reviews.cta.btn': 'Review us on Google',
@@ -91,7 +99,7 @@ const UI = {
     'faq.q2': 'Do you have vegetarian & vegan dishes? What about allergies?',
     'faq.a2': "Yes — plenty of vegetarian and vegan options, from veggie Mo:Mo to veggie sushi rolls. Use the 'Veg only' filter in the menu to find them fast. For allergies, just ask — we're happy to advise.",
     'faq.q3': 'What are you known for?',
-    'faq.a3': "Hand-folded Mo:Mo, the authentic Thakali set, and our Cross signature sushi rolls — above all the torched 'Premium Smoke Salmon Roll'. Plus Thai classics like duck in coconut milk.",
+    'faq.a3': "Hand-folded Mo:Mo, the authentic Thakali set, and our Cross signature sushi rolls — above all the torched 'Premium Smoke Salmon Roll'. Plus Thai classics like crispy Cross duck teriyaki.",
     'faq.q4': 'Can I reserve a table or book catering?',
     'faq.a4': 'Both, gladly. Reserve via the form above, or give us a call. For catering from 8 to 200 guests, just send us a quick request.',
     'contact.eyebrow': '10 · VISIT US', 'contact.title.1': 'Find us on', 'contact.title.accent': 'Hellkamp.',
@@ -149,18 +157,26 @@ const UI = {
     'story.c2.title': 'Ehrliche Zutaten', 'story.c2.p': 'Regionale Produkte aus Hamburg & Umland, Himalaya-Getreide und frischer Fisch.',
     'story.c3.title': 'Langsames Kochen', 'story.c3.p': 'Dal acht Stunden geköchelt. Mo:Mo-Teig auf Bestellung gerollt. Keine Abkürzungen.',
     'menu.eyebrow': '02 · UNSERE KÜCHE', 'menu.title.1': 'Die', 'menu.title.accent': 'Karte',
-    'menu.sub': 'Über 170 Gerichte aus drei Küchen — von Thakali-Klassikern bis Cross Sushi. Stöbern Sie hier und bestellen Sie online für Abholung oder Lieferung.',
+    'menu.sub': 'Alle {n} Gerichte aus vier Küchen — Thakali, Cross Sushi, Asiatisch und Bar. Stöbern Sie hier und bestellen Sie online für Abholung oder Lieferung.',
     'menu.chip.veg': 'Nur vegetarisch', 'menu.chip.spicy': 'Scharf',
     'menu.order': 'Ganze Karte ansehen & online bestellen',
     'menu.pop': 'Beliebt',
+    'menu.hint': 'Gericht antippen für Foto, Allergene und Schärfe.',
+    'legend.title': 'Allergene & Zusatzstoffe',
+    'legend.allergens': 'Allergene', 'legend.additives': 'Zusatzstoffe',
+    'sheet.num': 'Nr.', 'sheet.prices': 'Preise',
+    'sheet.none': 'Für dieses Gericht ist in der Karte kein Allergen abgedruckt.',
+    'sheet.advice': 'Die Buchstaben stammen aus der gedruckten Karte, die Schärfe ist ein Richtwert unserer Küche. Bei Allergien oder Unverträglichkeiten sprechen Sie uns bitte an — wir beraten Sie gern.',
+    'price.from': 'ab {p}',
+    'spice.1': 'leicht scharf', 'spice.2': 'scharf',
     'menu.sig.label': 'UNSER BESTSELLER', 'menu.sig.imgcap': 'Aus unserer Küche — flambierte Lachs-Signature-Rolle', 'menu.sig.add': 'Online bestellen',
-    'menu.items': 'Gerichte',
+    'menu.items': 'Gerichte', 'menu.drinks': 'Getränke',
     'gallery.eyebrow': '03 · AUS DER KÜCHE', 'gallery.title.1': 'In der', 'gallery.title.accent': 'Küche.',
     'gallery.cap.1': 'Maguro-Sashimi — frisch aufgefächert',
     'gallery.cap.2': 'Sukuti — würzig, rauchig, hausgemacht',
     'gallery.cap.3': 'Cross Avocado-Salat mit Kürbiskernen',
     'gallery.cap.4': 'Thukpa — goldene Himalaya-Nudelsuppe',
-    'gallery.cap.5': 'Avocado-Ceviche mit Sesam',
+    'gallery.cap.5': 'Red Power Roll — Avocado & Rote Bete',
     'gallery.cap.6': 'Lachs-Sashimi auf Shiso-Blättern',
     'gallery.cap.7': 'Thakali-Set auf Messing — wie im Thak Khola',
     'gallery.cap.8': 'Mo:Mo-Teller mit Jhol-Topf',
@@ -170,7 +186,7 @@ const UI = {
     'gallery.cap.12': 'Lachs-Hosomaki — schlicht & präzise',
     'gallery.cap.13': 'Thunfisch-Avocado-Maki — tiefrot & cremig',
     'gallery.cap.14': 'Maguro-Nigiri — pur',
-    'gallery.cap.15': 'Hühnercurry, Dal & Reis — das Thali im Detail',
+    'gallery.cap.15': 'Curry, Dal & Reis — das Thali im Detail',
     'reviews.eyebrow': '04 · GÄSTELIEBLINGE', 'reviews.title.1': 'Was am meisten', 'reviews.title.accent': 'bestellt wird.',
     'reviews.cta.p': 'Hat es dir geschmeckt? Wir freuen uns über deine Bewertung bei Google.',
     'reviews.cta.btn': 'Bei Google bewerten',
@@ -215,7 +231,7 @@ const UI = {
     'faq.q2': 'Habt ihr vegetarische & vegane Gerichte? Wie sieht es mit Allergien aus?',
     'faq.a2': 'Ja — viele vegetarische und vegane Optionen, vom Veggie-Mo:Mo bis zu Veggie-Sushi-Rollen. Mit dem Filter „Nur vegetarisch“ oben in der Karte findest du sie schnell. Bei Allergien sprich uns bitte an, wir beraten dich gern.',
     'faq.q3': 'Wofür seid ihr bekannt?',
-    'faq.a3': 'Für handgefaltete Mo:Mo, das authentische Thakali-Set und unsere Cross-Signature-Sushi-Rollen — allen voran der flambierte „Premium Smoke Salmon Roll“. Dazu Thai-Klassiker wie Ente in Kokosmilch.',
+    'faq.a3': 'Für handgefaltete Mo:Mo, das authentische Thakali-Set und unsere Cross-Signature-Sushi-Rollen — allen voran der flambierte „Premium Smoke Salmon Roll“. Dazu Thai-Klassiker wie die knusprige Cross Ente Teriyaki.',
     'faq.q4': 'Kann ich einen Tisch reservieren oder Catering buchen?',
     'faq.a4': 'Beides gern. Reserviere direkt über das Formular oben, oder ruf uns an. Für Catering von 8 bis 200 Gästen schick uns einfach eine kurze Anfrage.',
     'contact.eyebrow': '10 · BESUCH', 'contact.title.1': 'Findet uns am', 'contact.title.accent': 'Hellkamp.',
@@ -273,18 +289,26 @@ const UI = {
     'story.c2.title': 'इमानदार सामग्री', 'story.c2.p': 'स्थानीय हाम्बुर्गको उत्पादन, हिमाली अन्न र ताजा माछा।',
     'story.c3.title': 'बिस्तारै पकाइ', 'story.c3.p': 'दाल आठ घण्टा। म:मको छाला अर्डरमा बेलिन्छ।',
     'menu.eyebrow': '०२ · हाम्रो भान्सा', 'menu.title.1': 'हाम्रो', 'menu.title.accent': 'मेनु',
-    'menu.sub': 'तीन भान्साका १७० भन्दा बढी परिकार — थकाली देखि क्रस सुसीसम्म। यहाँ हेर्नुहोस्, अनि पिकअप वा डेलिभरीका लागि अनलाइन अर्डर गर्नुहोस्।',
+    'menu.sub': 'चार भान्साका सबै {n} परिकार — थकाली, क्रस सुसी, एसियाली र बार। यहाँ हेर्नुहोस्, अनि पिकअप वा डेलिभरीका लागि अनलाइन अर्डर गर्नुहोस्।',
     'menu.chip.veg': 'शाकाहारी मात्र', 'menu.chip.spicy': 'पिरो',
     'menu.order': 'पूरै मेनु हेर्नुहोस् र अनलाइन अर्डर गर्नुहोस्',
     'menu.pop': 'लोकप्रिय',
+    'menu.hint': 'फोटो, एलर्जेन र पिरोपन हेर्न परिकारमा थिच्नुहोस्।',
+    'legend.title': 'एलर्जेन र थपिने पदार्थ',
+    'legend.allergens': 'एलर्जेन', 'legend.additives': 'थपिने पदार्थ',
+    'sheet.num': 'नं.', 'sheet.prices': 'मूल्य',
+    'sheet.none': 'यो परिकारका लागि कार्डमा कुनै एलर्जेन अक्षर छापिएको छैन।',
+    'sheet.advice': 'यी अक्षर छापिएको मेनुबाट लिइएका हुन्; पिरोपन हाम्रो भान्साको अनुमान मात्र हो। एलर्जी वा असहिष्णुता भए हामीलाई भन्नुहोस् — खुसीसाथ सल्लाह दिन्छौं।',
+    'price.from': '{p} देखि',
+    'spice.1': 'अलिकति पिरो', 'spice.2': 'पिरो',
     'menu.sig.label': 'हाम्रो बेस्टसेलर', 'menu.sig.imgcap': 'हाम्रो भान्साबाट — फ्ल्याम्बे सामन सिग्नेचर रोल', 'menu.sig.add': 'अनलाइन अर्डर गर्नुहोस्',
-    'menu.items': 'परिकार',
+    'menu.items': 'परिकार', 'menu.drinks': 'पेय',
     'gallery.eyebrow': '०३ · भान्साबाट', 'gallery.title.1': 'भान्साभित्र', 'gallery.title.accent': 'एक झलक।',
     'gallery.cap.1': 'मागुरो (टुना) सासिमी — ताजा काटिएको',
     'gallery.cap.2': 'सुकुटी — पिरो र धुवाँदार',
     'gallery.cap.3': 'क्रस एभोकाडो सलाद, कद्दूको बीउसहित',
     'gallery.cap.4': 'थुक्पा — सुनौलो हिमाली नूडल सुप',
-    'gallery.cap.5': 'एभोकाडो सेभिचे, तिलसँग',
+    'gallery.cap.5': 'रेड पावर रोल — एभोकाडो र चुकन्दर',
     'gallery.cap.6': 'सामन सासिमी, शिसो पातमा',
     'gallery.cap.7': 'पित्तलको थालीमा थकाली सेट',
     'gallery.cap.8': 'म:म थाल र झोल',
@@ -294,7 +318,7 @@ const UI = {
     'gallery.cap.12': 'सामन होसोमाकी — सरल र सफा',
     'gallery.cap.13': 'टुना-एभोकाडो माकी — गाढा रातो र क्रिमी',
     'gallery.cap.14': 'मागुरो निगिरी — शुद्ध स्वाद',
-    'gallery.cap.15': 'कुखुराको करी, दाल र भात — थाली नजिकबाट',
+    'gallery.cap.15': 'करी, दाल र भात — थाली नजिकबाट',
     'reviews.eyebrow': '०४ · ग्राहकका मनपर्ने', 'reviews.title.1': 'सबैभन्दा धेरै', 'reviews.title.accent': 'मगाइने परिकार।',
     'reviews.cta.p': 'मीठो लाग्यो? गुगलमा समीक्षा दिनुभयो भने खुसी हुनेछौं।',
     'reviews.cta.btn': 'गुगलमा समीक्षा दिनुहोस्',
@@ -339,7 +363,7 @@ const UI = {
     'faq.q2': 'तपाईंसँग शाकाहारी र भेगन परिकार छन्? एलर्जीको के हुन्छ?',
     'faq.a2': 'छन् — भेजी म:म देखि भेजी सुसी रोलसम्म धेरै शाकाहारी र भेगन विकल्प। मेनुमा भएको “शाकाहारी मात्र” फिल्टरले छिट्टै भेट्टाउनुहुन्छ। एलर्जी भए हामीलाई सोध्नुहोस्, खुसीसाथ सल्लाह दिन्छौं।',
     'faq.q3': 'तपाईं केका लागि प्रसिद्ध हुनुहुन्छ?',
-    'faq.a3': 'हातले बनाएको म:म, प्रामाणिक थकाली सेट, र हाम्रा क्रस सिग्नेचर सुसी रोल — विशेषगरी फ्ल्याम्बे “प्रिमियम स्मोक सामन रोल”। साथै नरिवलको दूधमा हाँस जस्ता थाई क्लासिक।',
+    'faq.a3': 'हातले बनाएको म:म, प्रामाणिक थकाली सेट, र हाम्रा क्रस सिग्नेचर सुसी रोल — विशेषगरी फ्ल्याम्बे “प्रिमियम स्मोक सामन रोल”। साथै क्रस हाँस तेरियाकी जस्ता थाई क्लासिक।',
     'faq.q4': 'म टेबल आरक्षण वा केटरिङ बुक गर्न सक्छु?',
     'faq.a4': 'दुवै हुन्छ। माथिको फारमबाट आरक्षण गर्नुहोस्, वा हामीलाई फोन गर्नुहोस्। ८ देखि २०० जनासम्मको केटरिङका लागि छोटो अनुरोध पठाउनुहोस्।',
     'contact.eyebrow': '१० · सम्पर्क', 'contact.title.1': 'हेल्काम्पमा', 'contact.title.accent': 'भेटौं।',
@@ -396,7 +420,11 @@ const state = {
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const t = (key) => UI[state.lang][key] ?? UI.en[key] ?? key;
-const fmt = (n) => '€' + n.toFixed(2);
+/* German writes 14,90 € — the printed card does too, so match it per language. */
+const fmt = (n) => {
+  const amount = localiseDigits(n.toFixed(2));
+  return state.lang === 'de' ? `${amount.replace('.', ',')} €` : `€${amount}`;
+};
 const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const mobileHeaderQuery = window.matchMedia('(max-width: 1023px)');
 const activeAnimations = new WeakMap();
@@ -440,7 +468,8 @@ function applyI18n() {
 
   $$('[data-i18n]').forEach(el => {
     const val = t(el.getAttribute('data-i18n'));
-    if (typeof val === 'string') el.textContent = val;
+    /* {n} stands for the dish count, so the copy can never drift from the data. */
+    if (typeof val === 'string') el.textContent = val.replace('{n}', localiseDigits(dishCount()));
   });
 
   I18N_ATTRS.forEach(attr => {
@@ -473,6 +502,8 @@ document.addEventListener('DOMContentLoaded', () => {
   applyI18n();
   renderSignature();
   renderMenu();
+  renderAllergenLegend();
+  initDishSheet();
   renderFavourites();
   prepareImages();
   initRevealMotion();
@@ -488,6 +519,8 @@ function initLanguagePill() {
       applyI18n();
       renderSignature();
       renderMenu({ animate: true });
+      renderAllergenLegend();
+      if (openDishKey) renderDishSheet(openDishKey);
       renderFavourites();
       renderTimePills();
       renderHours();
@@ -601,28 +634,59 @@ function renderCategoryTabs() {
   });
 }
 
+function dishCount() {
+  return window.MENU_DATA.reduce(
+    (total, g) => total + g.categories.reduce((n, c) => n + c.items.length, 0), 0);
+}
+
 function isVegItem(item) {
-  return (item.badges || []).some(b => b === 'vegetarian' || b === 'vegan');
+  return item.veg === true;
 }
 
 function itemMatchesFilters(item) {
   return (!state.vegOnly || isVegItem(item))
-    && (!state.spicyOnly || (item.badges || []).includes('spicy'));
+    && (!state.spicyOnly || Boolean(item.spice));
+}
+
+const flameSvg = (lit) => `<svg class="${lit ? 'spice-on' : 'spice-off'}" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M13 2c1.7 3.3.6 5.3-1.1 7.2 3-.8 5.9 1.4 5.9 5.2A6.8 6.8 0 0 1 11 21.2a6.5 6.5 0 0 1-6.4-6.6c0-3 1.8-5 2.8-6.8.2 1 .7 1.9 1.6 2.4C8.1 7 9.8 4 13 2z"/></svg>`;
+
+/* Two pips, matching the card's own scale: leicht scharf / scharf. */
+function spiceTagHtml(level) {
+  const pips = [1, 2].map(i => flameSvg(i <= level)).join('');
+  return `<span class="tag spicy"><span class="spice-meter">${pips}</span>${escapeHtml(t(`spice.${level}`))}</span>`;
+}
+
+function popBadgeHtml(item) {
+  return `<span class="pop-badge"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>#${localiseDigits(item.pop)} ${escapeHtml(t('menu.pop'))}</span>`;
+}
+
+/* The printed card sets the allergen letters as small superscript behind the
+   dish name; keep that so the card and the site read the same way. Inside the
+   name span, not beside it, so it hugs the last word instead of becoming its
+   own flex item. */
+function allergenSupHtml(item) {
+  const codes = item.allergens || [];
+  return codes.length ? `<sup class="dish-allergens">${escapeHtml(codes.join(','))}</sup>` : '';
 }
 
 function itemBadges(item) {
   const tags = [];
-  if (item.pop) {
-    tags.push(`<span class="pop-badge"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>#${item.pop} ${t('menu.pop')}</span>`);
-  }
+  if (item.pop) tags.push(popBadgeHtml(item));
   if (isVegItem(item)) tags.push(`<span class="tag veg">${escapeHtml(t('tag.veg'))}</span>`);
-  if ((item.badges || []).includes('spicy')) tags.push(`<span class="tag spicy">${escapeHtml(t('tag.spicy'))}</span>`);
+  if (item.spice) tags.push(spiceTagHtml(item.spice));
+  if (item.img) {
+    tags.push(`<span class="tag has-photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5A2 2 0 0 1 5 6.5h1.8l1.2-2h8l1.2 2H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.4"/></svg>${escapeHtml(t('tag.photo'))}</span>`);
+  }
   return tags.join('');
 }
 
+/* Where the card prints several prices the row shows the lowest, prefixed —
+   the sheet lists every option. */
 function priceHtml(item) {
-  const was = item.was ? `<span class="was">${fmt(item.was)}</span>` : '';
-  return `${was}${fmt(item.price)}`;
+  const price = item.variants
+    ? t('price.from').replace('{p}', fmt(item.price))
+    : fmt(item.price);
+  return escapeHtml(price);
 }
 
 function renderMenu({ animate = false, keepActiveTabVisible = false } = {}) {
@@ -633,35 +697,40 @@ function renderMenu({ animate = false, keepActiveTabVisible = false } = {}) {
   const list = $('#menuList');
   if (!group) { list.innerHTML = ''; return; }
 
-  const cats = state.category === 'all'
-    ? group.categories
-    : group.categories.filter(c => c.slug === state.category);
+  /* Rows carry their position in MENU_DATA rather than a dish id: the card
+     prints some numbers twice (52, 250, 252, 314), so the number alone would
+     not identify a dish. */
+  const gi = window.MENU_DATA.indexOf(group);
 
-  list.innerHTML = cats.map(cat => {
-    const items = cat.items.filter(itemMatchesFilters);
-    if (!items.length) return '';
+  list.innerHTML = group.categories.map((cat, ci) => {
+    if (state.category !== 'all' && cat.slug !== state.category) return '';
+    const rows = cat.items
+      .map((item, ii) => ({ item, ii }))
+      .filter(({ item }) => itemMatchesFilters(item));
+    if (!rows.length) return '';
     return `
       <div class="menu-section">
         <div class="menu-section-head">
           <h3>${escapeHtml(loc(cat.label))}</h3>
         </div>
-        <div class="menu-section-sub">${localiseDigits(items.length)} ${t('menu.items')}</div>
-        <div class="dish-list${items.length >= 5 ? ' cols' : ''}">
-        ${items.map(item => {
+        <div class="menu-section-sub">${localiseDigits(rows.length)} ${t(group.group === 'drinks' ? 'menu.drinks' : 'menu.items')}</div>
+        ${cat.note ? `<p class="menu-section-note">${escapeHtml(loc(cat.note))}</p>` : ''}
+        <div class="dish-list${rows.length >= 5 ? ' cols' : ''}">
+        ${rows.map(({ item, ii }) => {
           const badges = itemBadges(item);
           return `
-            <div class="dish">
-              <div class="dish-num">${item.num}</div>
-              <div class="dish-body">
-                <div class="dish-title-row">
-                  <h4>${escapeHtml(loc(item.name))}</h4>
+            <button class="dish" type="button" data-dish="${gi}.${ci}.${ii}" aria-haspopup="dialog">
+              <span class="dish-num">${escapeHtml(localiseDigits(item.num))}</span>
+              <span class="dish-body">
+                <span class="dish-title-row">
+                  <span class="dish-name">${escapeHtml(loc(item.name))}${allergenSupHtml(item)}</span>
                   <span class="dish-dots"></span>
                   <span class="dish-price">${priceHtml(item)}</span>
-                </div>
-                ${loc(item.desc) ? `<div class="dish-desc">${escapeHtml(loc(item.desc))}</div>` : ''}
-                ${badges ? `<div class="dish-tags">${badges}</div>` : ''}
-              </div>
-            </div>
+                </span>
+                ${loc(item.desc) ? `<span class="dish-desc">${escapeHtml(loc(item.desc))}</span>` : ''}
+                ${badges ? `<span class="dish-tags">${badges}</span>` : ''}
+              </span>
+            </button>
           `;
         }).join('')}
         </div>
@@ -736,6 +805,189 @@ function initMenuFilters() {
       ], { duration: 240, easing: 'cubic-bezier(0.2, 0.85, 0.25, 1.15)' });
     });
   });
+}
+
+/* ===== Dish detail sheet =====
+ * A bottom sheet on phones, a centred card from 720px up. It is the only place
+ * the full allergen wording appears, so it has to survive a language switch
+ * while open — hence the remembered key. */
+let sheetReturnFocus = null;
+let openDishKey = null;
+
+function dishAt(key) {
+  const [gi, ci, ii] = String(key).split('.').map(Number);
+  const group = window.MENU_DATA[gi];
+  const cat = group && group.categories[ci];
+  const item = cat && cat.items[ii];
+  return item ? { group, cat, item } : null;
+}
+
+/* One builder for both the sheet and the legend under the menu. */
+function allergenListHtml(codes, kind) {
+  const rows = codes
+    .map(code => ({ code, info: window.ALLERGEN_INFO[code] }))
+    .filter(({ info }) => info && info.kind === kind);
+  if (!rows.length) return '';
+  const heading = kind === 'allergen' ? 'legend.allergens' : 'legend.additives';
+  return `
+    <div class="sheet-section-title">${escapeHtml(t(heading))}</div>
+    <ul class="allergen-list${kind === 'allergen' ? ' is-allergen' : ''}">
+      ${rows.map(({ code, info }) => `
+        <li><span class="allergen-code">${escapeHtml(code)}</span><span>${escapeHtml(loc(info))}</span></li>
+      `).join('')}
+    </ul>`;
+}
+
+function renderDishSheet(key) {
+  const found = dishAt(key);
+  if (!found) return;
+  const { cat, item } = found;
+  const codes = item.allergens || [];
+
+  const tags = [];
+  if (item.pop) tags.push(popBadgeHtml(item));
+  if (isVegItem(item)) tags.push(`<span class="tag veg">${escapeHtml(t('tag.veg'))}</span>`);
+  if (item.spice) tags.push(spiceTagHtml(item.spice));
+
+  $('#dishSheetBody').innerHTML = `
+    ${item.img ? `
+      <div class="sheet-photo">
+        <img src="images/${item.img}.jpg" alt="${escapeHtml(loc(item.name))}" loading="lazy"/>
+      </div>` : ''}
+    <div class="sheet-eyebrow">${escapeHtml(`${t('sheet.num')} ${localiseDigits(item.num)} · ${loc(cat.label)}`)}</div>
+    <h3 id="dishSheetTitle">${escapeHtml(loc(item.name))}${allergenSupHtml(item)}</h3>
+    ${tags.length ? `<div class="sheet-tags">${tags.join('')}</div>` : ''}
+    <div class="sheet-price">${priceHtml(item)}</div>
+    ${item.variants ? `
+      <ul class="sheet-variants">
+        ${item.variants.map(v => `
+          <li>
+            <span>${escapeHtml(loc(v.label))}</span>
+            <span class="leader"></span>
+            <span class="v-price">${escapeHtml(fmt(v.price))}</span>
+          </li>
+        `).join('')}
+      </ul>` : ''}
+    ${loc(item.desc) ? `<p class="sheet-desc">${escapeHtml(loc(item.desc))}</p>` : ''}
+    ${cat.note ? `<p class="sheet-note">${escapeHtml(loc(cat.note))}</p>` : ''}
+    ${item.note ? `<p class="sheet-note">${escapeHtml(loc(item.note))}</p>` : ''}
+    ${allergenListHtml(codes, 'allergen')}
+    ${allergenListHtml(codes, 'additive')}
+    ${codes.length ? '' : `<p class="sheet-note">${escapeHtml(t('sheet.none'))}</p>`}
+    <p class="sheet-advice">${escapeHtml(t('sheet.advice'))}</p>
+  `;
+  prepareImages($('#dishSheetBody'));
+}
+
+function openDishSheet(key, trigger) {
+  if (!dishAt(key)) return;
+  const scrim = $('#dishScrim');
+  openDishKey = key;
+  renderDishSheet(key);
+  sheetReturnFocus = trigger instanceof HTMLElement ? trigger : null;
+  scrim.inert = false;
+  scrim.setAttribute('aria-hidden', 'false');
+  scrim.classList.add('open');
+  document.body.classList.add('drawer-open');
+  $('#dishSheetBody').scrollTop = 0;
+  requestAnimationFrame(() => $('#dishSheetClose').focus({ preventScroll: true }));
+}
+
+function closeDishSheet() {
+  const scrim = $('#dishScrim');
+  if (!scrim.classList.contains('open')) return;
+  scrim.classList.remove('open');
+  scrim.inert = true;
+  scrim.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('drawer-open');
+  openDishKey = null;
+  sheetReturnFocus?.focus({ preventScroll: true });
+  sheetReturnFocus = null;
+}
+
+function initDishSheet() {
+  const scrim = $('#dishScrim');
+  const sheet = $('#dishSheet');
+  if (!scrim || !sheet) return;
+  scrim.inert = true;
+
+  /* Delegated, so re-rendering the list on every filter change costs nothing. */
+  $('#menuList')?.addEventListener('click', (e) => {
+    const row = e.target.closest('[data-dish]');
+    if (row) openDishSheet(row.dataset.dish, row);
+  });
+
+  $('#dishSheetClose').addEventListener('click', () => closeDishSheet());
+  scrim.addEventListener('click', (e) => { if (e.target === scrim) closeDishSheet(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!scrim.classList.contains('open')) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeDishSheet();
+      return;
+    }
+    if (e.key !== 'Tab') return;
+    const focusable = $$('a[href], button:not([disabled])', sheet);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  initSheetDrag(sheet, $('#dishSheetGrip'));
+}
+
+/* Flick the grip down to dismiss — the gesture people already expect from a
+   bottom sheet. The grip is hidden on desktop, where this never runs. */
+function initSheetDrag(sheet, grip) {
+  if (!grip) return;
+  let dragging = false;
+  let startY = 0;
+  let offset = 0;
+
+  const finish = () => {
+    if (!dragging) return;
+    dragging = false;
+    sheet.classList.remove('is-dragging');
+    sheet.style.transform = '';
+    if (offset > 96) closeDishSheet();
+  };
+
+  grip.addEventListener('pointerdown', (e) => {
+    if (e.button > 0) return;
+    dragging = true;
+    startY = e.clientY;
+    offset = 0;
+    sheet.classList.add('is-dragging');
+    grip.setPointerCapture(e.pointerId);
+  });
+  grip.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    offset = Math.max(0, e.clientY - startY);
+    sheet.style.transform = `translateY(${offset}px)`;
+  });
+  grip.addEventListener('pointerup', finish);
+  grip.addEventListener('pointercancel', finish);
+}
+
+function renderAllergenLegend() {
+  const body = $('#allergenLegendBody');
+  if (!body) return;
+  /* JS object key order puts the numeric codes first; the card lists a–k, then
+     1 and 2, so restore that. */
+  const isDigit = (code) => /^[0-9]$/.test(code);
+  const codes = Object.keys(window.ALLERGEN_INFO).sort((a, b) => {
+    if (isDigit(a) !== isDigit(b)) return isDigit(a) ? 1 : -1;
+    return a.localeCompare(b);
+  });
+  body.innerHTML = allergenListHtml(codes, 'allergen') + allergenListHtml(codes, 'additive');
 }
 
 /* ===== Signature dish (features the #1 bestseller) ===== */

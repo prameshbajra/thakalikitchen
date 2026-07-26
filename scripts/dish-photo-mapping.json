@@ -1,0 +1,107 @@
+[
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (3).jpeg",
+    "out": "dish-022-avocado-salat",
+    "fit": "subject",
+    "fill": 0.84
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (1).jpeg",
+    "out": "dish-044-yellowfin-tuna-nigiri",
+    "fit": "subject",
+    "fill": 0.8
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (2).jpeg",
+    "out": "dish-052-lachs-maki",
+    "fit": "subject",
+    "fill": 0.92
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (4).jpeg",
+    "out": "dish-054-lachs-avocado-maki",
+    "fit": "subject",
+    "fill": 0.82
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (8).jpeg",
+    "out": "dish-055-tuna-avocado-maki",
+    "fit": "subject",
+    "fill": 0.82
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (6).jpeg",
+    "out": "dish-091-lachs-sashimi",
+    "fit": "subject",
+    "fill": 0.88
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.55 AM (3).jpeg",
+    "out": "dish-092-maguro-sashimi",
+    "fit": "subject",
+    "fill": 0.9
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.55 AM (2).jpeg",
+    "out": "dish-111-premium-smoke-salmon-roll",
+    "fit": "subject",
+    "fill": 0.95
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.56 AM (5).jpeg",
+    "out": "dish-130-red-power-roll",
+    "fit": "subject",
+    "fill": 0.78
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.55 AM (1).jpeg",
+    "out": "dish-140-cross-crunchy-roll",
+    "fit": "subject",
+    "fill": 0.92
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.57 AM (5).jpeg",
+    "out": "dish-501-sel-roti",
+    "focus": 0.62
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.57 AM.jpeg",
+    "out": "dish-502-chana-chatpat",
+    "focus": 0.45
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.57 AM (3).jpeg",
+    "out": "dish-503-sukuti",
+    "focus": 0.55
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM (7).jpeg",
+    "out": "dish-505-chicken-chilli",
+    "focus": 0.5
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.57 AM (4).jpeg",
+    "out": "dish-506-panipuri",
+    "focus": 0.45
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.37.57 AM (2).jpeg",
+    "out": "dish-510-momo",
+    "focus": 0.5
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM (6).jpeg",
+    "out": "dish-511-jhol-momo",
+    "focus": 0.5
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM (3).jpeg",
+    "out": "dish-531-thakali-set",
+    "focus": 0.5
+  },
+  {
+    "src": "food_images/WhatsApp Image 2026-05-25 at 7.38.56 AM (4).jpeg",
+    "out": "dish-532-thukpa",
+    "focus": 0.5
+  }
+]

@@ -1,50 +1,95 @@
 /* ============================================
    THAKALI KITCHEN — Menu Data
    ============================================ */
-/* Single source of truth for menu content.
+/* Single source of truth for menu content, transcribed from the printed
+   Speisekarte. German names and prices are exactly as printed — including the
+   card's own quirks (numbers 52/250/252/314 appear twice, "Papkrika",
+   "Veggi Mix"). Do not "fix" them here.
+
    `name` / `desc` / `label` are either a plain string (identical in every
    language — producer names, bottle sizes) or an { en, de, ne } map.
-   js/main.js resolves both shapes through loc(). */
+   js/main.js resolves both shapes through loc().
+
+   Item fields
+     num        as printed on the card
+     price      single price, or the lowest of `variants`
+     variants   [{ label, price }] where the card prints several prices
+     allergens  the small letters behind the dish name; [] = none printed
+     veg        true only where the card prints the green vegetarian dot
+     spice      1 = leicht scharf, 2 = scharf. The photographed pages carry no
+                spice dots, so this is read off the printed wording: 2 where the
+                text says "scharf" of the dish or its sauce, 1 for "leicht
+                scharf" / "pikant" / "Spicy …" / a named chilli or peperoni.
+     img        images/<img>.jpg — only set where the dish in the photo is
+                positively identified
+     pop        guest-favourite rank, drives the bestseller card and #04 list */
+
+(function () {
+
+window.ALLERGEN_INFO = {
+  /* kind: 'allergen' = the 14 declarable allergens; 'additive' = Zusatzstoff. */
+  a: { kind: 'additive', en: 'Contains sweeteners', de: 'mit Süßungsmittel(n)', ne: 'मिठास (स्वीटनर) प्रयोग गरिएको' },
+  b: { kind: 'additive', en: 'Contains colouring', de: 'mit Farbstoff', ne: 'रङ (कलरिङ) प्रयोग गरिएको' },
+  c: { kind: 'additive', en: 'Contains preservative', de: 'mit Konservierungsstoff', ne: 'प्रिजर्भेटिभ प्रयोग गरिएको' },
+  d: { kind: 'allergen', en: 'Contains gluten (cereals)', de: 'enthält glutenhaltiges Getreide', ne: 'ग्लुटेनयुक्त अन्न' },
+  e: { kind: 'additive', en: 'Contains acidity regulator', de: 'mit Säuerungsmittel', ne: 'अम्लीकारक प्रयोग गरिएको' },
+  f: { kind: 'allergen', en: 'Contains fish', de: 'enthält Fisch', ne: 'माछा' },
+  g: { kind: 'allergen', en: 'Contains milk (lactose)', de: 'enthält Milch (laktosehaltig)', ne: 'दूध (ल्याक्टोज)' },
+  h: { kind: 'allergen', en: 'Contains peanuts', de: 'enthält Erdnüsse', ne: 'बदाम' },
+  i: { kind: 'allergen', en: 'Contains mustard', de: 'enthält Senf', ne: 'तोरी (मस्टर्ड)' },
+  j: { kind: 'allergen', en: 'Contains tree nuts', de: 'enthält Schalenfrüchte / Nüsse', ne: 'नट (काजु, ओखर आदि)' },
+  k: { kind: 'allergen', en: 'Contains crustaceans', de: 'enthält Krebstiere', ne: 'क्रस्टेसियन (झिँगेमाछा आदि)' },
+  1: { kind: 'additive', en: 'Contains caffeine', de: 'koffeinhaltig', ne: 'क्याफिनयुक्त' },
+  2: { kind: 'additive', en: 'Contains stabilisers', de: 'mit Stabilisatoren', ne: 'स्टेबिलाइजर प्रयोग गरिएको' },
+};
+
+/* Meat choices repeat across the Thakali main dishes. */
+const CHICKEN = { en: 'with chicken', de: 'mit Hühnerfleisch', ne: 'कुखुराको मासुसँग' };
+const PORK = { en: 'with pork', de: 'mit Schweinefleisch', ne: 'बंगुरको मासुसँग' };
+const LAMB = { en: 'with lamb', de: 'mit Lammfleisch', ne: 'खसीको मासुसँग' };
 
 window.MENU_DATA = [
   {
     group: 'thakali',
-    groupLabel: { en: 'Thakali Kitchen', de: 'Thakali Kitchen', ne: 'थकाली किचन' },
+    groupLabel: { en: 'Thakali', de: 'Thakali', ne: 'थकाली' },
     categories: [
       {
-        slug: 'starters',
-        label: { en: 'Starters', de: 'Vorspeisen', ne: 'सुरुवाती परिकार' },
+        slug: 'thakali-starters',
+        label: { en: 'Thakali Starters', de: 'Thakali Starter', ne: 'थकाली सुरुवाती परिकार' },
         items: [
-        { num: '500', name: { en: 'Bhatmas Sadeko', de: 'Bhatmas Sadeko', ne: 'भटमास सादेको' }, desc: { en: 'Soybeans, fresh garlic, ginger, green chilli', de: 'Sojabohnen, frischer Knoblauch, Ingwer, grüne Chili', ne: 'भटमास, ताजा लसुन, अदुवा, हरियो खुर्सानी' }, price: 4.90, badges: ['vegetarian', 'spicy'] },
-        { num: '501', name: { en: 'Sherchan Sel Roti', de: 'Sherchan Sel Roti', ne: 'शेर्चन सेल रोटी' }, desc: { en: 'Sherchan style, with alu dam', de: 'Sherchan-Art, mit Alu Dam', ne: 'शेर्चन शैलीमा, आलु दमसँग' }, price: 5.90, badges: ['vegetarian'] },
-        { num: '502', name: { en: 'Chana Chatpat', de: 'Chana Chatpat', ne: 'चना चटपट' }, desc: { en: 'Potato, puffed rice, Wai Wai, onion, cucumber', de: 'Kartoffel, Puffreis, Wai Wai, Zwiebel, Gurke', ne: 'आलु, भुजा, वाइवाइ, प्याज, काँक्रो' }, price: 8.90, badges: ['vegetarian'] },
-        { num: '503', name: { en: 'Sukuti', de: 'Sukuti', ne: 'सुकुटी' }, desc: { en: 'Dried buffalo meat', de: 'Getrocknetes Büffelfleisch', ne: 'राँगाको सुकेको मासु' }, price: 13.90, badges: [] },
-        { num: '504', name: { en: 'Bhutan', de: 'Bhutan', ne: 'भुटन' }, desc: null, price: 9.90, badges: [] },
-        { num: '505', name: { en: 'Chicken Chilli', de: 'Chicken Chilli', ne: 'चिल्ली चिकेन' }, desc: { en: 'Chicken, bell pepper, onion', de: 'Hühnerfleisch, Paprika, Zwiebel', ne: 'कुखुराको मासु, भेडे खुर्सानी, प्याज' }, price: 11.90, badges: ['spicy'] },
-        { num: '506', name: { en: 'Panipuri', de: 'Panipuri', ne: 'पानीपुरी' }, desc: { en: '10 pieces', de: '10 Stück', ne: '१० पीस' }, price: 10.90, badges: ['vegetarian'] },
+        { num: '500', name: { en: 'Bhatmas Sadeko', de: 'Bhatmas Sadeko', ne: 'भटमास सादेको' }, desc: { en: 'Soybeans, fresh garlic, ginger, green chilli', de: 'Sojabohnen, frischer Knoblauch, Ingwer, grünes Chilli', ne: 'भटमास, ताजा लसुन, अदुवा, हरियो खुर्सानी' }, price: 5.90, allergens: ['a', 'b', 'd', 'g'], veg: true, spice: 1 },
+        { num: '501', name: { en: 'Sherchan Sel Roti', de: 'Sherchan Sel Roti', ne: 'शेर्चन सेल रोटी' }, desc: { en: 'Sherchan style with alu dam — potatoes marinated the Nepali way', de: 'Sherchan Style mit Alu Dam (Kartoffeln mariniert nach nepalesischer Art)', ne: 'शेर्चन शैली, आलु दमसँग (नेपाली शैलीमा मरिनेट गरिएको आलु)' }, price: 5.90, allergens: ['a', 'b', 'd', 'g'], veg: true, img: 'dish-501-sel-roti' },
+        { num: '502', name: { en: 'Chana Chatpat', de: 'Chana Chatpat', ne: 'चना चटपट' }, desc: { en: 'Potatoes, puffed rice, Wai Wai, onions, cucumber', de: 'Kartoffeln, Puffreis, Wai Wai, Zwiebeln, Gurke', ne: 'आलु, भुजा, वाइवाइ, प्याज, काँक्रो' }, price: 8.90, allergens: ['a', 'b', 'd', 'g'], veg: true, img: 'dish-502-chana-chatpat' },
+        { num: '503', name: { en: 'Sukuti', de: 'Sukuti', ne: 'सुकुटी' }, desc: { en: 'Dry buffalo meat', de: 'Dry Büffel-Fleisch', ne: 'राँगाको सुकेको मासु' }, price: 13.90, allergens: ['a', 'b', 'd', 'g'], img: 'dish-503-sukuti' },
+        { num: '504', name: { en: 'Bhutan', de: 'Bhutan', ne: 'भुटन' }, desc: { en: 'Lamb speciality', de: 'Lamm-Spezialität', ne: 'खसीको विशेष परिकार' }, price: 10.90, allergens: ['a', 'b', 'd', 'g'] },
+        { num: '505', name: { en: 'Chicken Chilli', de: 'Chicken Chilli', ne: 'चिल्ली चिकेन' }, desc: { en: 'Chicken, bell pepper, onions', de: 'Hühnchen, Papkrika, Zwiebeln', ne: 'कुखुराको मासु, भेडे खुर्सानी, प्याज' }, price: 11.90, allergens: ['b', 'd', 'g'], spice: 2, img: 'dish-505-chicken-chilli' },
+        { num: '506', name: { en: 'Panipuri', de: 'Panipuri', ne: 'पानीपुरी' }, desc: { en: '8 pieces', de: '8 Stück', ne: '८ पीस' }, price: 9.90, allergens: ['b', 'd', 'g'], img: 'dish-506-panipuri' },
+        { num: '507', name: { en: 'Sungur Khaja Set', de: 'Sungur Khaja Set', ne: 'सुँगुर खाजा सेट' }, desc: null, price: 12.90, allergens: [] },
         ],
       },
       {
         slug: 'momo',
-        label: { en: 'Mo:Mo', de: 'Mo:Mo', ne: 'म:म' },
+        label: { en: 'Mo:Mo', de: 'MO:MO', ne: 'म:म' },
+        note: { en: 'Steamed dumplings (chicken or pork) with a spiced filling', de: 'Gedämpfte Teigtaschen (Hühnchen oder Schwein) mit würziger Füllung', ne: 'पिरो मसलादार भरणसहित बाफमा पकाएको म:म (कुखुरा वा बंगुर)' },
         items: [
-        { num: '510', name: { en: 'Mo:Mo', de: 'Mo:Mo', ne: 'म:म' }, desc: { en: 'Steamed chicken or pork dumplings, Sherchan style, with spicy tomato sauce', de: 'Gedämpfte Teigtaschen mit Hühner- oder Schweinefleisch, Sherchan-Art, mit pikanter Tomatensoße', ne: 'कुखुरा वा बंगुरको म:म, शेर्चन शैली, पिरो गोलभेँडाको अचारसँग' }, price: 13.90, badges: ['spicy'] },
-        { num: '511', name: { en: 'Jhol Mo:Mo', de: 'Jhol Mo:Mo', ne: 'झोल म:म' }, desc: { en: 'Steamed chicken or pork dumplings, Nepali style, in spicy tomato broth', de: 'Gedämpfte Teigtaschen mit Hühner- oder Schweinefleisch, nepalesische Art, in pikanter Tomatensuppe', ne: 'कुखुरा वा बंगुरको म:म, नेपाली शैली, पिरो गोलभेँडाको झोलमा' }, price: 13.90, badges: ['spicy'] },
-        { num: '512', name: { en: 'C. Mo:Mo', de: 'C. Mo:Mo', ne: 'सी. म:म' }, desc: { en: 'Steamed chilli chicken or pork dumplings, Thakali style, with spicy tomato-sesame sauce', de: 'Gedämpfte Chili-Teigtaschen mit Hühner- oder Schweinefleisch, Thakali-Art, mit pikanter Tomaten-Sesam-Soße', ne: 'पिरो कुखुरा वा बंगुरको म:म, थकाली शैली, गोलभेँडा-तिलको पिरो सससँग' }, price: 14.90, badges: ['spicy'] },
+        { num: '510', name: { en: 'Mo:Mo', de: 'MO:MO', ne: 'म:म' }, desc: { en: 'Steamed chicken or pork dumplings, Sherchan style, served with spicy tomato sauce', de: 'Gedämpfte Hühnchen- oder Schwein-Dumplings, Sherchan Style, serviert mit scharfer Tomaten-Soße', ne: 'कुखुरा वा बंगुरको म:म, शेर्चन शैली, पिरो गोलभेँडाको अचारसँग' }, price: 13.90, allergens: ['a', 'b', 'g'], spice: 2, img: 'dish-510-momo' },
+        { num: '511', name: { en: 'Jhol Mo:Mo', de: 'Jhol MO:MO', ne: 'झोल म:म' }, desc: { en: 'Steamed chicken or pork dumplings, served in an aromatic, mildly spicy tomato broth (jhol)', de: 'Gedämpfte Hühnchen- oder Schwein-Dumplings, serviert in einer aromatischen, leicht scharfen Tomaten-Suppe (Jhol)', ne: 'कुखुरा वा बंगुरको म:म, बासनादार अलिकति पिरो गोलभेँडाको झोलमा' }, price: 13.90, allergens: ['a', 'b', 'g'], spice: 1, img: 'dish-511-jhol-momo' },
+        { num: '512', name: { en: 'C. Mo:Mo', de: 'C. MO:MO', ne: 'सी. म:म' }, desc: { en: 'Steamed chicken or pork dumplings, Thakali style, with spicy tomato-sesame sauce', de: 'Gedämpfte Hühnchen- oder Schwein-Dumplings, Thakali Style, mit scharfer Tomaten-Sesam-Soße', ne: 'कुखुरा वा बंगुरको म:म, थकाली शैली, गोलभेँडा-तिलको पिरो सससँग' }, price: 14.90, allergens: ['a', 'b', 'g'], spice: 2 },
         ],
       },
       {
-        slug: 'mains',
-        label: { en: 'Main Dishes', de: 'Hauptgerichte', ne: 'मुख्य परिकार' },
+        slug: 'thakali-mains',
+        label: { en: 'Main Dishes', de: 'Hauptspeisen', ne: 'मुख्य परिकार' },
         items: [
-        { num: '530', name: { en: 'Dhindo Set', de: 'Dhindo Set', ne: 'ढिँडो सेट' }, desc: { en: 'Traditional Nepali buckwheat dish, served as a complete set', de: 'Traditionelles nepalesisches Buchweizengericht, als komplettes Set serviert', ne: 'परम्परागत फापरको ढिँडो, पूरा सेटसँग' }, price: 19.90, badges: [] },
-        { num: '531', name: { en: 'Thakali Set', de: 'Thakali Set', ne: 'थकाली सेट' }, desc: { en: 'Authentic Thakali meal — a complete dining experience', de: 'Authentisches Thakali-Menü — ein komplettes Esserlebnis', ne: 'प्रामाणिक थकाली खाना — पूरा भोजनको अनुभव' }, price: 18.90, badges: [] },
-        { num: '532', name: { en: 'Thukpa', de: 'Thukpa', ne: 'थुक्पा' }, desc: { en: 'Hearty Himalayan noodle soup', de: 'Herzhafte Himalaya-Nudelsuppe', ne: 'पेटभरी हिमाली नूडल सुप' }, price: 14.90, badges: [] },
-        { num: '533', name: { en: 'Sukuti Chowmein', de: 'Sukuti Chowmein', ne: 'सुकुटी चाउमिन' }, desc: { en: 'Stir-fried noodles with dried buffalo meat', de: 'Gebratene Nudeln mit getrocknetem Büffelfleisch', ne: 'राँगाको सुकुटीसँग भुटेको चाउमिन' }, price: 15.90, badges: [] },
-        { num: '534', name: { en: 'Pork Chowmein', de: 'Schweine-Chowmein', ne: 'बंगुरको चाउमिन' }, desc: { en: 'Stir-fried noodles with pork', de: 'Gebratene Nudeln mit Schweinefleisch', ne: 'बंगुरको मासुसँग भुटेको चाउमिन' }, price: 13.90, badges: [] },
+        { num: '530', name: { en: 'Sherchan Dhido Set', de: 'Sherchan Dhido Set', ne: 'शेर्चन ढिँडो सेट' }, desc: { en: 'Traditional buckwheat porridge, served with assorted spiced sides', de: 'Traditioneller Buchweizenbrei, serviert mit versch. würzigen Beilagen', ne: 'परम्परागत फापरको ढिँडो, विभिन्न मसलेदार परिकारसँग' }, price: 19.90, variants: [{ label: CHICKEN, price: 19.90 }, { label: PORK, price: 20.90 }, { label: LAMB, price: 22.90 }], allergens: ['a', 'b', 'g'] },
+        { num: '531', name: { en: 'Thakali Set', de: 'Thakali Set', ne: 'थकाली सेट' }, desc: { en: 'Classic Thakali platter with rice, lentils, seasonal vegetables, pickles and curry', de: 'Klassisches Thakali Menü mit Reis, Linsen, saisonalem Gemüse, Pickles und Curry', ne: 'भात, दाल, मौसमी तरकारी, अचार र तरकारीसहितको क्लासिक थकाली सेट' }, price: 18.90, variants: [{ label: CHICKEN, price: 18.90 }, { label: PORK, price: 19.90 }, { label: LAMB, price: 21.90 }], allergens: ['a', 'b', 'g'], img: 'dish-531-thakali-set' },
+        { num: '532', name: { en: 'Thukpa', de: 'Thukpa', ne: 'थुक्पा' }, desc: { en: 'Hearty Nepali noodle soup with vegetables and spices — warming and full-flavoured', de: 'Herzhafte nepalesische Nudelsuppe mit Gemüse und Gewürzen, wärmend und kräftig im Geschmack', ne: 'तरकारी र मसलासहितको पेटभरी नेपाली नूडल सुप — तातो र स्वादिलो' }, price: 14.90, variants: [{ label: { en: 'vegetable', de: 'Gemüse', ne: 'तरकारी' }, price: 14.90 }, { label: CHICKEN, price: 15.90 }, { label: PORK, price: 17.90 }], allergens: ['a', 'b', 'g'], img: 'dish-532-thukpa' },
+        { num: '533', name: { en: 'Sukuti Chowmein', de: 'Sukuti Chowmein', ne: 'सुकुटी चाउमिन' }, desc: { en: 'Fried noodles with air-dried, spiced meat the Nepali way', de: 'Gebratene Nudeln mit luftgetrocknetem, würzigem Fleisch nach nepalesischer Art', ne: 'नेपाली शैलीमा सुकाएको मसलेदार मासुसँग भुटेको चाउमिन' }, price: 17.90, allergens: ['a', 'b', 'g'] },
+        { num: '534', name: { en: 'Pork Chowmein', de: 'Schweinefleisch Chowmein', ne: 'बंगुरको चाउमिन' }, desc: { en: 'Fried noodles with tender pork, vegetables and fine spices', de: 'Gebratene Nudeln mit zartem Schweinefleisch, Gemüse und feinen Gewürzen', ne: 'नरम बंगुरको मासु, तरकारी र मसलासँग भुटेको चाउमिन' }, price: 16.90, allergens: ['a', 'b', 'g'] },
+        { num: '535', name: { en: 'Chicken Chowmein', de: 'Hühnerfleisch Chowmein', ne: 'कुखुराको चाउमिन' }, desc: { en: 'Fried noodles with chicken, vegetables and fine spices', de: 'Gebratene Nudeln mit Hühnerfleisch, Gemüse und feinen Gewürzen', ne: 'कुखुराको मासु, तरकारी र मसलासँग भुटेको चाउमिन' }, price: 15.90, allergens: ['a', 'b', 'g'] },
         ],
-      }
-    ]
+      },
+    ],
   },
   {
     group: 'sushi',
@@ -54,339 +99,343 @@ window.MENU_DATA = [
         slug: 'soups',
         label: { en: 'Soups', de: 'Suppen', ne: 'सुप' },
         items: [
-        { num: '1', name: { en: 'Miso Fancy Soup', de: 'Miso-Fancy-Suppe', ne: 'मिसो फ्यान्सी सुप' }, desc: { en: 'Traditional Japanese soup: tofu, seaweed, spring onions, miso paste', de: 'Traditionelle japanische Suppe: Tofu, Algen, Lauchzwiebeln, Miso-Paste', ne: 'परम्परागत जापानी सुप: टोफु, समुन्द्री झार, हरियो प्याज, मिसो पेस्ट' }, price: 5.90, badges: ['vegetarian'] },
-        { num: '2', name: { en: 'Japanese Vegetable Soup', de: 'Japanische Gemüse-Suppe', ne: 'जापानी तरकारी सुप' }, desc: { en: 'Tofu, mushrooms, cauliflower, sugar snap peas, spinach leaves, bell pepper, courgette', de: 'Tofu, Champignons, Blumenkohl, Zuckerschoten, Spinatblätter, Paprika, Zucchini', ne: 'टोफु, च्याउ, काउली, मिठो सिमी, पालुङ्गो, भेडे खुर्सानी, जुकिनी' }, price: 5.90, badges: ['vegetarian'] },
-        { num: '3', name: { en: 'Japanese Chicken Soup', de: 'Japanische Hühnersuppe', ne: 'जापानी कुखुरा सुप' }, desc: { en: 'Broccoli, bell pepper, mushrooms, courgette, sugar snap peas, spinach leaves', de: 'Brokkoli, Paprika, Champignons, Zucchini, Zuckerschoten, Spinatblätter', ne: 'ब्रोकाउली, भेडे खुर्सानी, च्याउ, जुकिनी, मिठो सिमी, पालुङ्गो' }, price: 6.50, badges: [] },
-        { num: '4', name: { en: 'Tom Kha Gai / Gung', de: 'Tom Kha Gai / Gung', ne: 'टोम खा गाई / गुङ' }, desc: { en: 'Coconut soup with chicken (Gai) or prawns (Gung), red Thai curry, aubergine, bamboo, mushrooms, coriander', de: 'Kokossuppe mit Hühnerfleisch (Gai) oder Garnelen (Gung), rotes Thai Curry, Auberginen, Bambus, Champignons, Koriander', ne: 'नरिवलको सुप, कुखुरा (गाई) वा झिँगेमाछा (गुङ), रातो थाई करी, भन्टा, बाँसको टुसा, च्याउ, धनियाँ' }, price: 6.90, badges: ['spicy'] },
+        { num: '1', name: { en: 'Fancy Miso Soup', de: 'Fancy Miso Suppe', ne: 'फ्यान्सी मिसो सुप' }, desc: { en: 'Traditional Japanese soup: tofu, seaweed, spring onions, miso paste', de: 'Traditionelle japanische Suppe: Tofu, Algen, Lauchzwiebeln, Miso-Paste', ne: 'परम्परागत जापानी सुप: टोफु, समुन्द्री झार, हरियो प्याज, मिसो पेस्ट' }, price: 5.90, allergens: ['b', 'd'], veg: true },
+        { num: '2', name: { en: 'Japanese Chicken Soup', de: 'Japanische Hühnersuppe', ne: 'जापानी कुखुरा सुप' }, desc: { en: 'Broccoli, bell pepper, mushrooms, courgette, sugar snap peas, spinach leaves', de: 'Brokkoli, Paprika, Champignons, Zucchini, Zuckerschoten, Spinatblätter', ne: 'ब्रोकाउली, भेडे खुर्सानी, च्याउ, जुकिनी, मिठो सिमी, पालुङ्गो' }, price: 6.50, allergens: ['b', 'd'] },
         ],
       },
       {
         slug: 'appetizers',
         label: { en: 'Appetizers', de: 'Vorspeisen', ne: 'सुरुवाती परिकार' },
         items: [
-        { num: '10', name: { en: 'Mini Poh Pia', de: 'Mini Poh Pia', ne: 'मिनी पो पिया' }, desc: { en: '6 pieces — mini spring rolls with house-made chilli sauce', de: '6 Stück — Mini-Frühlingsrollen mit hausgemachter Chili-Soße', ne: '६ पीस — मिनी स्प्रिङ रोल, घरैको खुर्सानीको सससँग' }, price: 5.90, badges: [], pop: 3 },
-        { num: '11', name: { en: 'Japanese Gyosa', de: 'Japanische Gyosa', ne: 'जापानी ग्योजा' }, desc: { en: '6 pieces — chicken dumplings with chilli sauce', de: '6 Stück — Teigtaschen mit Hühnerfleisch und Chili-Soße', ne: '६ पीस — कुखुराको डम्प्लिङ, खुर्सानीको सससँग' }, price: 9.90, badges: [] },
-        { num: '12', name: { en: 'Tori Teriyaki', de: 'Tori Teriyaki', ne: 'तोरी तेरियाकी' }, desc: { en: 'Chicken skewer with teriyaki sauce', de: 'Hühnerfleisch-Spieß mit Teriyaki-Soße', ne: 'कुखुराको सेकुवा, तेरियाकी सससँग' }, price: 6.90, badges: [] },
-        { num: '13', name: { en: 'Edamame', de: 'Edamame', ne: 'एदामामे' }, desc: { en: 'Young soybeans, sea salt', de: 'Junge Sojabohnen, Meersalz', ne: 'कलिलो भटमास, समुन्द्री नुन' }, price: 6.90, was: 7.90, badges: ['vegetarian'], pop: 6 },
-        { num: '14', name: { en: 'Cross Spicy Edamame', de: 'Cross Spicy Edamame', ne: 'क्रस स्पाइसी एदामामे' }, desc: { en: 'with spicy teriyaki sauce', de: 'mit spicy Teriyaki-Soße', ne: 'पिरो तेरियाकी सससँग' }, price: 8.90, badges: ['vegetarian', 'spicy'] },
-        ],
-      },
-      {
-        slug: 'tempura',
-        label: { en: 'Tempura', de: 'Tempura', ne: 'टेम्पुरा' },
-        items: [
-        { num: '20', name: { en: 'Japanese Vegetable Tempura', de: 'Japanische Gemüse Tempura', ne: 'जापानी तरकारी टेम्पुरा' }, desc: { en: 'Courgette, mushrooms, sweet potato, broccoli, house-made sauce', de: 'Zucchini, Champignons, Süßkartoffeln, Brokkoli, hausgemachte Soße', ne: 'जुकिनी, च्याउ, सखरखण्ड, ब्रोकाउली, घरैको सस' }, price: 8.90, badges: ['vegetarian'] },
-        { num: '21', name: { en: 'Cross Prawn Tempura', de: 'Cross Garnelen Tempura', ne: 'क्रस झिँगेमाछा टेम्पुरा' }, desc: { en: '5 pieces — prawn tempura served with teriyaki sauce', de: '5 Stück — Garnelen-Tempura angerichtet mit Teriyaki Soße', ne: '५ पीस — झिँगेमाछाको टेम्पुरा, तेरियाकी सससँग' }, price: 9.90, was: 11.90, badges: [] },
+        { num: '11', name: { en: 'Mini Poh Pia', de: 'Mini Poh Pia', ne: 'मिनी पो पिया' }, desc: { en: 'Mini spring rolls with house-made chilli sauce', de: 'Mini-Frühlingsrollen mit hausgemachter Chili-Soße', ne: 'मिनी स्प्रिङ रोल, घरैको खुर्सानीको सससँग' }, price: 5.90, allergens: ['a', 'b', 'c', 'd'], spice: 1, pop: 3 },
+        { num: '12', name: { en: 'Japanese Gyosa', de: 'Japanische Gyosa', ne: 'जापानी ग्योजा' }, desc: { en: 'Dumplings with chicken and chilli sauce', de: 'Teigtaschen mit Hühnerfleisch und Chili-Soße', ne: 'कुखुराको डम्प्लिङ, खुर्सानीको सससँग' }, price: 5.90, allergens: ['a', 'b', 'c', 'd'], spice: 1 },
+        { num: '13', name: { en: 'Tori Teriyaki', de: 'Tori Teriyaki', ne: 'तोरी तेरियाकी' }, desc: { en: 'Chicken skewer with teriyaki sauce', de: 'Hühnerfleisch-Spieß mit Teriyaki-Soße', ne: 'कुखुराको सेकुवा, तेरियाकी सससँग' }, price: 9.90, allergens: ['a', 'b'] },
+        { num: '14', name: { en: 'Edamame', de: 'Edamame', ne: 'एदामामे' }, desc: { en: 'Young soybeans, sea salt', de: 'Junge Sojabohnen, Meersalz', ne: 'कलिलो भटमास, समुन्द्री नुन' }, price: 6.90, allergens: [], veg: true, pop: 6 },
+        { num: '15', name: { en: 'Cross Prawn Tempura', de: 'Cross Garnelen Tempura', ne: 'क्रस झिँगेमाछा टेम्पुरा' }, desc: { en: '5 pieces — prawn tempura served with teriyaki sauce', de: '5 Stück — Garnelen-Tempura angerichtet mit Teriyaki Soße', ne: '५ पीस — झिँगेमाछाको टेम्पुरा, तेरियाकी सससँग' }, price: 9.90, allergens: ['a', 'b'] },
         ],
       },
       {
         slug: 'salads',
         label: { en: 'Salads', de: 'Salate', ne: 'सलाद' },
         items: [
-        { num: '22', name: { en: 'Cross Mixed Salad / Tuna Salad', de: 'Cross Mixed Salat / Tuna Salat', ne: 'क्रस मिक्स सलाद / टुना सलाद' }, desc: { en: 'Salmon, tuna and diced avocado, mixed salad, pumpkin seeds, house-made Cross sauce', de: 'Lachs, Thunfisch und Avocado Würfel, gemischter Salat, Kürbiskerne, hausgemachte Cross Soße', ne: 'सामन, टुना र एभोकाडो, मिक्स सलाद, कद्दूको बीउ, घरैको क्रस सस' }, price: 10.90, badges: [] },
-        { num: '23', name: { en: 'Cross Avocado Salad', de: 'Cross Avocado Salat', ne: 'क्रस एभोकाडो सलाद' }, desc: { en: 'Avocado, mixed salad, pumpkin seeds, house-made Cross sauce, shiso cress and sesame', de: 'Avocado, gemischter Salat, Kürbiskerne, hausgemachte Cross Soße, Shiso-Kresse und Sesam', ne: 'एभोकाडो, मिक्स सलाद, कद्दूको बीउ, घरैको क्रस सस, शिसो र तिल' }, price: 11.90, badges: ['vegetarian'] },
-        { num: '24', name: { en: 'Asian Spinach Salad', de: 'Asia Spinat Salat', ne: 'एसियाली पालुङ्गो सलाद' }, desc: { en: 'Spinach leaves, peanut sauce', de: 'Spinatblätter, Erdnusssoße', ne: 'पालुङ्गोको पात, बदामको सस' }, price: 9.90, badges: ['vegetarian'] },
-        { num: '25', name: { en: 'Cross Cesar Salad', de: 'Cross Cesar Salat', ne: 'क्रस सिजर सलाद' }, desc: { en: 'Romaine with panko chicken, house-made Cross sauce and shiso cress', de: 'Romanasalat mit Panko-Hähnchen, hausgemachte Cross Soße und Shiso-Kresse', ne: 'रोमेन सलाद, पान्को कुखुरा, घरैको क्रस सस र शिसो' }, price: 13.90, badges: [] },
+        { num: '21', name: { en: 'Cross Salad Salmon', de: 'Cross Salat Lachs', ne: 'क्रस सलाद सामन' }, desc: { en: 'Salmon or tuna and diced avocado, mixed salad, pumpkin seeds, house-made Cross sauce', de: 'Lachs oder Thunfisch und Avocado Würfel, gemischter Salat, Kürbiskerne, hausgemachte Cross Soße', ne: 'सामन वा टुना र एभोकाडो, मिक्स सलाद, कद्दूको बीउ, घरैको क्रस सस' }, price: 11.90, variants: [{ label: { en: 'Salmon', de: 'Lachs', ne: 'सामन' }, price: 11.90 }, { label: { en: 'Tuna Salad', de: 'Tuna Salat', ne: 'टुना सलाद' }, price: 13.90 }], allergens: ['f'] },
+        { num: '22', name: { en: 'Cross Avocado Salad', de: 'Cross Avocado Salat', ne: 'क्रस एभोकाडो सलाद' }, desc: { en: 'Avocado, mixed salad, pumpkin seeds, house-made Cross sauce, shiso cress and black and white sesame', de: 'Avocado, gemischter Salat, Kürbiskerne, hausgemachte Cross Soße, Shiso-Kresse und black and white Sesam', ne: 'एभोकाडो, मिक्स सलाद, कद्दूको बीउ, घरैको क्रस सस, शिसो र कालो-सेतो तिल' }, price: 10.90, allergens: ['a', 'b', 'd', 'g', 'h'], veg: true, img: 'dish-022-avocado-salat' },
         ],
       },
       {
         slug: 'nigiri',
         label: { en: 'Nigiri', de: 'Nigiri', ne: 'निगिरी' },
+        note: { en: '2 pieces', de: '2 Stück', ne: '२ पीस' },
         items: [
-        { num: '40', name: { en: 'Asparagus', de: 'Spargel', ne: 'कुरिलो' }, desc: { en: 'Green asparagus', de: 'Grüner Spargel', ne: 'हरियो कुरिलो' }, price: 5.90, badges: ['vegetarian'] },
-        { num: '41', name: { en: 'Kanisuja', de: 'Kanisuja', ne: 'कानिसुजा' }, desc: { en: 'Avocado', de: 'Avocado', ne: 'एभोकाडो' }, price: 5.90, badges: ['vegetarian'] },
-        { num: '42', name: { en: 'Shake', de: 'Shake', ne: 'शाके' }, desc: { en: 'Salmon', de: 'Lachs', ne: 'सामन' }, price: 5.90, badges: [] },
-        { num: '43', name: { en: 'Unagi', de: 'Unagi', ne: 'उनागी' }, desc: { en: 'Eel', de: 'Aal', ne: 'ईल माछा' }, price: 6.90, badges: [] },
-        { num: '44', name: { en: 'Yellowfin Tuna', de: 'Yellowfin Tuna', ne: 'यलोफिन टुना' }, desc: null, price: 8.90, badges: [] },
-        ],
-      },
-      {
-        slug: 'special-nigiri',
-        label: { en: 'Special Nigiri', de: 'Special Nigiri', ne: 'विशेष निगिरी' },
-        items: [
-        { num: '40.a', name: { en: 'Tempura Asparagus Nigiri', de: 'Tempura Spargel Nigiri', ne: 'टेम्पुरा कुरिलो निगिरी' }, desc: { en: 'Spicy sauce, kimchi sesame', de: 'Spicy Soße, Kimchi-Sesam', ne: 'पिरो सस, किम्ची तिल' }, price: 7.90, badges: ['spicy'] },
-        { num: '41.a', name: { en: 'Avocado with Ceviche', de: 'Avocado mit Ceviche', ne: 'एभोकाडो र सेभिचे' }, desc: { en: 'Parsley, sesame', de: 'Petersilie, Sesam', ne: 'पार्सले, तिल' }, price: 7.90, badges: ['vegetarian'] },
-        { num: '42.b', name: { en: 'Flambéed Salmon Nigiri', de: 'Flambiertes Salmon Nigiri', ne: 'फ्ल्याम्बे सामन निगिरी' }, desc: { en: 'Torched salmon, nut butter, ponzu sauce, crispy panko', de: 'Flambierter Lachs, Nussbutter, Ponzu Soße, Crispy Panko', ne: 'फ्ल्याम्बे सामन, नट बटर, पोन्जु सस, क्रिस्पी पान्को' }, price: 8.90, badges: [] },
-        { num: '43.c', name: { en: 'Tempura Prawn', de: 'Tempura-Garnele', ne: 'टेम्पुरा झिँगेमाछा' }, desc: { en: 'Cross dressing with shiso cress', de: 'Cross Dressing mit Shiso-Kresse', ne: 'क्रस ड्रेसिङ र शिसो' }, price: 9.90, badges: [] },
-        { num: '44.d', name: { en: 'Maguro Teriyaki Nigiri', de: 'Maguro Teriyaki Nigiri', ne: 'मागुरो तेरियाकी निगिरी' }, desc: { en: 'Torched tuna, mayo sauce, togarashi, kimchi sesame, teriyaki sauce', de: 'Flambierter Thunfisch, Mayo Soße, Togarashi, Kimchi-Sesam, Teriyaki Soße', ne: 'फ्ल्याम्बे टुना, मेयो सस, तोगाराशी, किम्ची तिल, तेरियाकी सस' }, price: 9.90, badges: [] },
-        { num: '45.e', name: { en: 'Smoke Beef Nigiri', de: 'Smoke Beef Nigiri', ne: 'स्मोक बिफ निगिरी' }, desc: { en: 'Torched beef, nut butter, truffle ponzu, crispy panko', de: 'Flambiertes Rindfleisch, Nussbutter, Trüffel Ponzu, Crispy Panko', ne: 'फ्ल्याम्बे बिफ, नट बटर, ट्रफल पोन्जु, क्रिस्पी पान्को' }, price: 8.90, badges: [] },
-        { num: '46.f', name: { en: 'Smoke Salmon Nigiri', de: 'Smoke Salmon Nigiri', ne: 'स्मोक सामन निगिरी' }, desc: { en: 'Salmon, nut butter, ponzu sauce, wakame with tobiko and chives', de: 'Lachs, Nussbutter, Ponzu Soße, Wakame mit Tobiko Schnittlauch', ne: 'सामन, नट बटर, पोन्जु सस, वाकामे, तोबिको र चाइभ्स' }, price: 9.90, badges: [] },
+        { num: '41', name: { en: 'Kanisuja', de: 'Kanisuja', ne: 'कानिसुजा' }, desc: { en: 'Avocado', de: 'Avocado', ne: 'एभोकाडो' }, price: 5.90, allergens: ['a'], veg: true },
+        { num: '42', name: { en: 'Shake', de: 'Shake', ne: 'शाके' }, desc: { en: 'Salmon', de: 'Lachs', ne: 'सामन' }, price: 6.90, allergens: ['a', 'f'] },
+        { num: '44', name: { en: 'Yellowfin Tuna', de: 'Yellowfin Tuna', ne: 'यलोफिन टुना' }, desc: null, price: 8.90, allergens: ['a', 'f'], img: 'dish-044-yellowfin-tuna-nigiri' },
         ],
       },
       {
         slug: 'maki',
         label: { en: 'Maki', de: 'Maki', ne: 'माकी' },
+        note: { en: '8 pieces', de: '8 Stück', ne: '८ पीस' },
         items: [
-        { num: '50', name: { en: 'Cucumber Maki', de: 'Gurke Maki', ne: 'काँक्रो माकी' }, desc: { en: 'with sesame', de: 'mit Sesam', ne: 'तिलसहित' }, price: 5.90, badges: ['vegetarian'] },
-        { num: '51', name: { en: 'Avocado Maki', de: 'Avocado Maki', ne: 'एभोकाडो माकी' }, desc: null, price: 6.60, badges: ['vegetarian'], pop: 2 },
-        { num: '52', name: { en: 'Asparagus Maki', de: 'Spargel Maki', ne: 'कुरिलो माकी' }, desc: null, price: 6.60, badges: ['vegetarian'] },
-        { num: '53', name: { en: 'Salmon Maki', de: 'Lachs Maki', ne: 'सामन माकी' }, desc: null, price: 7.60, badges: [], pop: 5 },
-        { num: '54', name: { en: 'Tuna Maki', de: 'Tuna Maki', ne: 'टुना माकी' }, desc: null, price: 8.50, badges: [] },
-        ],
-      },
-      {
-        slug: 'crossover-maki',
-        label: { en: 'Crossover Maki', de: 'Crossover Maki', ne: 'क्रसओभर माकी' },
-        items: [
-        { num: '60', name: { en: 'Salmon & Avocado Maki', de: 'Lachs & Avocado Maki', ne: 'सामन र एभोकाडो माकी' }, desc: null, price: 8.90, badges: [] },
-        { num: '61', name: { en: 'Tuna & Avocado Maki', de: 'Tuna & Avocado Maki', ne: 'टुना र एभोकाडो माकी' }, desc: null, price: 8.90, badges: [] },
-        { num: '62', name: { en: 'Tempura Prawn Maki', de: 'Tempura-Garnelen Maki', ne: 'टेम्पुरा झिँगेमाछा माकी' }, desc: null, price: 8.90, badges: [] },
-        { num: '63', name: { en: 'Cross Avocado Ceviche Maki', de: 'Cross Avocado Ceviche Maki', ne: 'क्रस एभोकाडो सेभिचे माकी' }, desc: null, price: 9.90, badges: [] },
-        { num: '64', name: { en: 'Tempura Asparagus Maki', de: 'Tempura-Spargel Maki', ne: 'टेम्पुरा कुरिलो माकी' }, desc: null, price: 9.90, badges: [] },
-        { num: '65', name: { en: 'Sweet Heart Maki', de: 'Sweet Heart Maki', ne: 'स्वीट हार्ट माकी' }, desc: { en: 'Salmon with warm butter ponzu and crunchy panko', de: 'Lachs mit warmer Butter Ponzu und Panko Crunchy', ne: 'सामन, तातो बटर पोन्जु र क्रन्ची पान्को' }, price: 9.90, badges: [] },
-        { num: '66', name: { en: 'Japanese Crispy Chicken Maki', de: 'Japanese Crispy Chicken Maki', ne: 'जापानी क्रिस्पी चिकेन माकी' }, desc: { en: 'with teriyaki sauce', de: 'mit Teriyaki Soße', ne: 'तेरियाकी सससँग' }, price: 8.90, badges: [] },
-        { num: '67', name: { en: 'Tempura Salmon Maki', de: 'Tempura-Lachs Maki', ne: 'टेम्पुरा सामन माकी' }, desc: { en: 'with teriyaki sauce', de: 'mit Teriyaki Soße', ne: 'तेरियाकी सससँग' }, price: 8.90, badges: [] },
-        { num: '68', name: { en: 'Yellowfin Tuna Tartare Maki', de: 'Yellowfin Tuna Tatar Maki', ne: 'यलोफिन टुना ट्यार्टार माकी' }, desc: null, price: 9.50, badges: [] },
-        { num: '69', name: { en: 'Salmon Tartare Maki', de: 'Lachs Tatar Maki', ne: 'सामन ट्यार्टार माकी' }, desc: null, price: 9.50, badges: [] },
-        ],
-      },
-      {
-        slug: 'poke-bowls',
-        label: { en: 'Poke Bowls', de: 'Poke Bowls', ne: 'पोके बाउल' },
-        items: [
-        { num: '30 A', name: { en: 'Veggie Bowl', de: 'Veggie Bowl', ne: 'भेजी बाउल' }, desc: null, price: 15.90, badges: ['vegetarian'] },
-        { num: '30 B', name: { en: 'Tuna Bowl', de: 'Tuna Bowl', ne: 'टुना बाउल' }, desc: { en: 'Coral lentils, avocado, beetroot', de: 'Korallenlinsen, Avocado, Rote Beete', ne: 'रातो दाल, एभोकाडो, चुकन्दर' }, price: 17.90, badges: [] },
-        { num: '30 C', name: { en: 'Teriyaki Bowl', de: 'Teriyaki Bowl', ne: 'तेरियाकी बाउल' }, desc: { en: 'Prawns, walnut, soy, mayo sauce', de: 'Garnelen, Walnuss, Soja, Mayo Soße', ne: 'झिँगेमाछा, ओखर, सोया, मेयो सस' }, price: 19.90, badges: [] },
-        { num: '30 D', name: { en: 'Crazy Chicken Bowl', de: 'Crazy Chicken Bowl', ne: 'क्रेजी चिकेन बाउल' }, desc: { en: 'Teriyaki sauce, peanut sauce', de: 'Teriyaki Soße, Erdnusssoße', ne: 'तेरियाकी सस, बदामको सस' }, price: 18.90, badges: [] },
-        ],
-      },
-      {
-        slug: 'kids-maki',
-        label: { en: 'Kids Maki', de: 'Kinder Maki', ne: 'बालबालिकाका माकी' },
-        items: [
-        { num: '70', name: { en: 'Salmon Maki', de: 'Lachs Maki', ne: 'सामन माकी' }, desc: { en: 'with teriyaki sauce', de: 'mit Teriyaki Soße', ne: 'तेरियाकी सससँग' }, price: 8.50, badges: [] },
-        { num: '71', name: { en: 'Mango Maki', de: 'Mango Maki', ne: 'आँप माकी' }, desc: null, price: 7.50, badges: ['vegetarian'] },
-        { num: '72', name: { en: 'Japanese Crispy Chicken Maki', de: 'Japanese Crispy Chicken Maki', ne: 'जापानी क्रिस्पी चिकेन माकी' }, desc: { en: 'with teriyaki sauce', de: 'mit Teriyaki Soße', ne: 'तेरियाकी सससँग' }, price: 8.00, badges: [] },
-        { num: '73', name: { en: 'Tempura Crispy Chicken Maki', de: 'Tempura Crispy Chicken Maki', ne: 'टेम्पुरा क्रिस्पी चिकेन माकी' }, desc: null, price: 8.50, badges: [] },
-        { num: '74', name: { en: 'Avocado Maki', de: 'Avocado Maki', ne: 'एभोकाडो माकी' }, desc: null, price: 7.50, badges: ['vegetarian'] },
-        { num: '75', name: { en: 'Avocado Drink Maki', de: 'Avocado Trink Maki', ne: 'एभोकाडो ड्रिंक माकी' }, desc: null, price: 5.50, badges: ['vegetarian'] },
+        { num: '50', name: { en: 'Cucumber Maki', de: 'Gurke Maki', ne: 'काँक्रो माकी' }, desc: null, price: 5.90, allergens: [], veg: true },
+        { num: '51', name: { en: 'Avocado Maki', de: 'Avocado Maki', ne: 'एभोकाडो माकी' }, desc: null, price: 6.60, allergens: [], veg: true, pop: 2 },
+        { num: '52', name: { en: 'Salmon Maki', de: 'Lachs Maki', ne: 'सामन माकी' }, desc: null, price: 7.60, allergens: [], pop: 5, img: 'dish-052-lachs-maki' },
+        { num: '52', name: { en: 'Tuna Maki', de: 'Tuna Maki', ne: 'टुना माकी' }, desc: null, price: 8.50, allergens: [], note: { en: 'The card prints number 52 twice; 53 does not appear.', de: 'Die Nummer 52 ist in der Karte zweimal gedruckt, 53 kommt nicht vor.', ne: 'कार्डमा नम्बर ५२ दुई ठाउँमा छापिएको छ; ५३ छैन।' } },
+        { num: '54', name: { en: 'Salmon & Avocado Maki', de: 'Lachs & Avocado Maki', ne: 'सामन र एभोकाडो माकी' }, desc: null, price: 8.90, allergens: [], img: 'dish-054-lachs-avocado-maki' },
+        { num: '55', name: { en: 'Tuna & Avocado Maki', de: 'Tuna & Avocado Maki', ne: 'टुना र एभोकाडो माकी' }, desc: null, price: 8.90, allergens: [], img: 'dish-055-tuna-avocado-maki' },
         ],
       },
       {
         slug: 'classic-roll',
         label: { en: 'Classic Roll', de: 'Classic Roll', ne: 'क्लासिक रोल' },
+        note: { en: '8 pieces', de: '8 Stück', ne: '८ पीस' },
         items: [
-        { num: '80', name: { en: 'California — Rocky Roll', de: 'California — Rocky Roll', ne: 'क्यालिफोर्निया — रकी रोल' }, desc: { en: 'Salmon, cucumber, rocket and sesame', de: 'Lachs, Gurke, Rucola und Sesam', ne: 'सामन, काँक्रो, रुकोला र तिल' }, price: 9.90, was: 10.90, badges: [] },
-        { num: '81', name: { en: 'California — Boston Roll', de: 'California — Boston Roll', ne: 'क्यालिफोर्निया — बोस्टन रोल' }, desc: { en: 'Yellowfin tuna, cucumber, avocado, sesame', de: 'Yellowfin Tuna, Gurke, Avocado, Sesam', ne: 'यलोफिन टुना, काँक्रो, एभोकाडो, तिल' }, price: 9.90, was: 10.90, badges: [] },
-        { num: '82', name: { en: 'California — New Cross Roll', de: 'California — New Cross Roll', ne: 'क्यालिफोर्निया — न्यू क्रस रोल' }, desc: { en: 'Salmon, avocado, caramelised cashews, cress, honey-mustard sauce', de: 'Lachs, Avocado, karamellisierte Cashewkerne, Kresse, Honig-Senf-Soße', ne: 'सामन, एभोकाडो, क्यारामेल काजु, क्रेस, मह-तोरीको सस' }, price: 12.90, badges: [], pop: 4 },
-        { num: '83', name: { en: 'Cross Avocado Salmon Roll', de: 'Cross Avocado Salmon Roll', ne: 'क्रस एभोकाडो सामन रोल' }, desc: { en: 'Cucumber, black & white sesame', de: 'Gurke, black & white Sesam', ne: 'काँक्रो, कालो र सेतो तिल' }, price: 12.90, badges: [] },
-        ],
-      },
-      {
-        slug: 'signature-roll',
-        label: { en: 'Signature Roll', de: 'Signature Roll', ne: 'सिग्नेचर रोल' },
-        items: [
-        { num: '110', name: { en: 'Sweet Dream Roll', de: 'Sweet Dream Roll', ne: 'स्वीट ड्रिम रोल' }, desc: { en: 'Tempura prawns, avocado, cucumber, spicy tuna tartare, spicy teriyaki, mayo, kimchi sesame, spring onions', de: 'Tempura-Garnelen, Avocado, Gurke, Spicy Tuna-Tatar, Spicy Teriyaki, Mayo, Kimchi-Sesam, Lauchzwiebeln', ne: 'टेम्पुरा झिँगेमाछा, एभोकाडो, काँक्रो, पिरो टुना ट्यार्टार, पिरो तेरियाकी, मेयो, किम्ची तिल, हरियो प्याज' }, price: 12.90, was: 13.90, badges: ['spicy'] },
-        { num: '111', name: { en: 'Premium Smoke Salmon Roll', de: 'Premium Smoke Salmon Roll', ne: 'प्रिमियम स्मोक सामन रोल' }, desc: { en: 'Tempura prawns, cucumber, avocado, torched salmon, mayo-teriyaki, chives, shiso cress', de: 'Tempura-Garnelen, Gurke, Avocado, flambierter Lachs, Mayo-Teriyaki, Schnittlauch, Shiso-Kresse', ne: 'टेम्पुरा झिँगेमाछा, काँक्रो, एभोकाडो, फ्ल्याम्बे सामन, मेयो-तेरियाकी, चाइभ्स, शिसो' }, price: 12.90, was: 13.90, badges: ['signature'], pop: 1 },
-        { num: '112', name: { en: 'Crunchy Eel Roll', de: 'Crunchy Aal Roll', ne: 'क्रन्ची ईल रोल' }, desc: { en: 'Tempura unagi, avocado, cucumber, salmon topping, sesame, shiso cress, teriyaki', de: 'Tempura-Unagi, Avocado, Gurke, Lachs-Topping, Sesam, Shiso-Kresse, Teriyaki', ne: 'टेम्पुरा उनागी, एभोकाडो, काँक्रो, सामन टपिङ, तिल, शिसो, तेरियाकी' }, price: 12.90, was: 13.90, badges: [] },
-        { num: '113', name: { en: 'Hot Star Roll', de: 'Hot Star Roll', ne: 'हट स्टार रोल' }, desc: { en: 'Tempura red chilli, cucumber, tuna, tuna tartare, torched mayo, spicy teriyaki, spring onion, shiso cress, kimchi sesame', de: 'Tempura-Rote-Peperoni, Gurke, Tuna, Tuna-Tatar, Mayo flambiert, Spicy Teriyaki, Lauchzwiebel, Shiso-Kresse, Kimchi-Sesam', ne: 'टेम्पुरा रातो खुर्सानी, काँक्रो, टुना, टुना ट्यार्टार, फ्ल्याम्बे मेयो, पिरो तेरियाकी, हरियो प्याज, शिसो, किम्ची तिल' }, price: 13.90, was: 14.90, badges: ['spicy'] },
-        { num: '114', name: { en: 'Everest Roll', de: 'Everest Roll', ne: 'एभरेस्ट रोल' }, desc: { en: 'Tempura shrimp, torched yellowfin tuna, avocado, cucumber, special spice, teriyaki mayo, shiso cress, kimchi sesame', de: 'Tempura-Shrimps, flambierter Yellowfin Tuna, Avocado, Gurke, Spezialgewürz, Teriyaki-Mayo, Shiso-Kresse, Kimchi-Sesam', ne: 'टेम्पुरा झिँगेमाछा, फ्ल्याम्बे यलोफिन टुना, एभोकाडो, काँक्रो, विशेष मसला, तेरियाकी मेयो, शिसो, किम्ची तिल' }, price: 13.90, was: 14.90, badges: [] },
-        { num: '115', name: { en: 'Truffle Roast Beef Roll', de: 'Trüffel Roast Beef Roll', ne: 'ट्रफल रोस्ट बिफ रोल' }, desc: { en: 'Tempura prawns, cucumber, avocado, torched roast beef, nut butter, truffle ponzu, spicy sauce, wasabi, sesame, shiso cress', de: 'Tempura-Garnelen, Gurke, Avocado, flambiertes Roastbeef, Nussbutter, Trüffel-Ponzu, Spicy Soße, Wasabi, Sesam, Shiso-Kresse', ne: 'टेम्पुरा झिँगेमाछा, काँक्रो, एभोकाडो, फ्ल्याम्बे रोस्ट बिफ, नट बटर, ट्रफल पोन्जु, पिरो सस, वासाबी, तिल, शिसो' }, price: 13.90, was: 14.90, badges: [] },
-        { num: '116', name: { en: 'Salmon Tartare Roll', de: 'Salmon Tatar Roll', ne: 'सामन ट्यार्टार रोल' }, desc: { en: 'Tempura salmon, cucumber, avocado, salmon tartare with teriyaki, creamy Philadelphia, black & white sesame', de: 'Tempura-Lachs, Gurke, Avocado, Lachstatar mit Teriyaki, Creamy Philadelphia, black & white Sesam', ne: 'टेम्पुरा सामन, काँक्रो, एभोकाडो, सामन ट्यार्टार र तेरियाकी, क्रिमी फिलाडेल्फिया, कालो र सेतो तिल' }, price: 13.90, badges: [], pop: 7 },
+        { num: '80', name: { en: 'California Roll', de: 'California Roll', ne: 'क्यालिफोर्निया रोल' }, desc: { en: 'Premium salmon, avocado, cucumber, black & white sesame', de: 'Premium Lachs, Avocado, Gurke, black & white Sesam', ne: 'प्रिमियम सामन, एभोकाडो, काँक्रो, कालो र सेतो तिल' }, price: 9.90, allergens: ['a', 'f'] },
+        { num: '81', name: { en: 'Boston Roll', de: 'Boston Roll', ne: 'बोस्टन रोल' }, desc: { en: 'Yellowfin tuna, cucumber, avocado, sesame', de: 'Yellowfin Tuna, Gurke, Avocado, Sesam', ne: 'यलोफिन टुना, काँक्रो, एभोकाडो, तिल' }, price: 9.90, allergens: [] },
+        { num: '82', name: { en: 'New Cross Roll', de: 'New Cross Roll', ne: 'न्यू क्रस रोल' }, desc: { en: 'Salmon, avocado, caramelised cashews, cress, honey-mustard sauce', de: 'Lachs, Avocado, karamellisierte Cashewkerne, Kresse, Honig-Senf-Soße', ne: 'सामन, एभोकाडो, क्यारामेल काजु, क्रेस, मह-तोरीको सस' }, price: 12.90, allergens: ['a', 'f', 'h'], pop: 4 },
         ],
       },
       {
         slug: 'veggie-roll',
-        label: { en: 'Veggie Roll', de: 'Veggie Roll', ne: 'भेजी रोल' },
+        label: { en: 'Cross Veggie Roll', de: 'Cross Veggie Roll', ne: 'क्रस भेजी रोल' },
+        note: { en: '8 pieces', de: '8 Stück', ne: '८ पीस' },
         items: [
-        { num: '130', name: { en: 'Red Power Roll', de: 'Red Power Roll', ne: 'रेड पावर रोल' }, desc: { en: 'Marinated carrot, cucumber, avocado, beetroot topping, grilled red pepper, hariyo sauce, wasabi sesame, shiso cress', de: 'Marinierte Karotten, Gurke, Avocado, Rote-Bete-Topping, gegrillte rote Paprika, Hariyo-Soße, Wasabi-Sesam, Shiso-Kresse', ne: 'मरिनेट गरेको गाजर, काँक्रो, एभोकाडो, चुकन्दर टपिङ, ग्रिल्ड रातो भेडे खुर्सानी, हरियो सस, वासाबी तिल, शिसो' }, price: 10.90, badges: ['vegetarian'] },
-        { num: '131', name: { en: 'Cross Rock Roll', de: 'Cross Rock Roll', ne: 'क्रस रक रोल' }, desc: { en: 'Cucumber, avocado, mango, tempura asparagus, avocado topping, ceviche, parsley, black & white sesame', de: 'Gurke, Avocado, Mango, Tempura-Spargel, Avocado-Topping, Ceviche, Petersilie, black & white Sesam', ne: 'काँक्रो, एभोकाडो, आँप, टेम्पुरा कुरिलो, एभोकाडो टपिङ, सेभिचे, पार्सले, कालो र सेतो तिल' }, price: 10.90, badges: ['vegetarian'] },
+        { num: '130', name: { en: 'Red Power Roll', de: 'Red Power Roll', ne: 'रेड पावर रोल' }, desc: { en: 'Marinated carrot, cucumber, avocado, beetroot topping, creamy avocado sauce, wasabi sesame, shiso cress', de: 'Marinierte Karotten, Gurke, Avocado, rote Bete Topping, Avocado Creamy Soße, Wasabi Sesam, Shisho Kresse', ne: 'मरिनेट गाजर, काँक्रो, एभोकाडो, चुकन्दर टपिङ, एभोकाडो क्रिमी सस, वासाबी तिल, शिसो' }, price: 10.90, allergens: ['a', 'g'], veg: true, img: 'dish-130-red-power-roll' },
+        { num: '131', name: { en: 'Cross Rock Veggie Roll', de: 'Cross Rock Veggie Roll', ne: 'क्रस रक भेजी रोल' }, desc: { en: 'Cucumber, avocado, mango, tempura asparagus, avocado topping, ceviche with fresh coriander topping, black & white sesame', de: 'Gurke, Avocado, Mango, Tempura Spargel, Topping Avocado, Ceviche mit frischem Koriander Topping, black & white Sesam', ne: 'काँक्रो, एभोकाडो, आँप, टेम्पुरा कुरिलो, एभोकाडो टपिङ, ताजा धनियाँसहित सेभिचे, कालो र सेतो तिल' }, price: 10.90, allergens: ['a', 'g'], veg: true },
         ],
       },
       {
         slug: 'hot-roll',
-        label: { en: 'Hot Roll', de: 'Hot Roll', ne: 'हट रोल' },
+        label: { en: 'Eimsbüttel Hot Roll', de: 'Eimsbüttel Hot Roll', ne: 'आइम्सब्युटेल हट रोल' },
+        note: { en: '5 pieces', de: '5 Stück', ne: '५ पीस' },
         items: [
-        { num: '140', name: { en: 'Cross Crunchy Roll', de: 'Cross Crunchy Roll', ne: 'क्रस क्रन्ची रोल' }, desc: { en: 'Tempura shrimp, house-made teriyaki and mayo sauce', de: 'Tempura Shrimps, hausgemachte Teriyaki und Mayo Soße', ne: 'टेम्पुरा झिँगेमाछा, घरैको तेरियाकी र मेयो सस' }, price: 11.90, badges: [] },
-        { num: '141', name: { en: 'Japanese Crispy Chicken Roll', de: 'Japanese Crispy Chicken Roll', ne: 'जापानी क्रिस्पी चिकेन रोल' }, desc: { en: 'Crispy chicken, avocado, cucumber, spicy teriyaki sauce', de: 'Crispy Chicken, Avocado, Gurke, Spicy Teriyaki Soße', ne: 'क्रिस्पी चिकेन, एभोकाडो, काँक्रो, पिरो तेरियाकी सस' }, price: 10.90, badges: [] },
-        { num: '142', name: { en: 'Crispy Duck Roll', de: 'Crispy Duck Roll', ne: 'क्रिस्पी डक रोल' }, desc: { en: 'Tempura duck, teriyaki sauce with chives and spicy sauce', de: 'Tempura Ente, Teriyaki Soße mit Schnittlauch und Spicy Soße', ne: 'टेम्पुरा हाँस, तेरियाकी सस, चाइभ्स र पिरो सस' }, price: 11.90, badges: [] },
-        { num: '143', name: { en: 'Cross Crunchy Spicy Roll', de: 'Cross Crunchy Spicy Roll', ne: 'क्रस क्रन्ची स्पाइसी रोल' }, desc: { en: 'Cucumber, spicy tuna with chives and spicy sauce', de: 'Gurke, Spicy Tuna mit Schnittlauch und Spicy Soße', ne: 'काँक्रो, पिरो टुना, चाइभ्स र पिरो सस' }, price: 11.90, badges: ['spicy'] },
-        { num: '144', name: { en: 'Cross Tempura Roll', de: 'Cross Tempura Roll', ne: 'क्रस टेम्पुरा रोल' }, desc: { en: 'Salmon, spicy tuna, house-made teriyaki and mayo sauce, sesame', de: 'Lachs, Spicy Tuna, hausgemachte Teriyaki und Mayo Soße, Sesam', ne: 'सामन, पिरो टुना, घरैको तेरियाकी र मेयो सस, तिल' }, price: 11.90, badges: [] },
+        { num: '140', name: { en: 'Cross Crunchy Roll', de: 'Cross Crunchy Roll', ne: 'क्रस क्रन्ची रोल' }, desc: { en: 'Cucumber, avocado, crispy tempura shrimps, house-made teriyaki and mayo sauce', de: 'Gurke, Avocado, Crispy Tempura Shrimps, hausgemachte Teriyaki- und Mayo-Soße', ne: 'काँक्रो, एभोकाडो, क्रिस्पी टेम्पुरा झिँगेमाछा, घरैको तेरियाकी र मेयो सस' }, price: 11.90, allergens: [], img: 'dish-140-cross-crunchy-roll' },
+        { num: '141', name: { en: 'Crispy Chicken Roll', de: 'Crispy Chicken Roll', ne: 'क्रिस्पी चिकेन रोल' }, desc: { en: 'Crispy chicken, avocado, cucumber, spicy teriyaki sauce', de: 'Crispy Chicken, Avocado, Gurke, Spicy-Teriyaki-Soße', ne: 'क्रिस्पी चिकेन, एभोकाडो, काँक्रो, पिरो तेरियाकी सस' }, price: 10.90, allergens: ['a', 'g', 'h'], spice: 1 },
+        { num: '142', name: { en: 'Cross Tempura Roll', de: 'Cross Tempura Roll', ne: 'क्रस टेम्पुरा रोल' }, desc: { en: 'Spicy tuna tartare, avocado, house-made teriyaki and mayo sauce, sesame', de: 'Spicy Tuna Tatar, Avocado, hausgemachte Teriyaki- und Mayo-Soße, Sesam', ne: 'पिरो टुना ट्यार्टार, एभोकाडो, घरैको तेरियाकी र मेयो सस, तिल' }, price: 11.90, allergens: [], spice: 1 },
         ],
       },
       {
         slug: 'sashimi',
-        label: { en: 'Sashimi', de: 'Sashimi', ne: 'सासिमी' },
+        label: { en: 'Classic Sashimi', de: 'Classic Sashimi', ne: 'क्लासिक सासिमी' },
+        note: { en: '10 slices', de: '10 Scheiben', ne: '१० स्लाइस' },
         items: [
-        { num: '90', name: { en: 'Avocado Ceviche Sashimi', de: 'Avocado Ceviche Sashimi', ne: 'एभोकाडो सेभिचे सासिमी' }, desc: { en: 'Avocado, sashimi, sesame', de: 'Avocado, Sashimi, Sesam', ne: 'एभोकाडो, सासिमी, तिल' }, price: 11.90, badges: ['vegetarian'] },
-        { num: '91', name: { en: 'Raw Bento Sashimi', de: 'Rohe Bento Sashimi', ne: 'काँचो बेन्तो सासिमी' }, desc: { en: 'Sashimi with mixed salad, tomato sauce, cress', de: 'Sashimi mit gemischtem Salat, Tomatensauce, Kresse', ne: 'सासिमी, मिक्स सलाद, गोलभेँडाको सस, क्रेस' }, price: 11.90, badges: [] },
-        { num: '92', name: { en: 'Salmon Sashimi', de: 'Lachs Sashimi', ne: 'सामन सासिमी' }, desc: null, price: 21.90, badges: [] },
-        { num: '93', name: { en: 'Cross Special Salmon Sashimi', de: 'Cross Special Salmon Sashimi', ne: 'क्रस स्पेशल सामन सासिमी' }, desc: { en: 'Wasabi, ginger, carrot, tomato, cress', de: 'Wasabi, Ingwer, Karotten, Tomaten, Kresse', ne: 'वासाबी, अदुवा, गाजर, गोलभेँडा, क्रेस' }, price: 27.90, badges: [] },
-        { num: '94', name: { en: 'Cross Special Yellowfin Tuna Tartare', de: 'Cross Special Yellowfin Tuna Tatar', ne: 'क्रस स्पेशल यलोफिन टुना ट्यार्टार' }, desc: { en: 'Fresh yellowfin tuna, sesame, cress', de: 'Frischer Yellowfin Tuna, Sesam, Kresse', ne: 'ताजा यलोफिन टुना, तिल, क्रेस' }, price: 27.90, badges: [] },
-        { num: '95', name: { en: 'Cross Special Yellowfin Tuna Tataki', de: 'Cross Special Yellowfin Tuna Tataki', ne: 'क्रस स्पेशल यलोफिन टुना तताकी' }, desc: null, price: 19.90, badges: [] },
-        { num: '100', name: { en: 'Cross Special Wellhorn Sashimi', de: 'Cross Special Wellhorn Sashimi', ne: 'क्रस स्पेशल वेलहर्न सासिमी' }, desc: { en: 'Seaweed leaves and salmon tartare, ponzu sauce', de: 'Seetangblätter und Lachstatar, Soße Ponzu', ne: 'समुन्द्री झार र सामन ट्यार्टार, पोन्जु सस' }, price: 22.90, badges: [] },
-        { num: '101', name: { en: 'Cross Special Salmon Sashimi', de: 'Cross Special Salmon Sashimi', ne: 'क्रस स्पेशल सामन सासिमी' }, desc: { en: 'Dry-ice waves, lime, truffle ponzu sauce', de: 'Wellenförmig Trockeneis, Limette, Trüffel Ponzu Soße', ne: 'ड्राई आइस, कागती, ट्रफल पोन्जु सस' }, price: 24.90, badges: [] },
-        { num: '102', name: { en: 'Cross Special Kobe Bento Sashimi', de: 'Cross Special Kobe Bento Sashimi', ne: 'क्रस स्पेशल कोबे बेन्तो सासिमी' }, desc: { en: 'Rose butter, truffle-foam sashimi, truffle ponzu', de: 'Rosenbutter, Trüffel-Schaum Sashimi, Trüffel Ponzu', ne: 'रोज बटर, ट्रफल फोम सासिमी, ट्रफल पोन्जु' }, price: 24.90, badges: [] },
-        { num: '103', name: { en: 'Cross Special Roast Beef Sashimi', de: 'Cross Special Roast Beef Sashimi', ne: 'क्रस स्पेशल रोस्ट बिफ सासिमी' }, desc: { en: 'Fresh roast beef with rose butter, truffle ponzu, mixed salad and shiso cress', de: 'Frisches Roast Beef mit Rosenbutter, Trüffel Ponzu, gemischter Salat und Shiso-Kresse', ne: 'ताजा रोस्ट बिफ, रोज बटर, ट्रफल पोन्जु, मिक्स सलाद र शिसो' }, price: 24.90, badges: [] },
+        { num: '90', name: { en: 'Avocado Ceviche Sashimi', de: 'Avocado Ceviche Sashimi', ne: 'एभोकाडो सेभिचे सासिमी' }, desc: { en: 'Whole avocado with ceviche, olive oil, salt, with fresh coriander', de: 'ganze Avocado mit Ceviche, Olivenöl, Salz, mit frischem Koriander', ne: 'सिङ्गो एभोकाडो, सेभिचे, जैतुनको तेल, नुन र ताजा धनियाँ' }, price: 11.90, allergens: [], veg: true },
+        { num: '91', name: { en: 'Salmon Sashimi', de: 'Lachs Sashimi', ne: 'सामन सासिमी' }, desc: null, price: 21.90, allergens: ['f'], img: 'dish-091-lachs-sashimi' },
+        { num: '92', name: { en: 'Maguro Tuna Sashimi', de: 'Maguro Thunfisch Sashimi', ne: 'मागुरो टुना सासिमी' }, desc: null, price: 23.90, allergens: ['f'], img: 'dish-092-maguro-sashimi' },
+        { num: '93', name: { en: 'Cross Special Salmon Tataki', de: 'Cross Spezial Salmon Tataki', ne: 'क्रस स्पेशल सामन तताकी' }, desc: { en: '9 slices', de: '9 Scheiben', ne: '९ स्लाइस' }, price: 17.90, allergens: [] },
+        { num: '94', name: { en: 'Cross Special Yellowfin Tuna Sashimi', de: 'Cross Spezial Yellowfin Tuna Sashimi', ne: 'क्रस स्पेशल यलोफिन टुना सासिमी' }, desc: { en: '9 slices', de: '9 Scheiben', ne: '९ स्लाइस' }, price: 19.90, allergens: [] },
+        ],
+      },
+      {
+        slug: 'signature-roll',
+        label: { en: 'Cross Signature Roll', de: 'Cross Signatur Roll', ne: 'क्रस सिग्नेचर रोल' },
+        note: { en: '8 pieces', de: '8 Stück', ne: '८ पीस' },
+        items: [
+        { num: '110', name: { en: 'Sweet Dream Roll', de: 'Sweet Dream Roll', ne: 'स्वीट ड्रिम रोल' }, desc: { en: 'Tempura shrimps, avocado, cucumber, topping: spicy tuna tartare, spicy teriyaki, mayo, spring onion, kimchi sesame', de: 'Tempura-Shrimps, Avocado, Gurke, Topping: Spicy Tuna Tatar, Spicy Teriyaki, Mayo, Lauchzwiebel, Kimchi-Sesam', ne: 'टेम्पुरा झिँगेमाछा, एभोकाडो, काँक्रो, टपिङ: पिरो टुना ट्यार्टार, पिरो तेरियाकी, मेयो, हरियो प्याज, किम्ची तिल' }, price: 12.90, allergens: ['a', 'f'], spice: 1 },
+        { num: '111', name: { en: 'Premium Smoke Salmon Roll', de: 'Premium Smoke Salmon Roll', ne: 'प्रिमियम स्मोक सामन रोल' }, desc: { en: 'Tempura shrimps, avocado, cucumber, torched salmon, teriyaki and creamy sauce, chives, shiso cress', de: 'Tempura Shrimps, Avocado, Gurke, flambierter Lachs, Teriyaki und Creamy-Soße, Schnittlauch, Shisho Kresse', ne: 'टेम्पुरा झिँगेमाछा, एभोकाडो, काँक्रो, फ्ल्याम्बे सामन, तेरियाकी र क्रिमी सस, चाइभ्स, शिसो' }, price: 12.90, allergens: ['a', 'f'], pop: 1, img: 'dish-111-premium-smoke-salmon-roll' },
+        { num: '112', name: { en: 'Crunchy Eel Roll', de: 'Crunchy Aal Roll', ne: 'क्रन्ची ईल रोल' }, desc: { en: 'Tempura unagi, avocado, cucumber, salmon topping, house-made teriyaki sauce, sesame, shiso cress', de: 'Tempura Unagi, Avocado, Gurke, Lachs Topping, hausgemachte Teriyaki-Soße, Sesam, Shisho Kresse', ne: 'टेम्पुरा उनागी, एभोकाडो, काँक्रो, सामन टपिङ, घरैको तेरियाकी सस, तिल, शिसो' }, price: 12.90, allergens: ['a', 'b', 'd', 'f'] },
+        { num: '113', name: { en: 'Hot Star Roll', de: 'Hot Star Roll', ne: 'हट स्टार रोल' }, desc: { en: 'Tempura, red peperoni, avocado, cucumber, tuna and tuna tartare, mayo sauce, torched spicy teriyaki sauce, spring onion, shiso cress, kimchi', de: 'Tempura, rote Peperoni, Avocado, Gurke, Tuna und Tuna Tatar, Mayo-Soße, flambierte Spicy-Teriyaki-Soße, Lauchzwiebel, Shiso Kresse, Kimchi', ne: 'टेम्पुरा, रातो खुर्सानी, एभोकाडो, काँक्रो, टुना र टुना ट्यार्टार, मेयो सस, फ्ल्याम्बे पिरो तेरियाकी सस, हरियो प्याज, शिसो, किम्ची' }, price: 13.90, allergens: ['a', 'f', 'g'], spice: 2 },
+        { num: '114', name: { en: 'Everest Roll', de: 'Everest Roll', ne: 'एभरेस्ट रोल' }, desc: { en: 'Tempura shrimps, torched yellowfin tuna, avocado, cucumber, special spice, house-made teriyaki-mayo sauce, spicy sauce, shiso cress, kimchi sesame', de: 'Tempura Shrimps, flambierter Yellowfin Tuna, Avocado, Gurke, Spezialgewürz, hausgemachte Teriyaki-Mayo-Soße, Spicy-Soße, Shisho Kresse, Kimchi Sesam', ne: 'टेम्पुरा झिँगेमाछा, फ्ल्याम्बे यलोफिन टुना, एभोकाडो, काँक्रो, विशेष मसला, घरैको तेरियाकी-मेयो सस, पिरो सस, शिसो, किम्ची तिल' }, price: 13.90, allergens: ['a', 'f', 'h'], spice: 1 },
+        { num: '115', name: { en: 'Rost Beef Roll', de: 'Rost Beef Roll', ne: 'रोस्ट बिफ रोल' }, desc: { en: 'Tempura shrimps, cucumber, avocado, torched beef, house-made spicy sauce, kimchi sesame, shiso cress', de: 'Tempura Shrimps, Gurke, Avocado, flambiertes Beef, hausgemachte Spicy-Soße, Kimchi Sesam, Shisho Kresse', ne: 'टेम्पुरा झिँगेमाछा, काँक्रो, एभोकाडो, फ्ल्याम्बे बिफ, घरैको पिरो सस, किम्ची तिल, शिसो' }, price: 13.90, allergens: ['a', 'd', 'j'], spice: 1 },
+        { num: '116', name: { en: 'Salmon Tartare Roll', de: 'Salmon Tatar Roll', ne: 'सामन ट्यार्टार रोल' }, desc: { en: 'Tempura salmon, cucumber, avocado, salmon tartare with teriyaki sauce, creamy sauce', de: 'Tempura Lachs, Gurke, Avocado, Lachstatar mit Teriyaki-Soße, Creamy Soße', ne: 'टेम्पुरा सामन, काँक्रो, एभोकाडो, तेरियाकी सससँग सामन ट्यार्टार, क्रिमी सस' }, price: 13.90, allergens: [], pop: 7 },
         ],
       },
       {
         slug: 'platten',
-        label: { en: 'Cross Mix Platters', de: 'Cross Mix Platten', ne: 'क्रस मिक्स प्लेट' },
+        label: { en: 'Sushi Platters', de: 'Sushi Platten', ne: 'सुसी प्लेट' },
         items: [
-        { num: '270', name: { en: 'Veggie Mix', de: 'Veggie Mix', ne: 'भेजी मिक्स' }, desc: { en: 'Miso soup · 2 avocado nigiri · 2 mango nigiri · 4 kappa maki · 4 avocado maki · 8 veggie Cross rolls', de: 'Misosuppe · 2 Nigiri Avocado · 2 Nigiri Mango · 4 Maki Kappa · 4 Maki Avocado · 8 Veggie Cross Rolls', ne: 'मिसो सुप · २ एभोकाडो निगिरी · २ आँप निगिरी · ४ कप्पा माकी · ४ एभोकाडो माकी · ८ भेजी क्रस रोल' }, price: 21.90, badges: ['vegetarian'] },
-        { num: '271', name: { en: 'Classic Mix', de: 'Classic Mix', ne: 'क्लासिक मिक्स' }, desc: { en: 'Miso soup · salmon & tuna nigiri · avocado maki · California & Boston roll · 3 salmon sashimi', de: 'Misosuppe · Nigiri Lachs & Tuna · Avocado Maki · California & Boston Roll · 3 Lachs Sashimi', ne: 'मिसो सुप · सामन र टुना निगिरी · एभोकाडो माकी · क्यालिफोर्निया र बोस्टन रोल · ३ सामन सासिमी' }, price: 27.90, badges: [] },
+        { num: '270', name: { en: 'Veggi Mix', de: 'Veggi Mix', ne: 'भेजी मिक्स' }, desc: { en: 'Miso soup · 1 avocado & 1 mango nigiri · Cross cucumber maki · Red Power Roll · ½ avocado ceviche sashimi', de: 'Miso Suppe · 1 Avocado & 1 Mango Nigiri · Cross Gurke Maki · Red Power Roll · ½ Avocado Ceviche Sashimi', ne: 'मिसो सुप · १ एभोकाडो र १ आँप निगिरी · क्रस काँक्रो माकी · रेड पावर रोल · आधा एभोकाडो सेभिचे सासिमी' }, price: 21.90, allergens: ['a', 'g'], veg: true },
+        { num: '271', name: { en: 'Classic Mix', de: 'Classic Mix', ne: 'क्लासिक मिक्स' }, desc: { en: 'Miso soup · 1 salmon & 1 tuna nigiri · avocado maki · California 2 · Boston Roll · 3 salmon sashimi', de: 'Miso Suppe · 1 Lachs & 1 Tuna Nigiri · Avocado Maki · California 2 · Boston Roll · 3 Lachs Sashimi', ne: 'मिसो सुप · १ सामन र १ टुना निगिरी · एभोकाडो माकी · क्यालिफोर्निया २ · बोस्टन रोल · ३ सामन सासिमी' }, price: 27.90, allergens: ['a', 'f'] },
+        { num: '273', name: { en: 'Bento Tsui', de: 'Bento Tsui', ne: 'बेन्तो त्सुई' }, desc: { en: '2 miso soups · 2 prawn tempura · 8 Everest special roll · Cross Crunchy Roll · 8 salmon & 8 tuna maki · 3 slices salmon tataki · 3 slices tuna tataki sashimi · 4 salmon & tuna nigiri', de: '2 Miso Suppen · 2 Garnele Tempura · 8 Everest Spezial Roll · Cross Crunchy Roll · 8 Lachs & 8 Tuna Maki · 3 Scheiben Lachs Tataki · 3 Scheiben Tuna Tataki Sashimi · 4 Lachs & Tuna Nigiri', ne: '२ मिसो सुप · २ झिँगेमाछा टेम्पुरा · ८ एभरेस्ट स्पेशल रोल · क्रस क्रन्ची रोल · ८ सामन र ८ टुना माकी · ३ स्लाइस सामन तताकी · ३ स्लाइस टुना तताकी सासिमी · ४ सामन र टुना निगिरी' }, price: 59.90, allergens: ['a', 'f'] },
+        ],
+      },
+    ],
+  },
+  {
+    group: 'asia',
+    groupLabel: { en: 'Asian', de: 'Asiatisch', ne: 'एसियाली' },
+    categories: [
+      {
+        slug: 'chicken',
+        label: { en: 'Chicken', de: 'Hühnerfleisch', ne: 'कुखुराको मासु' },
+        items: [
+        { num: '161', name: { en: 'Crispy Chicken', de: 'Knuspriges Hühnerfleisch', ne: 'क्रिस्पी कुखुराको मासु' }, desc: { en: 'Battered chicken, bell pepper, broccoli, mushrooms, sugar snap peas, bamboo, red Thai peperoni, courgette, spinach leaves, red onions', de: 'gebackenes Hühnerfleisch, Paprika, Brokkoli, Champignons, Zuckerschoten, Bambus, rote thai Peperoni, Zucchini, Spinatblätter, rote Zwiebeln', ne: 'तारेको कुखुराको मासु, भेडे खुर्सानी, ब्रोकाउली, च्याउ, मिठो सिमी, बाँसको टुसा, रातो थाई खुर्सानी, जुकिनी, पालुङ्गो, रातो प्याज' }, price: 18.90, variants: [{ label: { en: 'Chicken', de: 'Hühnerfleisch', ne: 'कुखुरा' }, price: 18.90 }, { label: { en: 'Duck', de: 'Ente', ne: 'हाँस' }, price: 19.90 }], allergens: ['b', 'd'], spice: 1 },
+        { num: '162', name: { en: 'Chicken Cashew', de: 'Huhn Cashew', ne: 'चिकेन काजु' }, desc: { en: 'Fried chicken, cashews, sugar snap peas, broccoli, bell pepper, Thai peperoni, cauliflower, courgette, bamboo, red onions, mushrooms', de: 'gebratenes Hühnerfleisch, Cashewkerne, Zuckerschoten, Brokkoli, Paprika, Thai Peperoni, Blumenkohl, Zucchini, Bambus, rote Zwiebeln, Champignons', ne: 'भुटेको कुखुराको मासु, काजु, मिठो सिमी, ब्रोकाउली, भेडे खुर्सानी, थाई खुर्सानी, काउली, जुकिनी, बाँसको टुसा, रातो प्याज, च्याउ' }, price: 17.90, allergens: ['b', 'd', 'g', 'h'], spice: 1 },
+        { num: '163', name: { en: 'Japanese Teriyaki Chicken', de: 'Japanisches Teriyaki Hühnchen', ne: 'जापानी तेरियाकी चिकेन' }, desc: { en: 'Chicken, courgette, spinach leaves, red Thai peperoni, cauliflower, sugar snap peas, broccoli, cashews, bell pepper, mushrooms', de: 'Hühnerfleisch, Zucchini, Spinatblätter, rote Thai Peperoni, Blumenkohl, Zuckerschoten, Brokkoli, Cashewkerne, Paprika, Champignons', ne: 'कुखुराको मासु, जुकिनी, पालुङ्गो, रातो थाई खुर्सानी, काउली, मिठो सिमी, ब्रोकाउली, काजु, भेडे खुर्सानी, च्याउ' }, price: 17.90, allergens: ['a', 'b', 'd'], spice: 1 },
+        { num: '164', name: { en: 'Korma Chicken', de: 'Korma Chicken', ne: 'कोर्मा चिकेन' }, desc: { en: 'Chicken, fresh vegetables, cashews, korma cream sauce', de: 'Hühnerfleisch, frisches Gemüse, Cashewkerne, Korma-Sahne-Soße', ne: 'कुखुराको मासु, ताजा तरकारी, काजु, कोर्मा क्रिम सस' }, price: 17.90, allergens: [] },
         ],
       },
       {
-        slug: 'thai',
-        label: { en: 'Thai Specialties', de: 'Thai Spezialitäten', ne: 'थाई विशेष परिकार' },
+        slug: 'beef',
+        label: { en: 'Beef', de: 'Rindfleisch', ne: 'बिफ' },
         items: [
-        { num: '150', name: { en: 'Thai Fried Rice', de: 'Thai Fried Rice', ne: 'थाई फ्राइड राइस' }, desc: { en: 'Thai basil, sambal, cashews, coconut flakes, or Gai', de: 'Thai Basilikum, Sambal, Cashewkerne, Kokosraspeln, oder Gai', ne: 'थाई तुलसी, साम्बल, काजु, नरिवल, वा गाई' }, price: 15.50, badges: [] },
-        { num: '151', name: { en: 'Massaman Curry', de: 'Massaman Curry', ne: 'मस्समान करी' }, desc: { en: 'Nahi Massaman with potato, mushrooms, carrot, peanut', de: 'Nahi Massaman mit Kartoffeln, Champignons, Karotten, Erdnuss', ne: 'नाही मस्समान, आलु, च्याउ, गाजर, बदाम' }, price: 17.90, badges: [] },
-        { num: '152', name: { en: 'Gäng Tom Kha Gai', de: 'Gäng Tom Kha Gai', ne: 'गाङ टोम खा गाई' }, desc: { en: 'Coconut soup with chicken, mushrooms, coriander', de: 'Kokossuppe mit Hühnerfleisch, Champignons, Koriander', ne: 'नरिवलको सुप, कुखुराको मासु, च्याउ, धनियाँ' }, price: 17.90, badges: [] },
-        { num: '160', name: { en: 'Crispy Sweet Chicken', de: 'Crispy Sweet Huhn', ne: 'क्रिस्पी स्वीट चिकेन' }, desc: { en: 'or Phed — fried chicken, sweet & sour with sugar snap peas', de: 'oder Phed — gebratenes Hühnerfleisch, Süß-Sauer mit Zuckerschoten', ne: 'वा फेड — तारेको कुखुरा, अमिलो-पिरो, मिठो सिमीसँग' }, price: 18.50, badges: [] },
-        { num: '161', name: { en: 'Crispy Chicken', de: 'Knuspriges Hühnerfleisch', ne: 'क्रिस्पी कुखुराको मासु' }, desc: { en: 'fried sweet & sour with sugar snap peas, corn sauce, onions', de: 'gebratenes Süß-Sauer mit Zuckerschoten, Mais Soße, Zwiebeln', ne: 'अमिलो-पिरो तारेको, मिठो सिमी, मकैको सस, प्याज' }, price: 19.90, badges: [] },
-        { num: '162', name: { en: 'Chicken Cashew Teriyaki', de: 'Huhn Cashew Teriyaki', ne: 'चिकेन काजु तेरियाकी' }, desc: { en: 'Courgette, chicken, red onion, bamboo, cashews, piquant sauce', de: 'Zucchini, Hühnchen, rote Zwiebeln, Bambus, Cashewkerne, Pikante Soße', ne: 'जुकिनी, कुखुरा, रातो प्याज, बाँसको टुसा, काजु, पिरो सस' }, price: 19.90, badges: [] },
-        { num: '163', name: { en: 'Japanese Teriyaki Chicken', de: 'Japanisches Teriyaki Hühnchen', ne: 'जापानी तेरियाकी चिकेन' }, desc: { en: 'or peanut — spinach leaves, bamboo, red onion, glass noodles', de: 'oder Erdnuss — Spinatblätter, Bambus, rote Zwiebeln, Glasnudeln', ne: 'वा बदाम — पालुङ्गो, बाँसको टुसा, रातो प्याज, ग्लास नुडल' }, price: 17.90, badges: [] },
-        { num: '164', name: { en: 'Korma Tofu', de: 'Korma Tofu', ne: 'कोर्मा टोफु' }, desc: { en: 'Tofu, Thai chilli, cauliflower, green beans, red onion, korma cream sauce', de: 'Tofu, Thai Peperoni, Blumenkohl, Schnittbohnen, rote Zwiebeln, Korma-Sahne-Soße', ne: 'टोफु, थाई खुर्सानी, काउली, सिमी, रातो प्याज, कोर्मा क्रिम सस' }, price: 15.90, badges: ['vegetarian'] },
-        { num: '165', name: { en: 'Gai Pled Prao', de: 'Gai Pled Prao', ne: 'गाई प्लेड प्राओ' }, desc: { en: 'Thai style — chicken, Thai vegetables, cashews, korma, Thai chilli', de: 'Thai art — Hühnerfleisch, Thai Gemüse, Cashewkerne, Korma, Thai Peperoni', ne: 'थाई शैली — कुखुराको मासु, थाई तरकारी, काजु, कोर्मा, थाई खुर्सानी' }, price: 17.90, badges: ['spicy'] },
-        { num: '170', name: { en: 'Fried Beef', de: 'Gebratenes Rindfleisch', ne: 'तारेको बिफ' }, desc: { en: 'red chilli, cauliflower, broccoli, courgette, bamboo, bell pepper, red onion, sugar snap peas', de: 'rote Peperoni, Blumenkohl, Brokkoli, Zucchini, Bambus, Paprika, rote Zwiebeln, Zuckerschoten', ne: 'रातो खुर्सानी, काउली, ब्रोकाउली, जुकिनी, बाँसको टुसा, भेडे खुर्सानी, रातो प्याज, मिठो सिमी' }, price: 17.90, badges: [] },
-        { num: '171', name: { en: 'Nua Pled Prao', de: 'Nua Pled Prao', ne: 'नुआ प्लेड प्राओ' }, desc: { en: 'fried beef, bell pepper, cashews, red onion, red chilli', de: 'gebratenes Rindfleisch, Paprika, Cashewkerne, rote Zwiebeln, rote Peperoni', ne: 'तारेको बिफ, भेडे खुर्सानी, काजु, रातो प्याज, रातो खुर्सानी' }, price: 17.90, badges: ['spicy'] },
-        { num: '180', name: { en: 'Cross Duck Teriyaki', de: 'Cross Ente Teriyaki', ne: 'क्रस डक तेरियाकी' }, desc: { en: 'crispy duck, sesame seeds, red onion, peanuts or peanut sauce', de: 'knusprige Ente, Sesamkörner, rote Zwiebeln, Erdnusskörner oder Erdnusssoße', ne: 'क्रिस्पी हाँस, तिल, रातो प्याज, बदाम वा बदामको सस' }, price: 19.90, badges: [] },
-        { num: '181', name: { en: 'Cross Duck Panang Curry', de: 'Cross Ente Panang Curry', ne: 'क्रस डक पानाङ करी' }, desc: { en: 'crispy duck, panang curry, sugar snap peas, red onion, coriander', de: 'knusprige Ente, Panang Curry, Zuckerschoten, rote Zwiebeln, Koriander', ne: 'क्रिस्पी हाँस, पानाङ करी, मिठो सिमी, रातो प्याज, धनियाँ' }, price: 20.90, badges: ['spicy'] },
+        { num: '170', name: { en: 'Fried Beef', de: 'Gebratenes Rindfleisch', ne: 'भुटेको बिफ' }, desc: { en: 'piquant — beef, red peperoni, cauliflower, broccoli, courgette, bamboo, spinach leaves, bell pepper, cashews, red onions, sugar snap peas', de: 'pikant — Rindfleisch, rote Peperoni, Blumenkohl, Brokkoli, Zucchini, Bambus, Spinatblätter, Paprika, Cashewkerne, rote Zwiebeln, Zuckerschoten', ne: 'पिरो — बिफ, रातो खुर्सानी, काउली, ब्रोकाउली, जुकिनी, बाँसको टुसा, पालुङ्गो, भेडे खुर्सानी, काजु, रातो प्याज, मिठो सिमी' }, price: 17.90, allergens: ['a', 'b', 'd'], spice: 1 },
+        { num: '171', name: { en: 'Nua phad grau prau', de: 'Nua phad grau prau', ne: 'नुआ फाद ग्राउ प्राउ' }, desc: { en: 'Thai style — fried beef with bell pepper, red onions, red peperoni, Thai basil, oyster sauce', de: 'thai art — gebratenes Rindfleisch mit Paprika, rote Zwiebeln, rote Peperoni, Thai Basilikum, Austern-Soße', ne: 'थाई शैली — भुटेको बिफ, भेडे खुर्सानी, रातो प्याज, रातो खुर्सानी, थाई तुलसी, ओइस्टर सस' }, price: 17.90, allergens: ['a', 'b', 'd'], spice: 1 },
+        ],
+      },
+      {
+        slug: 'duck',
+        label: { en: 'Cross Thai Duck', de: 'Cross Thai Ente', ne: 'क्रस थाई हाँस' },
+        items: [
+        { num: '180', name: { en: 'Cross Duck Teriyaki', de: 'Cross Ente Teriyaki', ne: 'क्रस हाँस तेरियाकी' }, desc: { en: 'Cross duck, sugar snap peas, spinach leaves, mushrooms, cauliflower, broccoli, bamboo, red peperoni, courgette, onions', de: 'Cross Ente, Zuckerschoten, Spinatblätter, Champignons, Blumenkohl, Brokkoli, Bambus, rote Peperoni, Zucchini, Zwiebeln', ne: 'क्रस हाँस, मिठो सिमी, पालुङ्गो, च्याउ, काउली, ब्रोकाउली, बाँसको टुसा, रातो खुर्सानी, जुकिनी, प्याज' }, price: 20.90, allergens: ['a', 'b', 'd'], spice: 1 },
+        ],
+      },
+      {
+        slug: 'poke-bowls',
+        label: { en: 'Poke Bowl', de: 'Poke Bowl', ne: 'पोके बाउल' },
+        note: { en: 'Base (no. 30): edamame, cucumber, avocado, beetroot, red bell pepper, blueberries, sweetcorn', de: 'Grundlage (Nr. 30): Edamame, Gurke, Avocado, Rote Bete, Rote Paprika, Blaubeeren, Mais', ne: 'आधार (नं. ३०): एदामामे, काँक्रो, एभोकाडो, चुकन्दर, रातो भेडे खुर्सानी, ब्लुबेरी, मकै' },
+        items: [
+        { num: '30 A', name: { en: 'Salmon Bowl', de: 'Lachs Bowl', ne: 'सामन बाउल' }, desc: { en: 'Cashews, creamy sauce', de: 'Cashewkerne, Cremige Soße', ne: 'काजु, क्रिमी सस' }, price: 17.90, allergens: [] },
+        { num: '30 B', name: { en: 'Tuna Bowl', de: 'Tuna Bowl', ne: 'टुना बाउल' }, desc: { en: 'Walnuts, spicy mayo sauce', de: 'Walnüsse, Spicy Mayo-Soße', ne: 'ओखर, पिरो मेयो सस' }, price: 19.90, allergens: [], spice: 1 },
         ],
       },
       {
         slug: 'fish',
-        label: { en: 'Fish', de: 'Fisch', ne: 'माछा' },
+        label: { en: 'Cross Fish', de: 'Cross Fisch', ne: 'क्रस माछा' },
         items: [
-        { num: '190', name: { en: 'Tuna Steak', de: 'Tuna Steak', ne: 'टुना स्टेक' }, desc: { en: 'Spinach leaves, fried potatoes, red chilli, broccoli, sugar snap peas, lemon, spinach sauce', de: 'Spinatblätter, Bratkartoffeln, rote Peperoni, Brokkoli, Zuckerschoten, Zitrone, Spinatsoße', ne: 'पालुङ्गो, तारेको आलु, रातो खुर्सानी, ब्रोकाउली, मिठो सिमी, कागती, पालुङ्गोको सस' }, price: 21.50, badges: [] },
-        { num: '191', name: { en: 'Barbecue Salmon', de: 'Barbecue Lachs', ne: 'बार्बेक्यु सामन' }, desc: { en: 'Grilled salmon fillet, fresh salad leaves, red chilli, sugar snap peas, lemon, spinach sauce', de: 'Gegrilltes Lachsfilet, frische Salatblätter, rote Peperoni, Zuckerschoten, Zitrone, Spinatsoße', ne: 'ग्रिल्ड सामन फिलेट, ताजा सलाद, रातो खुर्सानी, मिठो सिमी, कागती, पालुङ्गोको सस' }, price: 19.90, badges: [] },
+        { num: '190', name: { en: 'Tuna Steak', de: 'Tuna Steak', ne: 'टुना स्टेक' }, desc: { en: 'Medium-grilled tuna steak, sugar snap peas, bell pepper, broccoli, spinach leaves, mushrooms, cauliflower, red peperoni, courgette', de: 'Medium gegrilltes Thunfisch Steak, Zuckerschoten, Paprika, Brokkoli, Spinatblätter, Champignons, Blumenkohl, rote Peperoni, Zucchini', ne: 'मिडियम ग्रिल टुना स्टेक, मिठो सिमी, भेडे खुर्सानी, ब्रोकाउली, पालुङ्गो, च्याउ, काउली, रातो खुर्सानी, जुकिनी' }, price: 21.50, allergens: ['a', 'b', 'd', 'f'], spice: 1 },
+        { num: '191', name: { en: 'Barbecue Salmon', de: 'Barbecue Lachs', ne: 'बार्बेक्यु सामन' }, desc: { en: 'Grilled salmon fillet, fresh spinach leaves, sugar snap peas, lemon cream sauce', de: 'Gegrilltes Lachsfilet, frische Spinatblätter, Zuckerschoten, Zitronen-Sahnesoße', ne: 'ग्रिल सामन फिलेट, ताजा पालुङ्गो, मिठो सिमी, कागती-क्रिम सस' }, price: 19.50, allergens: ['a', 'b', 'd', 'g', 'f'] },
         ],
       },
       {
         slug: 'rice-noodles',
-        label: { en: 'Rice & Noodles', de: 'Reis & Nudeln', ne: 'भात र नुडल' },
+        label: { en: 'Cross Rice & Noodles', de: 'Cross Reis & Nudeln', ne: 'क्रस भात र नुडल' },
+        note: { en: '200. Fried noodles or fried rice — fresh seasonal vegetables, egg and your choice of:', de: '200. Gebratene Nudeln oder gebratener Reis — frisches Saison Gemüse, Ei und nach Wahl:', ne: '२००. भुटेको चाउमिन वा भुटेको भात — ताजा मौसमी तरकारी, अण्डा र तपाईंको रोजाइ:' },
         items: [
-        { num: '200 A', name: { en: 'Vegetarian', de: 'Vegetarisch', ne: 'शाकाहारी' }, desc: null, price: 13.90, badges: ['vegetarian'] },
-        { num: '200 B', name: { en: 'Chicken', de: 'Hühnerfleisch', ne: 'कुखुराको मासु' }, desc: null, price: 17.90, badges: [] },
-        { num: '200 C', name: { en: 'Beef', de: 'Rindfleisch', ne: 'बिफ' }, desc: null, price: 17.90, badges: [] },
-        { num: '200 D', name: { en: 'Crispy Duck / Chicken', de: 'Knusprige Ente / Hähnchen', ne: 'क्रिस्पी हाँस / कुखुरा' }, desc: null, price: 18.90, badges: [] },
+        { num: '200 A', name: { en: 'Vegetarian', de: 'Vegetarisch', ne: 'शाकाहारी' }, desc: null, price: 13.90, allergens: ['a', 'b', 'd'], veg: true },
+        { num: '200 B', name: { en: 'Chicken or beef', de: 'Hühnerfleisch oder Rindfleisch', ne: 'कुखुरा वा बिफ' }, desc: null, price: 17.90, allergens: ['a', 'b', 'd'] },
+        { num: '200 C', name: { en: 'Crispy chicken or crispy duck', de: 'Knuspriges Hähnchen oder Knusprige Ente', ne: 'क्रिस्पी कुखुरा वा क्रिस्पी हाँस' }, desc: null, price: 18.90, allergens: ['a', 'b', 'd'] },
         ],
       },
       {
         slug: 'vegetarian',
         label: { en: 'Vegetarian', de: 'Vegetarisch', ne: 'शाकाहारी' },
         items: [
-        { num: '210', name: { en: 'Coconut Sojaan', de: 'Kokos Sojaan', ne: 'नरिवल सोयान' }, desc: { en: 'Mushrooms, broccoli, sugar snap peas, bamboo, Thai basil, coconut flakes', de: 'Champignons, Brokkoli, Zuckerschoten, Bambus, Thai Basilikum, Kokosraspeln', ne: 'च्याउ, ब्रोकाउली, मिठो सिमी, बाँसको टुसा, थाई तुलसी, नरिवल' }, price: 14.90, badges: ['vegetarian'] },
-        { num: '211', name: { en: 'Fried Tofu', de: 'Tofu Gebraten', ne: 'तारेको टोफु' }, desc: { en: 'Mushrooms, ginger, red onion, bamboo, cashews, piquant sauce', de: 'Champignons, Ingwer, rote Zwiebeln, Bambus, Cashewkerne, Pikante Soße', ne: 'च्याउ, अदुवा, रातो प्याज, बाँसको टुसा, काजु, पिरो सस' }, price: 14.90, badges: ['vegetarian'] },
+        { num: '210', name: { en: 'Fried Tofu', de: 'Tofu Gebraten', ne: 'भुटेको टोफु' }, desc: { en: 'Fried tofu, broccoli, mushrooms, sugar snap peas, spinach leaves, bell pepper, cauliflower, red onions, bamboo, cashews, piquant sauce', de: 'Gebratener Tofu, Brokkoli, Champignons, Zuckerschoten, Spinatblätter, Paprika, Blumenkohl, rote Zwiebeln, Bambus, Cashewkerne, pikante Soße', ne: 'भुटेको टोफु, ब्रोकाउली, च्याउ, मिठो सिमी, पालुङ्गो, भेडे खुर्सानी, काउली, रातो प्याज, बाँसको टुसा, काजु, पिरो सस' }, price: 14.90, allergens: ['a', 'b', 'd', 'g'], veg: true, spice: 1 },
+        ],
+      },
+      {
+        slug: 'kids',
+        label: { en: 'For Children', de: 'Für Kinder', ne: 'बालबालिकाका लागि' },
+        items: [
+        { num: '222', name: { en: 'Fried noodles or rice with chicken', de: 'Gebratene Nudeln oder Reis mit Hühnerfleisch', ne: 'कुखुराको मासुसँग भुटेको चाउमिन वा भात' }, desc: { en: 'With fresh vegetables and egg', de: 'Mit frischem Gemüse und Ei', ne: 'ताजा तरकारी र अण्डासहित' }, price: 9.90, allergens: ['a', 'b', 'g'] },
+        ],
+      },
+      {
+        slug: 'extras',
+        label: { en: 'Extras & Sides', de: 'Extras & Beilagen', ne: 'थप र साइड' },
+        items: [
+        { num: '230', name: { en: 'Jasmine Rice', de: 'Jasminreis', ne: 'जास्मिन भात' }, desc: null, price: 2.50, allergens: [] },
+        { num: '231', name: { en: 'Sushi Rice', de: 'Sushi-Reis', ne: 'सुसी भात' }, desc: null, price: 3.50, allergens: [] },
+        { num: '232', name: { en: 'House-made Sauces', de: 'Hausgemachte Soßen', ne: 'घरैका ससहरू' }, desc: { en: 'Teriyaki sauce, tobiko mayo, soy sauce, spicy teriyaki sauce, creamy teriyaki sauce', de: 'Teriyaki-Soße, Tobiko Mayo, Soya-Soße, Spicy Teriyaki-Soße, Cremige Teriyaki Soße', ne: 'तेरियाकी सस, तोबिको मेयो, सोया सस, पिरो तेरियाकी सस, क्रिमी तेरियाकी सस' }, price: 2.50, allergens: [] },
         ],
       },
       {
         slug: 'desserts',
         label: { en: 'Desserts', de: 'Nachtisch', ne: 'मिठाई' },
         items: [
-        { num: '220', name: { en: 'Crispy Banana', de: 'Knusprige Banane', ne: 'क्रिस्पी केरा' }, desc: null, price: 6.90, badges: [] },
-        { num: '221', name: { en: 'Fried Vanilla Ice Cream', de: 'Frittierte Vanille-Eis', ne: 'तारेको भ्यानिला आइसक्रिम' }, desc: { en: 'with strawberry or chocolate sauce', de: 'mit Erdbeer- oder Schoko-Soße', ne: 'स्ट्रबेरी वा चकलेट सससँग' }, price: 6.90, badges: [] },
-        { num: '222', name: { en: 'Warm Waffles with Vanilla Ice Cream', de: 'Warme Waffeln mit Vanille-Eis', ne: 'तातो वाफल र भ्यानिला आइसक्रिम' }, desc: { en: 'with strawberry or chocolate sauce', de: 'mit Erdbeer- oder Schoko-Soße', ne: 'स्ट्रबेरी वा चकलेट सससँग' }, price: 6.90, badges: [] },
+        { num: '220', name: { en: 'Crispy Banana', de: 'Knusprige Banane', ne: 'क्रिस्पी केरा' }, desc: { en: 'With strawberry sauce or honey', de: 'Mit Erdbeer-Soße oder Honig', ne: 'स्ट्रबेरी सस वा महसँग' }, price: 6.90, allergens: ['a', 'b', 'g'] },
+        { num: '221', name: { en: 'Jaki Ice Cream', de: 'Jaki Eis', ne: 'जाकी आइसक्रिम' }, desc: { en: 'Deep-fried vanilla ice cream with strawberries or chocolate sauce', de: 'Frittiertes Vanilleeis mit Erdbeeren oder Schoko-Soße', ne: 'तारेको भ्यानिला आइसक्रिम, स्ट्रबेरी वा चकलेट सससँग' }, price: 6.90, allergens: ['a', 'b', 'g'] },
         ],
       },
-      {
-        slug: 'extras',
-        label: { en: 'Extras', de: 'Extras', ne: 'थप' },
-        items: [
-        { num: '230', name: { en: 'Jasmine Rice', de: 'Jasminreis', ne: 'जास्मिन भात' }, desc: null, price: 2.90, badges: [] },
-        { num: '231', name: { en: 'Sushi Rice', de: 'Sushi-Reis', ne: 'सुसी भात' }, desc: null, price: 3.50, badges: [] },
-        { num: '232', name: { en: 'House-made Sauces', de: 'Hausgemachte Soßen', ne: 'घरैका ससहरू' }, desc: { en: 'Truffle sauce, soy sauce, spicy teriyaki sauce', de: 'Trüffel Soße, Soya Soße, Spicy Teriyaki-Soße', ne: 'ट्रफल सस, सोया सस, पिरो तेरियाकी सस' }, price: 2.90, badges: [] },
-        { num: '233', name: { en: 'Teriyaki Sauce', de: 'Teriyaki Soße', ne: 'तेरियाकी सस' }, desc: null, price: 3.50, badges: [] },
-        { num: '234', name: { en: 'Peanut Sauce', de: 'Erdnusssoße', ne: 'बदामको सस' }, desc: null, price: 3.90, badges: [] },
-        { num: '235', name: { en: 'Portion of Ginger / Wasabi', de: 'Portion Ingwer / Wasabi', ne: 'अदुवा / वासाबी' }, desc: null, price: 3.50, badges: [] },
-        { num: '236', name: { en: 'Crispy Chicken', de: 'Knuspriges Hühnchen', ne: 'क्रिस्पी कुखुरा' }, desc: { en: 'with seasonal vegetables', de: 'mit Saison Gemüse', ne: 'मौसमी तरकारीसँग' }, price: 10.90, badges: [] },
-        { num: '237', name: { en: 'Crispy Duck', de: 'Knusprige Ente', ne: 'क्रिस्पी हाँस' }, desc: { en: 'with seasonal vegetables', de: 'mit Saison Gemüse', ne: 'मौसमी तरकारीसँग' }, price: 9.90, badges: [] },
-        ],
-      }
-    ]
+    ],
   },
   {
     group: 'drinks',
     groupLabel: { en: 'Drinks', de: 'Getränke', ne: 'पेय पदार्थ' },
     categories: [
       {
-        slug: 'tea-coffee',
-        label: { en: 'Tea & Coffee', de: 'Tee & Kaffee', ne: 'चिया र कफी' },
+        slug: 'tea',
+        label: { en: 'Exclusive Teas', de: 'Exklusive Teesorten', ne: 'विशेष चियाहरू' },
         items: [
-        { num: '240', name: { en: 'Japanese Green Tea', de: 'Japanischer Grüner Tee', ne: 'जापानी हरियो चिया' }, desc: { en: 'with various additions', de: 'mit verschiedenen Zusätzen', ne: 'विभिन्न स्वादसँग' }, price: 4.90, badges: [] },
-        { num: '241', name: { en: 'Green Winter Tea', de: 'Grüner Winter-Tee', ne: 'हरियो जाडो चिया' }, desc: null, price: 4.90, badges: [] },
-        { num: '242', name: { en: 'Ginger Tea', de: 'Ingwer Tee', ne: 'अदुवाको चिया' }, desc: null, price: 4.90, badges: [] },
-        { num: '243', name: { en: 'Jasmine Oolong Tea', de: 'Jasmin Oolong Tee', ne: 'जास्मिन उलोङ चिया' }, desc: null, price: 5.90, badges: [] },
-        { num: '250', name: { en: 'Espresso', de: 'Espresso', ne: 'एस्प्रेसो' }, desc: null, price: 2.90, badges: [] },
-        { num: '251', name: { en: 'Double Espresso', de: 'Doppelter Espresso', ne: 'डबल एस्प्रेसो' }, desc: null, price: 3.90, badges: [] },
-        { num: '252', name: { en: 'Cappuccino', de: 'Cappuccino', ne: 'क्यापुचिनो' }, desc: null, price: 3.90, badges: [] },
+        { num: '240', name: { en: 'Asian Ginger Tea', de: 'Asiatischer Ingwertee', ne: 'एसियाली अदुवाको चिया' }, desc: null, price: 4.90, allergens: [] },
+        { num: '241', name: { en: 'Fresh Mint Tea', de: 'Frische Minze Tee', ne: 'ताजा पुदिनाको चिया' }, desc: { en: 'with ginger and honey', de: 'mit Ingwer und Honig', ne: 'अदुवा र महसँग' }, price: 4.90, allergens: [] },
+        { num: '242', name: { en: 'Green Tea „White FU“', de: 'Grüner Tee „White FU“', ne: 'हरियो चिया „White FU“' }, desc: { en: 'A blend of green, white and oolong teas, refined with exotic ingredients', de: 'Mischung aus grünen, weißen und Oolong-Tees mit exotischen Zutaten und mit edlen Zutaten verfeinert', ne: 'हरियो, सेतो र उलोङ चियाको मिश्रण, विशेष सामग्रीसँग परिष्कृत' }, price: 5.90, allergens: [] },
+        { num: '243', name: { en: 'China Jasmine Tea „Tai Mu lo g Zhu“', de: 'China Jashmintee „Tai Mu lo g Zhu“', ne: 'चिनियाँ जास्मिन चिया „Tai Mu lo g Zhu“' }, desc: { en: 'Green tea leaves layered with jasmine blossoms and then hand-rolled', de: 'Grüne Teeblätter mit Jashminblüten versetzt und anschließend mit der Hand gerollt', ne: 'जास्मिनको फूलसँग मिलाएर हातले बेरिएका हरियो चियाका पात' }, price: 5.90, allergens: [] },
+        ],
+      },
+      {
+        slug: 'coffee',
+        label: { en: 'Coffee', de: 'Kaffee', ne: 'कफी' },
+        items: [
+        { num: '250', name: { en: 'Espresso', de: 'Espresso', ne: 'एस्प्रेसो' }, desc: null, price: 2.90, allergens: [] },
+        { num: '252', name: { en: 'Cafe Creme', de: 'Cafe Creme', ne: 'काफे क्रिम' }, desc: null, price: 3.90, allergens: [] },
         ],
       },
       {
         slug: 'soft-drinks',
-        label: { en: 'Soft Drinks', de: 'Softgetränke', ne: 'सफ्ट ड्रिंक' },
+        label: { en: 'Soft Drinks', de: 'Soft Drinks', ne: 'सफ्ट ड्रिंक' },
+        note: { en: 'Numbers 250 and 252 appear twice on this card — once under coffee, once here. That is how it is printed.', de: 'Die Nummern 250 und 252 kommen in dieser Karte doppelt vor (einmal bei Kaffee, einmal hier) — so ist es gedruckt.', ne: 'यो कार्डमा नम्बर २५० र २५२ दुई ठाउँमा छन् — एक कफीमा, एक यहाँ। छापिएको त्यही हो।' },
         items: [
-        { num: '250', name: { en: 'Vatu Lemonade', de: 'Vatu Limonade', ne: 'वातु लेमोनेड' }, desc: '0.25 l', price: 3.00, badges: [] },
-        { num: '251', name: { en: 'Still Water / Brunnen', de: 'Stilles Wasser / Brunnen', ne: 'सादा पानी / ब्रुनेन' }, desc: '0.75 l', price: 6.90, badges: [] },
-        { num: '252', name: { en: 'Sparkling Water', de: 'Sprudel Wasser', ne: 'स्पार्कलिङ पानी' }, desc: '0.75 l', price: 6.90, badges: [] },
-        { num: '253', name: { en: 'Coca Cola / Coca Cola Zero', de: 'Coca Cola / Coca Cola Zero', ne: 'कोका कोला / कोका कोला जिरो' }, desc: '0.4 l', price: 3.90, badges: [] },
-        { num: '254', name: { en: 'Ginger Ale / Lemon', de: 'Ginger Ale / Lemon', ne: 'जिन्जर एल / लेमन' }, desc: 'Ginger Ale', price: 3.90, badges: [] },
+        { num: '259', name: { en: 'Yuzu Lemonade', de: 'Yuzu Limonade', ne: 'युजु लेमोनेड' }, desc: 'Yuniq Yuzu · 0,33 L', price: 3.90, allergens: [] },
+        { num: '250', name: 'ST.Michaelis Brunnen', desc: { en: '0,25 L · still / sparkling', de: '0,25 L · Naturell / mit Kohlensäure', ne: '०.२५ L · सादा / स्पार्कलिङ' }, price: 3.20, allergens: [] },
+        { num: '251', name: 'ST.Michaelis Brunnen', desc: { en: '0,75 L · still / sparkling', de: '0,75 L · Naturell / mit Kohlensäure', ne: '०.७५ L · सादा / स्पार्कलिङ' }, price: 6.90, allergens: [] },
+        { num: '252', name: 'Coca Cola, Cola Zero', desc: null, price: 3.50, variants: [{ label: '0,3 L', price: 3.50 }, { label: '0,4 L', price: 4.90 }], allergens: [] },
+        { num: '253', name: 'Bitter Lemon, Ginger Ale', desc: '0,2 L', price: 3.30, allergens: [] },
         ],
       },
       {
         slug: 'lemonade',
-        label: { en: 'Lemonades', de: 'Limonaden', ne: 'लेमोनेड' },
+        label: { en: 'House-made Lemonades', de: 'Hausgemachte Limonaden', ne: 'घरैका लेमोनेड' },
         items: [
-        { num: '260', name: { en: 'Passion Fruit', de: 'Passion Fruit', ne: 'प्यासन फ्रुट' }, desc: { en: 'Organic orange, pineapple, organic lime', de: 'Bio Orange, Ananas, Bio Limette', ne: 'अर्गानिक सुन्तला, भुइँकटहर, अर्गानिक कागती' }, price: 5.90, badges: [] },
-        { num: '261', name: { en: 'Ginger Fruity', de: 'Ginger Fruity', ne: 'जिन्जर फ्रुटी' }, desc: { en: 'Organic orange, lime juice, sugar', de: 'Bio Orange, Limettensaft, Zucker', ne: 'अर्गानिक सुन्तला, कागतीको रस, चिनी' }, price: 5.90, badges: [] },
-        { num: '262', name: { en: 'Apple Jai', de: 'Apple Jai', ne: 'एप्पल जाइ' }, desc: { en: 'Sparkling water, lime juice, sugar, lemon', de: 'Sprudel Wasser, Limettensaft, Zucker, Zitrone', ne: 'स्पार्कलिङ पानी, कागतीको रस, चिनी, निबुवा' }, price: 4.90, badges: [] },
-        { num: '263', name: { en: 'Mango Lassi', de: 'Mango Lassi', ne: 'आँप लस्सी' }, desc: { en: 'Yoghurt, mango, soft', de: 'Joghurt, Mango, Soft', ne: 'दही, आँप, सफ्ट' }, price: 4.90, badges: [] },
-        { num: '264', name: { en: 'Kathmandu Jai', de: 'Kathmandu Jai', ne: 'काठमाडौँ जाइ' }, desc: { en: 'Lime juice, ginger and mint', de: 'Limettensaft, Ingwer und Minze', ne: 'कागतीको रस, अदुवा र पुदिना' }, price: 6.90, badges: [] },
-        { num: '265', name: { en: 'Amrit Sarbat', de: 'Amrit Sarbat', ne: 'अमृत सर्बत' }, desc: { en: 'Brown sugar, mint and sparkling water', de: 'Brauner Zucker, Minze und Sprudel Wasser', ne: 'खुदो, पुदिना र स्पार्कलिङ पानी' }, price: 4.90, badges: [] },
+        { num: '260', name: 'Passion Fruty', desc: { en: '0,3 L · Passion fruit, organic kiwi, organic orange, pineapple, organic lime, mint with sparkling water, lime juice, sugar', de: '0,3 L · Maracuja, Bio Kiwi, Bio Orange, Ananas, Bio Limette, Minze mit Sprudel Wasser, Limettensaft, Zucker', ne: '०.३ L · प्यासन फ्रुट, अर्गानिक किवी, अर्गानिक सुन्तला, भुइँकटहर, अर्गानिक कागती, पुदिना, स्पार्कलिङ पानी, कागतीको रस, चिनी' }, price: 5.90, allergens: [] },
+        { num: '261', name: 'Ginger Fruty', desc: { en: '0,3 L · Ginger, organic lemon, organic grapefruit, organic orange, mint with sparkling water, lime juice, sugar', de: '0,3 L · Ingwer, Bio Zitrone, Bio Grapefruit, Bio Orange, Minze mit Sprudel Wasser, Limettensaft, zucker', ne: '०.३ L · अदुवा, अर्गानिक निबुवा, अर्गानिक ग्रेपफ्रुट, अर्गानिक सुन्तला, पुदिना, स्पार्कलिङ पानी, कागतीको रस, चिनी' }, price: 5.90, allergens: [] },
+        { num: '263', name: { en: 'Mango Lassi', de: 'Mango Lassi', ne: 'आँप लस्सी' }, desc: { en: '0,3 L · Mango pulp, milk, yoghurt, mango juice', de: '0,3 L · Mango Pulp, Milch, Joguhrt, Mango Saft', ne: '०.३ L · आँपको पल्प, दूध, दही, आँपको रस' }, price: 4.90, allergens: [] },
+        { num: '265', name: { en: 'Lemon Sarbat', de: 'Lemon Sarbat', ne: 'निबुवा सर्बत' }, desc: { en: '0,3 L · Lime juice, sugar syrup, mint and sparkling water', de: '0,3 L · Limettensaft, Zucker Sirup, Minze und Sprudel Wasser', ne: '०.३ L · कागतीको रस, चिनीको सिरप, पुदिना र स्पार्कलिङ पानी' }, price: 4.90, allergens: [] },
         ],
       },
       {
         slug: 'beer',
-        label: { en: 'Beer', de: 'Bier', ne: 'बियर' },
+        label: { en: 'Draught Beer', de: 'Bier vom Fass', ne: 'ड्राफ्ट बियर' },
         items: [
-        { num: '270', name: { en: 'König Pilsner', de: 'König Pilsner', ne: 'कोनिग पिल्सनर' }, desc: '0.3 l', price: 3.50, badges: [] },
-        { num: '271', name: { en: 'König Pilsner', de: 'König Pilsner', ne: 'कोनिग पिल्सनर' }, desc: '0.5 l', price: 5.50, badges: [] },
-        { num: '272', name: { en: 'Benediktiner Wheat Beer', de: 'Benediktiner Weißbier', ne: 'बेनेडिक्टिनर गहुँ बियर' }, desc: '0.3 l', price: 3.50, badges: [] },
-        { num: '273', name: { en: 'Benediktiner Wheat Beer', de: 'Benediktiner Weißbier', ne: 'बेनेडिक्टिनर गहुँ बियर' }, desc: '0.5 l', price: 5.50, badges: [] },
-        { num: '274', name: { en: 'Alcohol-free Pilsner', de: 'Alkoholfreies Pilsner', ne: 'रक्सीरहित पिल्सनर' }, desc: '0.33 l', price: 3.50, badges: [] },
-        { num: '275', name: { en: 'Alcohol-free Wheat Beer', de: 'Alkoholfreies Weißbier', ne: 'रक्सीरहित गहुँ बियर' }, desc: '0.33 l', price: 3.50, badges: [] },
+        { num: '270', name: 'König Pilsener', desc: '0,3 L', price: 3.30, allergens: [] },
+        { num: '271', name: 'König Pilsener', desc: '0,5 L', price: 4.90, allergens: [] },
+        { num: '272', name: 'Benediktiner', desc: { en: 'Wheat beer · 0,5 L', de: 'Weißbier · 0,5 L', ne: 'गहुँको बियर · ०.५ L' }, price: 5.50, allergens: [] },
+        { num: '273', name: 'Benediktiner', desc: { en: 'Wheat beer, alcohol-free · 0,5 L', de: 'Weißbier alkoholfrei · 0,5 L', ne: 'गहुँको बियर, रक्सीरहित · ०.५ L' }, price: 5.50, allergens: [] },
+        { num: '274', name: 'Kirin', desc: { en: 'Japanese beer · 0,3 L', de: 'japanisches Bier · 0,3 L', ne: 'जापानी बियर · ०.३ L' }, price: 3.90, allergens: [] },
+        { num: '275', name: 'Asahi', desc: { en: 'Japanese beer · 0,3 L', de: 'japanisches Bier · 0,3 L', ne: 'जापानी बियर · ०.३ L' }, price: 3.90, allergens: [] },
+        ],
+      },
+      {
+        slug: 'spirits',
+        label: { en: 'Spirits', de: 'Spirituosen', ne: 'रक्सी' },
+        items: [
+        { num: '290', name: { en: 'Bamboo Schnapps', de: 'Bambusschnaps', ne: 'बाँसको रक्सी' }, desc: '2 cl', price: 3.50, allergens: [] },
+        { num: '291', name: 'Tequila', desc: '2 cl', price: 3.50, allergens: [] },
+        { num: '292', name: 'Jägermeister', desc: '2 cl', price: 3.00, allergens: [] },
+        { num: '293', name: 'Sambuca', desc: '2 cl', price: 2.50, allergens: [] },
+        { num: '294', name: 'Absolut Vodka', desc: '4 cl', price: 6.90, allergens: [] },
+        ],
+      },
+      {
+        slug: 'whiskey',
+        label: { en: 'Whiskey', de: 'Whiskey', ne: 'व्हिस्की' },
+        items: [
+        { num: '295', name: 'Johnnie Walker', desc: 'Black Label', price: 3.50, variants: [{ label: '2 cl', price: 3.50 }, { label: '4 cl', price: 7.00 }], allergens: [] },
+        { num: '296', name: 'Johnnie Walker', desc: 'Gold Label', price: 4.00, variants: [{ label: '2 cl', price: 4.00 }, { label: '4 cl', price: 8.00 }], allergens: [] },
+        { num: '297', name: 'Johnnie Walker', desc: 'Green Label', price: 5.00, variants: [{ label: '2 cl', price: 5.00 }, { label: '4 cl', price: 10.00 }], allergens: [] },
+        { num: '298', name: 'Jack Daniels', desc: null, price: 3.50, variants: [{ label: '2 cl', price: 3.50 }, { label: '4 cl', price: 7.00 }], allergens: [] },
+        { num: '299', name: 'Chivas Regal 12Y.', desc: null, price: 3.50, variants: [{ label: '2 cl', price: 3.50 }, { label: '4 cl', price: 7.00 }], allergens: [] },
+        ],
+      },
+      {
+        slug: 'spritz',
+        label: { en: 'Spritz', de: 'Spritz', ne: 'स्प्रिट्ज' },
+        items: [
+        { num: '301', name: 'Aperol Spritz', desc: { en: 'Aperol, sparkling wine, soda', de: 'Aperol, Sekt, Soda', ne: 'एपेरोल, स्पार्कलिङ वाइन, सोडा' }, price: 8.00, allergens: [] },
+        { num: '302', name: 'Lillet Spritz', desc: { en: 'Lillet, sparkling wine, soda', de: 'Lillet, Sekt, Soda', ne: 'लिलेट, स्पार्कलिङ वाइन, सोडा' }, price: 8.00, allergens: [] },
+        { num: '303', name: 'Limoncello - Spritz', desc: { en: 'Limoncello, sparkling wine, soda', de: 'Limoncello, Sekt, Soda', ne: 'लिमोनचेलो, स्पार्कलिङ वाइन, सोडा' }, price: 8.00, allergens: [] },
+        { num: '304', name: 'Hendricks Gin Cucumber', desc: 'Schweppes Indian Tonic', price: 8.00, allergens: [] },
+        ],
+      },
+      {
+        slug: 'prosecco',
+        label: { en: 'Prosecco', de: 'Prosecco', ne: 'प्रोसेको' },
+        items: [
+        { num: '340', name: '„Frivolo“', desc: 'Prosecco Frizzante delle Venezie D.O.C', price: 6.90, variants: [{ label: '0,75 L', price: 26.90 }, { label: '0,1 L', price: 6.90 }], allergens: [] },
         ],
       },
       {
         slug: 'cocktails',
         label: { en: 'Cocktails', de: 'Cocktails', ne: 'ककटेल' },
         items: [
-        { num: '280', name: { en: 'Caipirinha', de: 'Caipirinha', ne: 'काइपिरिन्हा' }, desc: { en: 'Lime, brown sugar, crushed ice', de: 'Limetten, brauner Zucker, crushed ice', ne: 'कागती, खुदो, क्रश्ड आइस' }, price: 10.90, badges: [] },
-        { num: '281', name: { en: 'Gin Basil Smash', de: 'Gin Basil Smash', ne: 'जिन बेसिल स्म्यास' }, desc: { en: 'Gin, basil, lime, sugar syrup', de: 'Gin, Basilikum, Limetten, Zuckersirup', ne: 'जिन, तुलसी, कागती, चिनीको सिरप' }, price: 10.90, badges: [] },
-        { num: '282', name: { en: 'Mojito', de: 'Mojito', ne: 'मोहितो' }, desc: { en: 'Rum, lime, mint, brown sugar, crushed ice', de: 'Rum, Limetten, Minze, brauner Zucker, crushed ice', ne: 'रम, कागती, पुदिना, खुदो, क्रश्ड आइस' }, price: 10.90, badges: [] },
-        { num: '283', name: { en: 'Espresso Martini', de: 'Espresso Martini', ne: 'एस्प्रेसो मार्टिनी' }, desc: { en: 'Vodka, espresso, sugar syrup', de: 'Wodka, Espresso, Zuckersirup', ne: 'भोड्का, एस्प्रेसो, चिनीको सिरप' }, price: 11.00, badges: [] },
-        { num: '284', name: { en: 'Whiskey Sour', de: 'Whiskey Sour', ne: 'व्हिस्की साउर' }, desc: { en: 'Whiskey, lemon juice, sugar, ice cubes', de: 'Whiskey, Zitronensaft, Zucker, Eiswürfel', ne: 'व्हिस्की, निबुवाको रस, चिनी, बरफ' }, price: 11.00, badges: [] },
-        { num: '285', name: { en: 'The Joshua Tree', de: 'The Joshua Tree', ne: 'द जोशुआ ट्री' }, desc: { en: 'Tequila, lemon juice, sugar', de: 'Tequila, Zitronensaft, Zucker', ne: 'टकिला, निबुवाको रस, चिनी' }, price: 12.00, badges: [] },
-        { num: '290', name: { en: 'Bamboo Schnapps', de: 'Bambusschnaps', ne: 'बाँसको रक्सी' }, desc: null, price: 3.50, badges: [] },
-        { num: '291', name: { en: 'Grappa', de: 'Grappa', ne: 'ग्राप्पा' }, desc: null, price: 3.50, badges: [] },
-        { num: '292', name: { en: 'Limoncello', de: 'Limoncello', ne: 'लिमोनचेलो' }, desc: null, price: 4.00, badges: [] },
-        { num: '293', name: { en: 'Illiens Schnapps', de: 'Illiens Schnaps', ne: 'इलियन्स रक्सी' }, desc: null, price: 4.90, badges: [] },
-        { num: '301', name: { en: 'The Joshua Tea Spritz', de: 'The Joshua Tea Spritz', ne: 'द जोशुआ टी स्प्रिट्ज' }, desc: null, price: 8.00, badges: [] },
-        { num: '302', name: { en: 'Aperol Spritz', de: 'Aperol Spritz', ne: 'एपेरोल स्प्रिट्ज' }, desc: null, price: 8.00, badges: [] },
-        { num: '303', name: { en: 'Lillet Spritz', de: 'Lillet Spritz', ne: 'लिलेट स्प्रिट्ज' }, desc: null, price: 8.00, badges: [] },
-        { num: '304', name: { en: 'Limoncello Spritz', de: 'Limoncello Spritz', ne: 'लिमोनचेलो स्प्रिट्ज' }, desc: null, price: 8.50, badges: [] },
+        { num: '280', name: 'Mojito', desc: { en: 'Havana Club, soda water, mint, brown sugar, organic limes, crushed ice', de: 'Havana Club, Sodawasser, Minze, Brauner Zucker, Bio Limetten, Crushed Ice', ne: 'हवाना क्लब, सोडा पानी, पुदिना, खुदो, अर्गानिक कागती, क्रश्ड आइस' }, price: 9.50, allergens: [] },
+        { num: '281', name: 'Caipirinha', desc: { en: 'Cachaça (Pitú), limes, brown sugar, crushed ice', de: 'Cachaca (Pitú), Limetten, brauner Zucker, Crushed Ice', ne: 'काचासा (पितु), कागती, खुदो, क्रश्ड आइस' }, price: 9.50, allergens: [] },
+        { num: '282', name: 'Gin Basil Smash', desc: { en: 'Gin, basil, lemon, sugar', de: 'Gin, Basilikum, Zitrone, Zucker', ne: 'जिन, तुलसी, निबुवा, चिनी' }, price: 10.00, allergens: [] },
+        { num: '283', name: 'Espresso Martini', desc: { en: 'Absolut Vodka, espresso, Kahlua', de: 'Absolut Vodka, Espresso, Kahlua', ne: 'एब्सोल्युट भोड्का, एस्प्रेसो, काहलुआ' }, price: 10.00, allergens: [] },
+        { num: '284', name: 'Whiskey Sour', desc: { en: 'Johnnie Walker, lemon, sugar, foam', de: 'Johnnie Walker, Zitrone, Zucker, Schaum', ne: 'जोनी वाकर, निबुवा, चिनी, फोम' }, price: 10.00, allergens: [] },
         ],
       },
       {
-        slug: 'wine',
-        label: { en: 'Wine & Prosecco', de: 'Wein & Prosecco', ne: 'वाइन र प्रोसेको' },
+        slug: 'white-wine',
+        label: { en: 'White Wine', de: 'Weißwein', ne: 'सेतो वाइन' },
         items: [
-        { num: '310', name: 'Riesling, Pfalz', desc: null, price: 7.90, badges: [] },
-        { num: '311', name: 'Weingut Seckinger, Pfalz', desc: null, price: 7.90, badges: [] },
-        { num: '312', name: 'Weingut Weber, Baden', desc: null, price: 7.90, badges: [] },
-        { num: '313', name: 'Grüner Veltliner', desc: null, price: 25.90, badges: [] },
-        { num: '314', name: 'Gavi, Baden Rivaner', desc: '0.7 l', price: 6.90, badges: [] },
-        { num: '320', name: 'Weingut Weber, Baden', desc: '2023 Spätburgunder Rosé', price: 7.90, badges: [] },
-        { num: '330', name: 'Azienda Agricola Dei Baroni', desc: null, price: 7.90, badges: [] },
-        { num: '331', name: 'Stéphane Vigny', desc: '2022 Pied Spätling', price: 8.90, badges: [] },
-        { num: '340', name: 'Prosecco Frizzante delle Venezie D.O.C.', desc: '0.7 l / 0.2 l', price: 6.90, badges: [] },
-        { num: '350', name: 'Louis de Grenelle, Loire', desc: 'Crémant Grande Cuvée, 0.7 l', price: 35.50, badges: [] },
-        { num: '300', name: { en: 'Wine Spritzer', de: 'Weinschorle', ne: 'वाइन स्प्रिट्जर' }, desc: { en: 'White / Rosé', de: 'Weiß / Rosé', ne: 'सेतो / रोजे' }, price: 4.90, badges: [] },
+        { num: '311', name: { en: 'Riesling vom Löss', de: 'Riesling vom Löss', ne: 'रिस्लिङ फोम लोस' }, desc: { en: '2023 – Weingut Seckinger, Pfalz, Germany · Clear and dry with fresh acidity, yellow apple, citrus notes and a mineral character', de: '2023 – Weingut Seckinger Pfalz, Deutschland · Klar, trocken mit frischer Säure, gelber Apfel, Zitrusnoten und mineralischer Charakter', ne: '२०२३ – वाइनगुट सेकिङर, फाल्ज, जर्मनी · सफा, ड्राई, ताजा अम्लता, पहेँलो स्याउ, सिट्रस र खनिज स्वाद' }, price: 7.50, variants: [{ label: '0,75 L', price: 26.00 }, { label: '0,2 L', price: 7.50 }], allergens: [] },
+        { num: '312', name: 'Pinot Grigio Delle Venezie DOC', desc: { en: '2023 – Veneto, Italy · Crisp and fresh with citrus, pear and green apple', de: '2023 – Venezien, Italien · Spritzig und frisch mit Zitrus, Birne und grünem Apfel', ne: '२०२३ – भेनेतो, इटाली · ताजा र चम्किलो, सिट्रस, नास्पाती र हरियो स्याउ' }, price: 7.50, variants: [{ label: '0,75 L', price: 26.00 }, { label: '0,2 L', price: 7.50 }], allergens: [] },
+        { num: '313', name: { en: 'Pinot Gris „Traube - Liebe - Hoffnung“', de: 'Grauer Burgunder „Traube - Liebe - Hoffnung“', ne: 'ग्राउअर बुर्गुन्डर „Traube - Liebe - Hoffnung“' }, desc: { en: '2023 – Weingut Weber, Baden, Germany · Round and harmonious with yellow fruit and mild acidity', de: '2023 – Weingut Weber – Baden, Deutschland · Rund und harmonisch mit gelber Frucht und milder Säure', ne: '२०२३ – वाइनगुट वेबर, बादेन, जर्मनी · सन्तुलित र मधुर, पहेँलो फलफूल र नरम अम्लता' }, price: 6.50, variants: [{ label: '0,75 L', price: 25.00 }, { label: '0,2 L', price: 6.50 }], allergens: [] },
+        { num: '314', name: 'Chardonnay Netzl', desc: { en: '2024 – Weingut Netzl, Carnuntum, Austria · Juicy with exotic fruit, pear and lime, creamy finish', de: '2024 – Weingut Netzl – Carnuntum, Österreich · Saftig mit exotischer Frucht, Birne und Limette, cremiger Abgang', ne: '२०२४ – वाइनगुट नेट्जल, कार्नुन्टुम, अस्ट्रिया · रसिलो, विदेशी फलफूल, नास्पाती र कागती, क्रिमी अन्त्य' }, price: 8.50, variants: [{ label: '0,75 L', price: 27.00 }, { label: '0,2 L', price: 8.50 }], allergens: [] },
+        { num: '314', name: 'Sauvignon Blanc, Daniel Mattern „Glück, Glück, Glück“', desc: { en: '2023 – Rheinhessen, Germany · Lively and aromatic with citrus, gooseberry and a fresh herbal note', de: '2023 – Rheinhessen, Deutschland · Lebendig und aromatisch mit Zitrus, Stachelbeere und einer frischen Kräuternote', ne: '२०२३ – राइनहेसन, जर्मनी · जीवन्त र बासनादार, सिट्रस, गुजबेरी र ताजा जडीबुटीको स्वाद' }, price: 7.50, variants: [{ label: '0,75 L', price: 26.00 }, { label: '0,2 L', price: 7.50 }], allergens: [], note: { en: 'Number 314 is printed twice on the card.', de: 'Die Nummer 314 ist in der Karte doppelt gedruckt.', ne: 'कार्डमा नम्बर ३१४ दुई ठाउँमा छापिएको छ।' } },
+        { num: '300', name: { en: 'White Wine Spritzer', de: 'Weißweinschorle', ne: 'सेतो वाइन स्प्रिट्जर' }, desc: { en: 'Pinot Gris, dry · 0,2 L', de: 'Grauburgunder, trocken · 0,2 L', ne: 'ग्राउबुर्गुन्डर, ड्राई · ०.२ L' }, price: 5.90, allergens: [] },
         ],
-      }
-    ]
-  }
+      },
+      {
+        slug: 'rose-wine',
+        label: { en: 'Rosé', de: 'Rosé', ne: 'रोजे' },
+        items: [
+        { num: '320', name: { en: 'Pinot Noir Rosé, „Traube-Liebe-Hoffnung“', de: 'Spätburgunder Rosé, „Traube-Liebe-Hoffnung“', ne: 'स्पेटबुर्गुन्डर रोजे, „Traube-Liebe-Hoffnung“' }, desc: { en: '2023 – Weingut Weber, Baden', de: '2023 – Weingut Weber, Baden', ne: '२०२३ – वाइनगुट वेबर, बादेन' }, price: 7.50, variants: [{ label: '0,75 L', price: 25.00 }, { label: '0,2 L', price: 7.50 }], allergens: [] },
+        ],
+      },
+      {
+        slug: 'red-wine',
+        label: { en: 'Red Wine', de: 'Rotwein', ne: 'रातो वाइन' },
+        items: [
+        { num: '330', name: 'Primitivo San Marzano', desc: { en: '2024 – Puglia, Italy · Puglia IGP, a complex nose of plum and cherry with light savoury rosemary notes', de: '2024 – Apulien, Italien · Puglia IGP komplexer Duft mit Pflaumen- und Kirschnoten, sowie leichte würzige Rosmarinnoten', ne: '२०२४ – पुल्या, इटाली · Puglia IGP, आलुबखडा र चेरीको जटिल बासना, हल्का रोजमेरीको स्वाद' }, price: 6.50, variants: [{ label: '0,75 L', price: 22.00 }, { label: '0,2 L', price: 6.50 }], allergens: [] },
+        { num: '331', name: 'La Boscana', desc: { en: '2022 – Costers del Segre, Spain · Tempranillo, Grenache, Syrah · Ruby red, fine fruit aromas of red and black currant, aromatic & savoury, classic & traditional', de: '2022 – Costers del Segre, Spanien · Rebsorten: Tempranillo, Grenache, Syrah · Rubinrot – Feine Fruchtaromen von roten und schwarzen Johannisbeeren, aromatisch & würzig, klassisch & traditionell', ne: '२०२२ – कोस्तेर्स देल सेग्रे, स्पेन · टेम्प्रानियो, ग्रेनास, सिरा · गाढा रातो, रातो र कालो करौंतेको स्वाद, बासनादार, परम्परागत' }, price: 7.50, variants: [{ label: '0,75 L', price: 26.00 }, { label: '0,2 L', price: 7.50 }], allergens: [] },
+        { num: '332', name: 'Chateau Barre Gentillot „l\'Orangerie“', desc: { en: '2023 – Bordeaux, France · Cuvée of Cabernet Franc and Merlot · Dominant plum aromas with vanilla notes, supple and round on the palate with a pleasantly fruity bouquet', de: '2023 – Bordeaux Frankreich · Rebsorten: Cuvée aus Cabernet Franc, Merlot · Dominante Aromen von Pflaumen mit Vanillenoten, am Gaumen geschmeidig und rund mit einem angenehm fruchtigen Bouquet', ne: '२०२३ – बोर्दो, फ्रान्स · क्याबरनेट फ्रान्क र मर्लोको कुभे · आलुबखडा र भ्यानिलाको प्रमुख स्वाद, नरम र गोलाकार, रसिलो बुके' }, price: 9.00, variants: [{ label: '0,75 L', price: 31.00 }, { label: '0,2 L', price: 9.00 }], allergens: [] },
+        ],
+      },
+    ],
+  },
 ];
+
+}());

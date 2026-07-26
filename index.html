@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet"/>
 
-  <link rel="stylesheet" href="css/style.css?v=7"/>
+  <link rel="stylesheet" href="css/style.css?v=8"/>
 
   <script type="application/ld+json">
   {
@@ -239,7 +239,14 @@
         <button class="chip" id="spicyChip" type="button" aria-pressed="false" data-i18n="menu.chip.spicy">Scharf</button>
       </div>
 
+      <p class="menu-hint" data-i18n="menu.hint">Gericht antippen für Foto, Allergene und Schärfe.</p>
+
       <div class="menu-list" id="menuList"></div>
+
+      <details class="allergen-legend" id="allergenLegend">
+        <summary data-i18n="legend.title">Allergene & Zusatzstoffe</summary>
+        <div class="legend-body" id="allergenLegendBody"></div>
+      </details>
 
       <a class="btn btn-terra menu-order-cta" href="https://www.crosssushi-hamburg.de/speisekarte/crosssushi" target="_blank" rel="noopener" style="width:100%" data-i18n="menu.order">Ganze Karte ansehen & online bestellen</a>
     </section>
@@ -261,7 +268,7 @@
         <div class="imgph"><img src="images/gallery-2-sukuti.jpg" alt="Sukuti mit Rettich und Microgreens" data-i18n-alt="gallery.cap.2" loading="lazy"/><span class="imgph-tag" data-num="02">02</span><span class="imgph-cap" data-i18n="gallery.cap.2">Sukuti — würzig, rauchig, hausgemacht</span></div>
         <div class="imgph"><img src="images/gallery-3-avocado-salat.jpg" alt="Cross Avocado-Salat mit Kürbiskernen" data-i18n-alt="gallery.cap.3" loading="lazy"/><span class="imgph-tag" data-num="03">03</span><span class="imgph-cap" data-i18n="gallery.cap.3">Cross Avocado-Salat mit Kürbiskernen</span></div>
         <div class="imgph"><img src="images/gallery-4-thukpa.jpg" alt="Thukpa — Himalaya-Nudelsuppe mit goldener Brühe" data-i18n-alt="gallery.cap.4" loading="lazy"/><span class="imgph-tag" data-num="04">04</span><span class="imgph-cap" data-i18n="gallery.cap.4">Thukpa — goldene Himalaya-Nudelsuppe</span></div>
-        <div class="imgph"><img src="images/gallery-5-avocado-ceviche.jpg" alt="Avocado-Ceviche mit Sesam und Ponzu" data-i18n-alt="gallery.cap.5" loading="lazy"/><span class="imgph-tag" data-num="05">05</span><span class="imgph-cap" data-i18n="gallery.cap.5">Avocado-Ceviche mit Sesam</span></div>
+        <div class="imgph"><img src="images/gallery-5-avocado-ceviche.jpg" alt="Red Power Roll mit Avocado und Rote-Bete-Topping" data-i18n-alt="gallery.cap.5" loading="lazy"/><span class="imgph-tag" data-num="05">05</span><span class="imgph-cap" data-i18n="gallery.cap.5">Avocado-Ceviche mit Sesam</span></div>
         <div class="imgph"><img src="images/gallery-6-lachs-sashimi.jpg" alt="Lachs-Sashimi auf Shiso-Blättern" data-i18n-alt="gallery.cap.6" loading="lazy"/><span class="imgph-tag" data-num="06">06</span><span class="imgph-cap" data-i18n="gallery.cap.6">Lachs-Sashimi auf Shiso-Blättern</span></div>
         <div class="imgph"><img src="images/gallery-7-thakali-set.jpg" alt="Thakali-Set auf Messingthali" data-i18n-alt="gallery.cap.7" loading="lazy"/><span class="imgph-tag" data-num="07">07</span><span class="imgph-cap" data-i18n="gallery.cap.7">Thakali-Set auf Messing — wie im Thak Khola</span></div>
         <div class="imgph"><img src="images/gallery-8-momo-jhol.jpg" alt="Mo:Mo-Teller mit Jhol im Steintopf" data-i18n-alt="gallery.cap.8" loading="lazy"/><span class="imgph-tag" data-num="08">08</span><span class="imgph-cap" data-i18n="gallery.cap.8">Mo:Mo-Teller mit Jhol-Topf</span></div>
@@ -271,7 +278,7 @@
         <div class="imgph"><img src="images/gallery-12-lachs-hosomaki.jpg" alt="Lachs-Hosomaki in versetzter Reihe auf schwarzem Grund" data-i18n-alt="gallery.cap.12" loading="lazy"/><span class="imgph-tag" data-num="12">12</span><span class="imgph-cap" data-i18n="gallery.cap.12">Lachs-Hosomaki — schlicht & präzise</span></div>
         <div class="imgph"><img src="images/gallery-13-thunfisch-avocado-maki.jpg" alt="Thunfisch-Avocado-Maki auf schwarzem Grund" data-i18n-alt="gallery.cap.13" loading="lazy"/><span class="imgph-tag" data-num="13">13</span><span class="imgph-cap" data-i18n="gallery.cap.13">Thunfisch-Avocado-Maki — tiefrot & cremig</span></div>
         <div class="imgph"><img src="images/gallery-14-maguro-nigiri.jpg" alt="Zwei Maguro-Nigiri, minimalistisch angerichtet" data-i18n-alt="gallery.cap.14" loading="lazy"/><span class="imgph-tag" data-num="14">14</span><span class="imgph-cap" data-i18n="gallery.cap.14">Maguro-Nigiri — pur</span></div>
-        <div class="imgph"><img src="images/gallery-15-thali-detail.jpg" alt="Nahaufnahme: Hühnercurry, Dal und Reis auf Messingthali" data-i18n-alt="gallery.cap.15" loading="lazy"/><span class="imgph-tag" data-num="15">15</span><span class="imgph-cap" data-i18n="gallery.cap.15">Hühnercurry, Dal & Reis — das Thali im Detail</span></div>
+        <div class="imgph"><img src="images/gallery-15-thali-detail.jpg" alt="Nahaufnahme: Curry, Dal und Reis auf Messingthali" data-i18n-alt="gallery.cap.15" loading="lazy"/><span class="imgph-tag" data-num="15">15</span><span class="imgph-cap" data-i18n="gallery.cap.15">Hühnercurry, Dal & Reis — das Thali im Detail</span></div>
       </div>
     </section>
 
@@ -739,7 +746,21 @@
   <!-- role=status so form results are announced; it is the only send confirmation -->
   <div class="toast-wrap" id="toastWrap" role="status" aria-live="polite" aria-atomic="false"></div>
 
-  <script src="js/menu-data.js?v=7"></script>
-  <script src="js/main.js?v=7"></script>
+  <!-- ============ DISH DETAIL SHEET ============ -->
+  <!-- Filled by renderDishSheet(); a bottom sheet on phones, a centred card on
+       desktop. Kept in the document (rather than created on demand) so the
+       dialog and its close control exist for assistive tech from the start. -->
+  <div class="sheet-scrim" id="dishScrim" aria-hidden="true">
+    <div class="dish-sheet" id="dishSheet" role="dialog" aria-modal="true" aria-labelledby="dishSheetTitle">
+      <div class="sheet-grip" id="dishSheetGrip" aria-hidden="true"><span></span></div>
+      <button class="sheet-close" id="dishSheetClose" type="button" data-i18n-aria-label="a11y.close" aria-label="Schließen">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="sheet-body" id="dishSheetBody"></div>
+    </div>
+  </div>
+
+  <script src="js/menu-data.js?v=8"></script>
+  <script src="js/main.js?v=8"></script>
 </body>
 </html>
