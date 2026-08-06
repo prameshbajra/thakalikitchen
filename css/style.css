@@ -1135,10 +1135,23 @@ footer.footer .footer-meta a:hover {
   color: var(--mustard);
   text-decoration-color: var(--mustard);
 }
-/* a handle keeps its own casing, so it opts out of the meta row's uppercasing */
+/* the handle keeps its own casing, so the credit opts out of the meta row's
+   uppercasing; nowrap keeps the phrase from breaking mid-underline on a phone,
+   letting the row wrap at the · separators instead */
 footer.footer .footer-meta a.footer-credit {
   text-transform: none;
   letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+/* an inline SVG like every other icon here, so it takes the footer's mustard
+   accent and scales with the type instead of arriving as a system emoji in a
+   palette of its own. Hover turns the row mustard too, absorbing the heart. */
+footer.footer .credit-heart {
+  width: 1em;
+  height: 1em;
+  margin: 0 0.32em;
+  vertical-align: -0.12em;
+  fill: var(--mustard);
 }
 
 /* ============== Cart / Nav drawer ============== */
