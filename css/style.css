@@ -1112,20 +1112,29 @@ footer.footer .footer-meta {
   padding-top: 16px;
   border-top: 1px solid rgba(245,239,227,0.15);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(245,239,227,0.5);
+  color: rgba(245,239,227,0.72);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
 }
+/* smallest type on the page, so the links carry solid paper plus an underline:
+   inheriting the row's colour left them indistinguishable from the © line, and
+   hover was the only affordance — which touch never gets */
 footer.footer .footer-meta a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--paper);
+  text-decoration: underline;
+  text-decoration-color: rgba(245,239,227,0.45);
+  text-underline-offset: 3px;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
 }
-footer.footer .footer-meta a:hover { color: var(--paper); }
+footer.footer .footer-meta a:hover {
+  color: var(--mustard);
+  text-decoration-color: var(--mustard);
+}
 /* a handle keeps its own casing, so it opts out of the meta row's uppercasing */
 footer.footer .footer-meta a.footer-credit {
   text-transform: none;
